@@ -1,0 +1,4 @@
+  <div class="field">
+    <%= form.label :producer_id %><br />
+    <%= form.select(:producer_id, @producers.map { |p| [p.name, p.id] }, include_blank: true) %>
+  </div>

@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<div class="group">
+  <h2>Millesime</h2>
+
+  <ul>
+    <li><%= @millesime.wine.domain %> <%= @millesime.year %></li>
+    <li>
+      <%= link_to @millesime.wine.region.name, country_region_path(@wine.region.country, @wine.region) %>
+    </li>
+    <li>
+      Color: <%= @millesime.wine.color.name %>
+      <% if @wine.effervescent %>
+        (effervescent)
+      <% end %>
+    </li>
+    <li>Quantity: <%= @millesime.quantity %></li>
+    <% if @wine.organic? %>
+    <li><%= image_tag('organic.png', alt: 'Organic wine', size: '64x42') %></li>
+    <% end %>
+  </ul>
+
+  <% if @wine.attribute_present? :notes %>
+  <dl>
+    <dt>Notes about wine:</dt>
+    <dd><%= @wine.notes %></dd>
+  </dl>
+  <% end %>
+  <% if @millesime.attribute_present? :notes %>
+  <dl>
+    <dt>Notes about millesime:</dt>
+    <dd><%= @millesime.notes %></dd>
+  </dl>
+  <% end %>
+</div>
+
+<div class="group">
+    <h2>Log entries</h2>
+    <table>
+        <thead>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Notes</th>
+        </thead>
+        <tbody>
+        <% @millesime.wlogs.each do |wlog| %>
+            <tr>
+                <td><%= link_to wlog.date, edit_wine_millesime_wlog_path(@wine, @millesime, wlog) %></td>
+                <td><%= wlog.mvt_type %></td>
+                <td><%= wlog.quantity %></td>
+                <td><%= wlog.price %></td>
+                <td><%= wlog.notes %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <%= link_to 'New log entry', new_wine_millesime_wlog_path(@wine, @millesime) %>
+</div>
+
+<%= link_to 'Edit', edit_wine_millesime_path(@wine, @millesime) %> |
+<%= link_to 'Back to wine', wine_path(@wine) %>

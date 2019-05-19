@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Colors</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @colors.each do |color| %>
+      <tr>
+        <td><%= color.name %></td>
+        <td><%= link_to 'Edit', edit_color_path(color) %></td>
+        <td><%= link_to_destroy color %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

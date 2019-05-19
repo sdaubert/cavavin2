@@ -1,0 +1,45 @@
+<%= form_with(model: wine, local: true) do |form| %>
+  <% if wine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
+
+      <ul>
+      <% wine.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :domain %>
+    <%= form.text_field :domain %>
+  </div>
+
+  <div class="field">
+    <%= form.label :effervescent %>
+    <%= form.check_box :effervescent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organic %>
+    <%= form.check_box :organic %>
+  </div>
+
+  <%= render 'colors/color_select', form: form %>
+
+  <%= render 'regions/region_select', form: form %>
+
+  <%= render 'producers/producer_select', form: form %>
+
+  <%= render 'providers/provider_select', form: form %>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

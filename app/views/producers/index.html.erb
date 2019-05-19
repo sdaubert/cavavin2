@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Producers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Zip</th>
+      <th>City</th>
+      <th>Country</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @producers.each do |producer| %>
+      <tr>
+        <td><%= link_to producer.name, producer %></td>
+        <td><%= producer.zip %></td>
+        <td><%= producer.city %></td>
+        <td><%= producer.country.name %></td>
+        <td><%= link_to 'Edit', edit_producer_path(producer) %></td>
+        <td><%= link_to_destroy producer %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Producer', new_producer_path %>

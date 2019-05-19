@@ -1,0 +1,6 @@
+  <div class="field">
+    <%= form.label :region_id %><br />
+    <%= form.select(:region_id, nil, {}, {size: 10}) do %>
+      <%= option_groups_from_collection_for_select(@regions, :options, :type_name, :id, :name, @wine.region_id) %>
+    <% end %>
+  </div>

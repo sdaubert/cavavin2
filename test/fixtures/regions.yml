@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: one
+  name: MyString
+  parent_id: nil
+  country_id: 1
+  lft: 1
+  rgt: 1
+
+two:
+  country: two
+  name: MyString
+  parent_id: 1
+  country_id: 1
+  lft: 2
+  rgt: 2

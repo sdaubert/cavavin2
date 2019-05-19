@@ -1,0 +1,2 @@
+module WlogsHelper
+end

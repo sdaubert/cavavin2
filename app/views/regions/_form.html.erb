@@ -1,0 +1,28 @@
+<%= form_with(model: [@region.country, @region]) do |f| %>
+  <% if @region.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@region.errors.count, "error") %> prohibited this region from being saved:</h2>
+
+      <ul>
+      <% @region.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_id %><br />
+    <%= f.select(:parent_id, nil, {}, {size: 10}) do %>
+      <%= option_groups_from_collection_for_select(@regions, :options, :type_name, :id, :name, @region.parent_id) %>
+    <% end %>
+  </div>
+  <%= render 'countries/country_select', form: f %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

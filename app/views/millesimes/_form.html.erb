@@ -1,0 +1,32 @@
+<%= form_with(model: [@wine, @millesime], local: true) do |form| %>
+  <% if @millesime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@millesime.errors.count, "error") %> prohibited this millesime from being saved:</h2>
+
+      <ul>
+      <% @millesime.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.number_field :year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :garde %>
+    <%= form.text_field :garde %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @producer.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @producer.address %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @producer.zip %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @producer.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @producer.country_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @producer.notes %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @producer.phone %>
+</p>
+
+<p>
+  <strong>Web:</strong>
+  <%= @producer.web %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @producer.email %>
+</p>
+
+<%= link_to 'Edit', edit_producer_path(@producer) %> |
+<%= link_to 'Back', producers_path %>

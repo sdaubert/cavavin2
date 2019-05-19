@@ -1,0 +1,166 @@
+body {
+  background-color: #fff;
+  color: #333;
+  margin: 33px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  height: 100%;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a {
+  color: #c03;
+  text-decoration: none;
+  padding: 0 1px;
+
+  &:visited {
+    color: #c03;
+  }
+
+  &:hover {
+    color: white;
+    background-color: #c03;
+  }
+}
+
+table {
+  border: 2px solid #f77;
+  padding: 0;
+}
+
+thead {
+  margin: 0;
+  padding: 0;
+  background-color: #f77;
+}
+
+tbody tr {
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+}
+
+th {
+  margin: 0;
+  padding: 5px 4px;
+  }
+
+td {
+  margin: 0;
+  padding: 2px 4px;
+}
+
+div {
+  &.field, &.actions {
+    margin-bottom: 10px;
+  }
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+label {
+  display: block;
+}
+
+div.group {
+  border: 1px black solid;
+  border-radius: 10px;
+  padding: 1ex 1em;
+  margin: 1em 0;
+}
+
+#header {
+  height: 50px;
+  text-align: center;
+}
+
+#sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  background-color: #111;
+}
+
+.menu {
+  width: 180px;
+  color: #eee;
+  padding: 1ex 1em;
+}
+
+.menu ul {
+  padding-right: 1em;
+  list-style-type: none;
+}
+
+.menu li a {
+  display: block;
+  &:hover {
+    color: black;
+  }
+}
+
+.menu li.separator {
+  margin: 0.5ex 0;
+  border-bottom: 1px solid #c03;
+}
+
+#real-content {
+  margin-left: 210px;
+  /*min-height: 400px;*/
+  padding: 0.2em 1.5em;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+}

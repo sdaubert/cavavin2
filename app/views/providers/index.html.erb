@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Providers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Zip</th>
+      <th>City</th>
+      <th>Country</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @providers.each do |provider| %>
+      <tr>
+        <td><%= link_to provider.name, provider %></td>
+        <td><%= provider.zip %></td>
+        <td><%= provider.city %></td>
+        <td><%= provider.country.name %></td>
+        <td><%= link_to 'Edit', edit_provider_path(provider) %></td>
+        <td><%= link_to_destroy provider %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Provider', new_provider_path %>

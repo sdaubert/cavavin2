@@ -1,0 +1,4 @@
+  <div class="field">
+    <%= form.label :color_id %><br />
+    <%= form.select(:color_id, Color.all.map { |c| [c.name, c.id] }) %>
+  </div>
