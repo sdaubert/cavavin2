@@ -7,7 +7,19 @@ class WinesController < ApplicationController
   # GET /wines
   # GET /wines.json
   def index
-    @wines = Wine.all
+    @wines = Millesime.includes(:wine).all
+    case params[:sort_by]
+    when 'color'
+      @wines = @wines.sort_by { |w| w.wine.color.name }
+    when 'millesime'
+      @wines = @wines.sort_by(&:year)
+    when 'country'
+      @wines = @wines.sort_by { |w| w.wine.region.country.name }
+    when 'zone'
+      @wines = @wines.sort_by { |w| w.wine.region.root.name }
+    else
+      @wines = @wines.sort_by { |w| w.wine.domain }
+    end
   end
 
   # GET /wines/1
