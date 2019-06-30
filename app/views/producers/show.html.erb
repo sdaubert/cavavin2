@@ -1,49 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @producer.name %>
-</p>
+<div class="group">
+  <h2>Producer</h2>
 
-<p>
-  <strong>Address:</strong>
-  <%= @producer.address %>
-</p>
-
-<p>
-  <strong>Zip:</strong>
-  <%= @producer.zip %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @producer.city %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @producer.country_id %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @producer.notes %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @producer.phone %>
-</p>
-
-<p>
-  <strong>Web:</strong>
-  <%= @producer.web %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @producer.email %>
-</p>
+  <ul>
+    <li><%= @producer.name %></li>
+    <% unless @producer.address.empty? %><li><%= @producer.address %></li><%end%>
+    <% unless @producer.zip.empty? && @producer.city.empty? %><li><%= @producer.zip %> <%= @producer.city %></li><%end%>
+    <% if @producer.country %><li><%= @producer.country.name %></li><%end%>
+    <% unless @producer.phone.empty? %><li><%= @producer.phone %></li><%end%>
+    <% unless @producer.web.empty? %>
+    <li><%= link_to h(@producer.web), @producer.web %></li>
+    <%end%>
+    <% unless @producer.email.empty? %>
+    <li><%= mail_to @producer.email %></li>
+    <%end%>
+    <% unless @producer.notes.empty? %><li>Notes: <%= @producer.notes %></li><%end%>
+  </ul>
 
 <%= link_to 'Edit', edit_producer_path(@producer) %> |
 <%= link_to 'Back', producers_path %>
