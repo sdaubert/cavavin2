@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bottle Racks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lines</th>
+      <th>Columns</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bottle_racks.each do |bottle_rack| %>
+      <tr>
+        <td><%= link_to bottle_rack.name, bottle_rack %></td>
+        <td><%= bottle_rack.lines %></td>
+        <td><%= bottle_rack.columns %></td>
+        <td><%= link_to 'Edit', edit_bottle_rack_path(bottle_rack) %></td>
+        <td><%= link_to_destroy bottle_rack %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bottle Rack', new_bottle_rack_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @bottle_rack.name %>
+</p>
+
+<p>
+  <strong>Lines:</strong>
+  <%= @bottle_rack.lines %>
+</p>
+
+<p>
+  <strong>Columns:</strong>
+  <%= @bottle_rack.columns %>
+</p>
+
+<%= link_to 'Edit', edit_bottle_rack_path(@bottle_rack) %> |
+<%= link_to 'Back', bottle_racks_path %>

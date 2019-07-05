@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bottle_racks
   resources :wines do
     resources :millesimes, except: %i[index] do
       resources :wlogs, except: %i[index show]
