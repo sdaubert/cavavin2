@@ -7,4 +7,8 @@ class Wine < ApplicationRecord
   belongs_to :producer, optional: true
   belongs_to :provider, optional: true
   has_many :millesimes
+
+  def quantity
+    Wine.joins(millesimes: :bottles).count
+  end
 end

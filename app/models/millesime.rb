@@ -1,6 +1,7 @@
 class Millesime < ApplicationRecord
   belongs_to :wine
   has_many :wlogs
+  has_many :bottles
 
   validates :wine, presence: true
   validates :year, presence: true,
@@ -9,8 +10,6 @@ class Millesime < ApplicationRecord
   validates :garde, presence: true, numericality: { only_integer: true }
 
   def quantity
-    ins = wlogs.where(mvt_type: 'in').sum(:quantity)
-    outs = wlogs.where(mvt_type: 'out').sum(:quantity)
-    ins - outs
+    Millesime.joins(:bottles).count
   end
 end

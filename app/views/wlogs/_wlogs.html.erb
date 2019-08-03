@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Notes</th>
+        <th></th>
+    </thead>
+    <tbody>
+    <% @millesime.wlogs.each do |wlog| %>
+        <tr>
+            <td><%= link_to wlog.date, edit_wine_millesime_wlog_path(@wine, @millesime, wlog) %></td>
+            <td><%= wlog.mvt_type %></td>
+            <td><%= wlog.quantity %></td>
+            <td><%= wlog.price %></td>
+            <td><%= wlog.notes %></td>
+            <td><%= link_to_destroy [@wine, @millesime, wlog] %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

@@ -36,26 +36,7 @@
 
 <div class="group">
     <h2>Log entries</h2>
-    <table>
-        <thead>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Notes</th>
-        </thead>
-        <tbody>
-        <% @millesime.wlogs.each do |wlog| %>
-            <tr>
-                <td><%= link_to wlog.date, edit_wine_millesime_wlog_path(@wine, @millesime, wlog) %></td>
-                <td><%= wlog.mvt_type %></td>
-                <td><%= wlog.quantity %></td>
-                <td><%= wlog.price %></td>
-                <td><%= wlog.notes %></td>
-            </tr>
-        <% end %>
-        </tbody>
-    </table>
+    <%= render 'wlogs/wlogs' %>
     <%= link_to 'New log entry', new_wine_millesime_wlog_path(@wine, @millesime) %>
 </div>
 

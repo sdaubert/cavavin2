@@ -2,14 +2,28 @@ class Wlog < ApplicationRecord
   MVT_TYPES = %w[in out move].freeze
 
   belongs_to :millesime
+  belongs_to :bottle_rack, foreign_key: 'br_id', optional: true
 
   validates :mvt_type, inclusion: { in: MVT_TYPES }
   validates :quantity, numericality: { only_integers: true }
-  validates :price, numericality: true, if: :mvt_types_is_in?
+  validates :price, numericality: true, if: :mvt_type_is_in?
+
+  validates :br_id, numericality: { only_integers: true }, allow_nil: true
+  validates :pos, presence: true, if: :bottle_rack?
+  validates :move_to_br_id, numericality: { only_integers: true }, allow_nil: true, if: :mvt_type_is_move?
+  validates :move_to_pos, presence: true, if: :mvt_type_is_move?
 
   private
 
-  def mvt_types_is_in?
+  def mvt_type_is_in?
     mvt_type == 'in'
+  end
+
+  def mvt_type_is_move?
+    mvt_type == 'move'
+  end
+
+  def bottle_rack?
+    !br_id.nil?
   end
 end
