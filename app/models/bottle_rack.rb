@@ -3,7 +3,7 @@ class BottleRack < ApplicationRecord
   NO_POS = []
 
   has_many :wlogs
-  has_many :bottles
+  has_many :bottles, foreign_key: 'br_id'
 
   validates :name, presence: true
   validates :lines, numericality: { only_integers: true }

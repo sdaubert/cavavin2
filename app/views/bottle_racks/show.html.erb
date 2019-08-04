@@ -1,19 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @bottle_rack.name %>
-</p>
-
-<p>
-  <strong>Lines:</strong>
-  <%= @bottle_rack.lines %>
-</p>
-
-<p>
-  <strong>Columns:</strong>
-  <%= @bottle_rack.columns %>
-</p>
+<div class="group">
+  <h2>Bottle rack</h2>
+  <ul>
+    <li><%=  @bottle_rack.name %></li>
+  </ul>
+  <table class="bottle_rack">
+    <% @bottle_rack.lines.times do |i| %>
+      <tr>
+        <% @bottle_rack.columns.times do |j| %>
+          <% pos = j + i * @bottle_rack.columns + 1 %>
+          <% bottle = @bottle_rack.bottles.find_by(pos: pos) %>
+          <td>
+            <%= pos %>:
+            <% if bottle.nil? %>
+            empty
+            <% else %>
+            <%= bottle.millesime.wine.name %> <%= bottle.millesime.year %>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
 <%= link_to 'Edit', edit_bottle_rack_path(@bottle_rack) %> |
 <%= link_to 'Back', bottle_racks_path %>
