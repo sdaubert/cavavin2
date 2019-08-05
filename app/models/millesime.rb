@@ -10,6 +10,6 @@ class Millesime < ApplicationRecord
   validates :garde, presence: true, numericality: { only_integer: true }
 
   def quantity
-    Millesime.joins(:bottles).count
+    Millesime.joins(:bottles).where(id: id).count
   end
 end

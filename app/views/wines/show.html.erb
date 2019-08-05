@@ -14,7 +14,7 @@
         (effervescent)
       <% end %>
     </li>
-    <li>Quantity: </li>
+    <li>Quantity: <%= @wine.quantity %></li>
     <% if @wine.organic? %>
     <li><%= image_tag('organic.png', alt: 'Organic wine', size: '64x42') %></li>
     <% end %>

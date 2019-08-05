@@ -9,6 +9,6 @@ class Wine < ApplicationRecord
   has_many :millesimes
 
   def quantity
-    Wine.joins(millesimes: :bottles).count
+    Wine.joins(millesimes: :bottles).where(id: id).count
   end
 end
