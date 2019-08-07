@@ -15,6 +15,21 @@
       <% end %>
     </li>
     <li>Quantity: <%= @millesime.quantity %></li>
+    <li>
+      Racks:
+      <% if @racks.empty? %>
+      none
+      <% else %>
+      <ul>
+        <% @racks.each do |rack| %>
+        <li>
+          <%= link_to rack.name, bottle_rack_path(rack)%>:
+          <%= BottleRack.ary_to_pos(rack.bottles.map(&:pos).sort) %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %>
+    </li>
     <% if @wine.organic? %>
     <li><%= image_tag('organic.png', alt: 'Organic wine', size: '64x42') %></li>
     <% end %>

@@ -1,16 +1,13 @@
 class BottleRacksController < ApplicationController
-  before_action :set_bottle_rack, only: [:show, :edit, :update, :destroy]
+  before_action :set_bottle_rack, only: %i[show edit update destroy get_info]
 
   # GET /bottle_racks
-  # GET /bottle_racks.json
   def index
     @bottle_racks = BottleRack.all
   end
 
   # GET /bottle_racks/1
-  # GET /bottle_racks/1.json
-  def show
-  end
+  def show; end
 
   # GET /bottle_racks/new
   def new
@@ -18,11 +15,9 @@ class BottleRacksController < ApplicationController
   end
 
   # GET /bottle_racks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bottle_racks
-  # POST /bottle_racks.json
   def create
     @bottle_rack = BottleRack.new(bottle_rack_params)
 
@@ -34,7 +29,6 @@ class BottleRacksController < ApplicationController
   end
 
   # PATCH/PUT /bottle_racks/1
-  # PATCH/PUT /bottle_racks/1.json
   def update
     if @bottle_rack.update(bottle_rack_params)
       redirect_to @bottle_rack, notice: 'Bottle rack was successfully updated.'
@@ -44,10 +38,17 @@ class BottleRacksController < ApplicationController
   end
 
   # DELETE /bottle_racks/1
-  # DELETE /bottle_racks/1.json
   def destroy
     @bottle_rack.destroy
     redirect_to bottle_racks_url, notice: 'Bottle rack was successfully destroyed.'
+  end
+
+  # xhr only
+  # POST /bottle_racks/1/get_info
+  def get_info
+    logger.debug "XHR get_info"
+    @wlog = Wlog.find(params[:wlog_id])
+    render partial: 'rack', layout: false, locals: { bottle_rack: @bottle_rack, show: false }
   end
 
   private

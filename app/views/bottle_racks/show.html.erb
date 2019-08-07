@@ -4,25 +4,11 @@
   <h2>Bottle rack</h2>
   <ul>
     <li><%=  @bottle_rack.name %></li>
+    <li>Size: <%= "#{@bottle_rack.lines}x#{@bottle_rack.columns}"%> (<%= @bottle_rack.size %> locations)</li>
+    <li>Free locations: <%= @bottle_rack.free_location_count %></li>
   </ul>
-  <table class="bottle_rack">
-    <% @bottle_rack.lines.times do |i| %>
-      <tr>
-        <% @bottle_rack.columns.times do |j| %>
-          <% pos = j + i * @bottle_rack.columns + 1 %>
-          <% bottle = @bottle_rack.bottles.find_by(pos: pos) %>
-          <td>
-            <%= pos %>:
-            <% if bottle.nil? %>
-            empty
-            <% else %>
-            <%= bottle.millesime.wine.name %> <%= bottle.millesime.year %>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
+
+  <%= render partial: 'rack', locals: { bottle_rack: @bottle_rack, show: true } %>
 </div>
 
 <%= link_to 'Edit', edit_bottle_rack_path(@bottle_rack) %> |

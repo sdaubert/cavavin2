@@ -9,6 +9,8 @@ class BottleRack < ApplicationRecord
   validates :lines, numericality: { only_integers: true }
   validates :columns, numericality: { only_integers: true }
 
+  scope :millesime, ->(mil) { joins(:bottles).includes(:bottles).where(bottles: { millesime_id: mil.id }).distinct.order(:name) }
+
   def self.pos_to_ary(pos)
     if pos.nil?
       NO_POS
@@ -19,5 +21,13 @@ class BottleRack < ApplicationRecord
 
   def self.ary_to_pos(ary)
     ary.join(',')
+  end
+
+  def size
+    lines * columns
+  end
+
+  def free_location_count
+    size - bottles.count
   end
 end

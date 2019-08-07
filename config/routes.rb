@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
-  resources :bottle_racks
+  resources :bottle_racks do
+    member do
+      post :get_info
+    end
+  end
   resources :wines do
     resources :millesimes, except: %i[index] do
-      resources :wlogs, except: %i[index show]
+      resources :wlogs, except: %i[index show] do
+        member do
+          get :select_rack
+          post :save_rack
+        end
+      end
     end
   end
   resources :providers

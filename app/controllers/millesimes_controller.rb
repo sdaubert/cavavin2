@@ -7,14 +7,14 @@ class MillesimesController < ApplicationController
   end
 
   def show
+    @racks = BottleRack.millesime(@millesime).all
   end
 
   def new
     @millesime = @wine.millesimes.build
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @millesime = @wine.millesimes.build(millesime_params)
