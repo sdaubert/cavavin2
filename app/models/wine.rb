@@ -8,6 +8,8 @@ class Wine < ApplicationRecord
   belongs_to :provider, optional: true
   has_many :millesimes
 
+  scope :with_bottles, -> { joins(millesimes: :bottles).distinct }
+
   def quantity
     Wine.joins(millesimes: :bottles).where(id: id).count
   end

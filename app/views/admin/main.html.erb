@@ -1,2 +1,47 @@
-<h1>Admin#main</h1>
-<p>Find me in app/views/admin/main.html.erb</p>
+<p>
+    There are <%= @bottle_count%> bottles from <%= @wine_count %> different
+    wines in the cellar.
+</p>
+
+<h2 id='todrink'>Wines to drink in <%= @years_to_drink_wines %> years</h2>
+
+<p>
+    This table lists bottles of wine to drink quite quickly. Bottles
+    on pink background have to be drunk in the current year.
+</p>
+
+<% if !@millesimes.nil? and @bottles_to_drink > 0 %>
+<table>
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Color</th>
+            <th>Millesime</th>
+            <th>Quantity</th>
+            <th>Region</th>
+            <th>Zone</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @millesimes.each do |m| %>
+        <% wine = m.wine %>
+        <tr class="<%= m.diff < 1 ? 'lessthan1y' : nil %>">
+            <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
+            <td><%= wine.color.name %></td>
+            <td><%= m.year %></td>
+            <td><%= m.quantity %></td>
+            <td><%= wine.region.name %></td>
+            <td><%= wine.region.root.name %></td>
+            <td><%= wine.region.country.name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<% else %>
+<p>There is no wine ready to drink.</p>
+<% end %>
+
+<h2 id="lastentries">Cellar book's last entries</h2>
+
+<%= render partial: 'wlogs/book', locals: { show_comments: false } %>

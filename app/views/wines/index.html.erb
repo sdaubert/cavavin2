@@ -25,7 +25,7 @@
           <td><%= link_to wine.domain, wine_millesime_path(wine, millesime) %></td>
           <td><%= wine.color.name %></td>
           <td><%= millesime.year %></td>
-          <td><%= wine.quantity %>
+          <td><%= millesime.quantity %>
           <td><%= link_to wine.region.name, country_region_path(country_id, wine.region) %></td>
           <td><%= link_to wine.region.root.name, country_region_path(country_id, wine.region.root) %></td>
           <td><%= wine.region.country.name %></td>

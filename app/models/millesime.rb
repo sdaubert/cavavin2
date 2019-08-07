@@ -9,6 +9,10 @@ class Millesime < ApplicationRecord
                    uniqueness: { scope: :wine_id }
   validates :garde, presence: true, numericality: { only_integer: true }
 
+  scope :with_bottles, -> { joins(:bottles).distinct }
+  scope :drink_before, ->(years) { select("millesimes.*, millesimes.garde + millesimes.year - cast(strftime('%Y', date('now')) as integer) AS diff").
+                                   where('diff < ?', years)}
+
   def quantity
     Millesime.joins(:bottles).where(id: id).count
   end
