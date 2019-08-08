@@ -1,4 +1,8 @@
+<% if flash[:notice] %>
 <p id="notice"><%= notice %></p>
+<% elsif flash[:alert] %>
+<p id="alert">Error: <%= flash[:alert] %></p>
+<% end %>
 
 <h1>Wines</h1>
 
@@ -6,12 +10,12 @@
   <thead>
     <tr>
       <th><%= link_to 'Domain', wines_path %></th>
-      <th><%= link_to 'Color', wines_path(sort_by: 'color') %></th>
-      <th><%= link_to 'Millesime', wines_path(sort_by: 'millesime') %></th>
+      <th><%= link_to 'Color', wines_path(build_params(sort_by: 'color')) %></th>
+      <th><%= link_to 'Millesime', wines_path(build_params(sort_by: 'millesime')) %></th>
       <th>Quantity</th>
       <th>Region</th>
-      <th><%= link_to 'Zone', wines_path(sort_by: 'zone') %></th>
-      <th><%= link_to 'Country', wines_path(sort_by: 'country') %></th>
+      <th>Zone</th>
+      <th><%= link_to 'Country', wines_path(build_params(sort_by: 'country')) %></th>
       <th>Organic</th>
       <th colspan="2"></th>
     </tr>
@@ -23,11 +27,11 @@
       <% country_id = wine.region.country.id %>
         <tr>
           <td><%= link_to wine.domain, wine_millesime_path(wine, millesime) %></td>
-          <td><%= wine.color.name %></td>
+          <td><%= link_to wine.color.name, wines_path(build_params(filter: 'color', filter_id: wine.color)) %></td>
           <td><%= millesime.year %></td>
           <td><%= millesime.quantity %>
-          <td><%= link_to wine.region.name, country_region_path(country_id, wine.region) %></td>
-          <td><%= link_to wine.region.root.name, country_region_path(country_id, wine.region.root) %></td>
+          <td><%= link_to wine.region.name, wines_path(build_params({ filter: 'region', filter_id: wine.region })) %></td>
+          <td><%= link_to wine.region.root.name, wines_path(build_params({ filter: 'zone', filter_id: wine.region.root })) %></td>
           <td><%= wine.region.country.name %></td>
           <td><%= wine.organic %></td>
           <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
@@ -37,6 +41,8 @@
   </tbody>
 </table>
 
-<br>
+<% if !@url_params.empty? %>
+<%= link_to 'Reset filters', wines_path %><br>
+<% end %>
 
 <%= link_to 'New Wine', new_wine_path %>

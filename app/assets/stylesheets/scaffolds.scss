@@ -80,6 +80,14 @@ div {
   color: green;
 }
 
+#alert {
+  color: red;
+  font-weight: bold;
+  border: 2px solid red;
+  border-radius: 5px;
+  padding: 1ex 1em;
+}
+
 .field_with_errors {
   padding: 2px;
   background-color: red;

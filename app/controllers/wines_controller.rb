@@ -7,19 +7,10 @@ class WinesController < ApplicationController
   # GET /wines
   # GET /wines.json
   def index
-    @wines = Millesime.includes(:wine).all
-    case params[:sort_by]
-    when 'color'
-      @wines = @wines.sort_by { |w| w.wine.color.name }
-    when 'millesime'
-      @wines = @wines.sort_by(&:year)
-    when 'country'
-      @wines = @wines.sort_by { |w| w.wine.region.country.name }
-    when 'zone'
-      @wines = @wines.sort_by { |w| w.wine.region.root.name }
-    else
-      @wines = @wines.sort_by { |w| w.wine.domain }
-    end
+    @wines = Millesime.includes(wine: [:color, { region: :country }])
+    handles_sort_by params
+    handles_filter params
+    @url_params = params.permit(:sort_by, :filter, :filter_id)
   end
 
   # GET /wines/1
@@ -74,5 +65,36 @@ class WinesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def wine_params
     params.require(:wine).permit(:domain, :effervescent, :organic, :garde, :color_id, :region_id, :producer_id, :provider_id, :notes)
+  end
+
+  def handles_sort_by(params)
+    @wines = case params[:sort_by]
+             when 'color'
+               @wines.order('colors.name, millesimes.wine_id')
+             when 'millesime'
+               @wines.order('millesimes.year, millesimes.wine_id')
+             when 'country'
+               @wines.order('countries.name, millesimes.wine_id')
+             else
+               @wines.order('wines.domain, millesimes.wine_id')
+             end
+  end
+
+  def handles_filter(params)
+    @wines = case params[:filter]
+             when 'color'
+               @wines.where('wines.color_id = ?', params[:filter_id].to_i)
+             when 'region'
+               @wines.where('Wines.region_id = ?', params[:filter_id].to_i)
+             when 'zone'
+               begin
+                 region = Region.find(params[:filter_id].to_i)
+                 @wines.where('wines.region_id' => region.self_and_descendants)
+               rescue ActiveRecord::RecordNotFound
+                 redirect_to wines_path, alert: 'Unknown requested region'
+               end
+             else
+               @wines
+             end
   end
 end
