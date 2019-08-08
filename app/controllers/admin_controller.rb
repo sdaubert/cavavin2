@@ -15,6 +15,6 @@ class AdminController < ApplicationController
   end
 
   def book
-    @book = Wlog.order(date: :desc, id: :desc).paginate(page: params[:page], per_page: 5)
+    @book = Wlog.order(date: :desc, id: :desc).page(params[:page])
   end
 end

@@ -1,3 +1,5 @@
 <h2>Cellar book</h2>
 
 <%= render partial: 'wlogs/book', locals: { show_comments: true }   %>
+
+<%= will_paginate @book %>

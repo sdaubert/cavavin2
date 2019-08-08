@@ -40,9 +40,10 @@
     <% end %>
   </tbody>
 </table>
-
 <% if !@url_params.empty? %>
 <%= link_to 'Reset filters', wines_path %><br>
 <% end %>
+
+<%= will_paginate @wines %>
 
 <%= link_to 'New Wine', new_wine_path %>

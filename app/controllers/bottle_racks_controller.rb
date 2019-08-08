@@ -3,7 +3,7 @@ class BottleRacksController < ApplicationController
 
   # GET /bottle_racks
   def index
-    @bottle_racks = BottleRack.all
+    @bottle_racks = BottleRack.page(params[:page])
   end
 
   # GET /bottle_racks/1

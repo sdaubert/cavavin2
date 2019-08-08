@@ -2,10 +2,6 @@ class MillesimesController < ApplicationController
   before_action :set_wine
   before_action :set_millesime, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @millesimes = Millesime.all
-  end
-
   def show
     @racks = BottleRack.millesime(@millesime).all
   end

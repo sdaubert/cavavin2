@@ -5,16 +5,15 @@ class WinesController < ApplicationController
   before_action :set_regions, only: %i[new create edit update]
 
   # GET /wines
-  # GET /wines.json
   def index
     @wines = Millesime.includes(wine: [:color, { region: :country }])
     handles_sort_by params
     handles_filter params
+    @wines = @wines.page(params[:page])
     @url_params = params.permit(:sort_by, :filter, :filter_id)
   end
 
   # GET /wines/1
-  # GET /wines/1.json
   def show
   end
 
@@ -28,7 +27,6 @@ class WinesController < ApplicationController
   end
 
   # POST /wines
-  # POST /wines.json
   def create
     @wine = Wine.new(wine_params)
 
@@ -40,7 +38,6 @@ class WinesController < ApplicationController
   end
 
   # PATCH/PUT /wines/1
-  # PATCH/PUT /wines/1.json
   def update
     if @wine.update(wine_params)
       redirect_to @wine, notice: 'Wine was successfully updated.'
@@ -50,7 +47,6 @@ class WinesController < ApplicationController
   end
 
   # DELETE /wines/1
-  # DELETE /wines/1.json
   def destroy
     @wine.destroy
     redirect_to wines_url, notice: 'Wine was successfully destroyed.'
