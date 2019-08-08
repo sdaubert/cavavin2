@@ -1,21 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Provider</h2>
+  <h2>Provider #<%= @provider.id %></h2>
 
   <ul>
-    <li><%= @provider.name %></li>
-    <% unless @provider.address.empty? %><li><%= @provider.address %></li><%end%>
-    <% unless @provider.zip.empty? && @provider.city.empty? %><li><%= @provider.zip %> <%= @provider.city %></li><%end%>
-    <% if @provider.country %><li><%= @provider.country.name %></li><%end%>
-    <% unless @provider.phone.empty? %><li><%= @provider.phone %></li><%end%>
+    <li>Name: <%= @provider.name %></li>
+    <% unless @provider.address.empty? && @provider.zip.empty? && @provider.city.empty? %>
+    <li>
+      Address: <%= @provider.address %>
+      <%= @provider.zip %> <%= @provider.city %>
+    </li>
+    <%end%>
+    <% if @provider.country %>
+    <li>Country: <%= link_to @provider.country.name, country_path(@provider.country) %></li>
+    <%end%>
+    <% unless @provider.phone.empty? %>
+    <li>Phone: <%= @provider.phone %></li>
+    <%end%>
     <% unless @provider.web.empty? %>
-    <li><%= link_to h(@provider.web), @provider.web %></li>
+    <li>Web: <%= link_to h(@provider.web), @provider.web %></li>
     <%end%>
     <% unless @provider.email.empty? %>
-    <li><%= mail_to @provider.email %></li>
+    <li>E-mail: <%= mail_to @provider.email %></li>
     <%end%>
-    <% unless @provider.notes.empty? %><li>Notes: <%= @provider.notes %></li><%end%>
+    <% unless @provider.notes.empty? %>
+    <li class="notes">Notes:
+      <p><%= @provider.notes %></p>
+    </li>
+    <%end%>
   </ul>
 
 <%= link_to 'Edit', edit_provider_path(@provider) %> |

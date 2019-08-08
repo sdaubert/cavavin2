@@ -1,20 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @region.name %>
-</p>
+<div class="group">
+  <h2>Region #<%= @region.id %></h2>
 
-<p>
-  <b>Parent:</b>
-  <%= @region.parent_id %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%= @region.country_id %>
-</p>
-
+  <ul>
+    <li>Name: <%= @region.name %></li>
+    <% unless @region.root? %>
+    <li>Zone: <%= @region.root.name %></li>
+    <li>Parent: <%= @region.parent.name %></li>
+    <% end %>
+    <li>Country: <%= @region.country.name %></li>
+  </ul>
+</div>
 
 <%= link_to 'Edit', edit_country_region_path(@region.country, @region) %> |
 <%= link_to 'Back', country_regions_path(@region.country) %>

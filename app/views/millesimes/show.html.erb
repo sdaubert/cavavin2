@@ -1,15 +1,21 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Millesime</h2>
+  <h2>Wine #<%= @wine.id %>, millesime <%= @millesime.year %></h2>
 
   <ul>
-    <li><%= @millesime.wine.domain %> <%= @millesime.year %></li>
+    <li>Domain: <%= @millesime.wine.domain %></li>
     <li>
-      <%= link_to @millesime.wine.region.name, country_region_path(@wine.region.country, @wine.region) %>
+      Region:
+      <%= link_to @wine.region.name, country_region_path(@wine.region.country, @wine.region) %>
     </li>
     <li>
-      Color: <%= @millesime.wine.color.name %>
+      Zone:
+      <%= link_to @wine.region.root.name, country_region_path(@wine.region.country, @wine.region.root) %>
+      (<%= link_to @wine.region.country.name, country_path(@wine.region.country) %>)
+    </li>
+    <li>
+      Color: <%= @wine.color.name %>
       <% if @wine.effervescent %>
         (effervescent)
       <% end %>

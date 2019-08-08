@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Bottle rack</h2>
+  <h2>Bottle rack #<%= @bottle_rack.id %></h2>
   <ul>
-    <li><%=  @bottle_rack.name %></li>
+    <li>Name: <%=  @bottle_rack.name %></li>
     <li>Size: <%= "#{@bottle_rack.lines}x#{@bottle_rack.columns}"%> (<%= @bottle_rack.size %> locations)</li>
     <li>Free locations: <%= @bottle_rack.free_location_count %></li>
   </ul>

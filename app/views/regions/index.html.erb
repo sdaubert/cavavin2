@@ -1,16 +1,14 @@
-<h2>Listing regions from <%= @country.name %></h2>
+<h2>Regions from <%= @country.name %></h2>
 
 <table>
   <tr>
     <th>Name</th>
     <th></th>
-    <th></th>
   </tr>
 
 <% @regions.each do |region| %>
   <tr>
-    <td><%= region.name %></td>
-    <td><%= link_to 'Edit', edit_country_region_path(region.country, region) %></td>
+    <td><%= link_to region.name, country_region_path(region.country, region) %></td>
     <td><%= link_to_destroy [region.country, region] %></td>
   </tr>
 <% end %>

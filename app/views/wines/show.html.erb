@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Wine</h2>
+  <h2>Wine #<%= @wine.id %></h2>
 
   <ul>
-    <li><%= @wine.domain %></li>
+    <li>Domain: <%= @wine.domain %></li>
     <li>
+      Region:
       <%= link_to @wine.region.name, country_region_path(@wine.region.country, @wine.region) %>
+    </li>
+    <li>
+      Zone:
+      <%= link_to @wine.region.root.name, country_region_path(@wine.region.country, @wine.region.root) %>
+      (<%= link_to @wine.region.country.name, country_path(@wine.region.country) %>)
     </li>
     <li>
       Color: <%= @wine.color.name %>
