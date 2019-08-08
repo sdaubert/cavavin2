@@ -1,19 +1,5 @@
 <h2>Regions from <%= @country.name %></h2>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-  </tr>
-
-<% @regions.each do |region| %>
-  <tr>
-    <td><%= link_to region.name, country_region_path(region.country, region) %></td>
-    <td><%= link_to_destroy [region.country, region] %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<%= generate_region_tree(@country) %>
 
 <%= link_to 'New Region', new_country_region_path(params[:country_id]) %>

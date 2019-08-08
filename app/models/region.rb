@@ -6,4 +6,8 @@ class Region < ApplicationRecord
   belongs_to :country
 
   scope :by_country, lambda { |country_id| where('regions.country_id = ?', country_id) }
+
+  def direct_descendants
+    Region.children_of(self.id)
+  end
 end

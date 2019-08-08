@@ -6,7 +6,7 @@ class RegionsController < ApplicationController
   before_action :set_countries, only: [:new, :create, :edit, :update]
 
   def index
-    @regions = @country.regions
+    #@regions = @country.regions
   end
 
   def show
