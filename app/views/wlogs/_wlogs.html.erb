@@ -13,8 +13,8 @@
         <tr>
             <td><%= link_to wlog.date, edit_wine_millesime_wlog_path(@wine, @millesime, wlog) %></td>
             <td><%= wlog.mvt_type %></td>
-            <td><%= wlog.quantity %></td>
-            <td><%= wlog.price %></td>
+            <td class="right"><%= '-' if wlog.mvt_type == 'out' %><%= wlog.quantity %></td>
+            <td class="right"><%= wlog.price %></td>
             <% if wlog.bottle_rack.nil? %>
             <td></td>
             <% else %>
@@ -22,7 +22,7 @@
                 <%= link_to wlog.bottle_rack.name, bottle_rack_path(wlog.bottle_rack) %>:
                 <%= wlog.pos %>
                 <% if wlog.mvt_type == 'move' %>
-                ->
+                &#8594;
                 <%= link_to BottleRack.find(wlog.move_to_br_id).name, bottle_rack_path(wlog.move_to_br_id) %>:
                 <%= wlog.move_to_pos%>
                 <% end %>

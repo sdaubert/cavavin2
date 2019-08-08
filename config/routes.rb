@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   end
 
   get 'admin/main'
+  get 'admin/book'
   root 'admin#main'
 end

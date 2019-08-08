@@ -11,6 +11,10 @@ class AdminController < ApplicationController
     logger.debug Millesime.with_bottles.drink_before(YEARS_TO_DRINK_WINES).inspect
     @bottles_to_drink = @millesimes.to_a.inject(0) { |sum, mil| sum + mil.quantity }
 
-    @book = Wlog.order(date: :desc).take(CELLAR_BOOK_LAST_ENTRIES_COUNT)
+    @book = Wlog.order(date: :desc, id: :desc).take(CELLAR_BOOK_LAST_ENTRIES_COUNT)
+  end
+
+  def book
+    @book = Wlog.order(date: :desc, id: :desc).paginate(page: params[:page], per_page: 5)
   end
 end
