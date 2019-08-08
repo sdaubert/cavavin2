@@ -15,7 +15,11 @@ get_info = () ->
         $('#RackAjax').html("")
     else
         wlogid = $('#wlog_id').val()
-        $('#RackAjax').load("/bottle_racks/#{brid}/get_info", {wlog_id: wlogid, id: brid})
+        if $('#move_in_phase').length > 0
+          move_in_phase = true
+        else
+          move_in_phase = false
+        $('#RackAjax').load("/bottle_racks/#{brid}/get_info", {wlog_id: wlogid, id: brid, move_in_phase: move_in_phase })
     $('#spinner').hide();
 
 $(document).ready ->

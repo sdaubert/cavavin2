@@ -21,6 +21,11 @@
             <td>
                 <%= link_to wlog.bottle_rack.name, bottle_rack_path(wlog.bottle_rack) %>:
                 <%= wlog.pos %>
+                <% if wlog.mvt_type == 'move' %>
+                ->
+                <%= link_to BottleRack.find(wlog.move_to_br_id).name, bottle_rack_path(wlog.move_to_br_id) %>:
+                <%= wlog.move_to_pos%>
+                <% end %>
             </td>
             <% end %>
             <td><%= wlog.notes %></td>

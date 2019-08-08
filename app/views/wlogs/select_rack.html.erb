@@ -19,6 +19,9 @@
 
     <%= form_tag({action: :save_rack, id: @wlog}) do %>
         <%= hidden_field_tag :wlog_id, @wlog.id %>
+        <% if @move_in_phase %>
+        <%= hidden_field_tag "move_in_phase", true %>
+        <% end %>
         <fieldset>
             <div class="field">
                 <%= label_tag :bottle_rack_id, 'Bottle rack' %>
@@ -27,7 +30,7 @@
             </div>
             <div class="field" id="RackAjax">
                 <% unless @bottle_rack.nil? %>
-                <%= render partial: 'bottle_racks/rack', locals: { bottle_rack: @bottle_rack, show: false } %>
+                <%= render partial: 'bottle_racks/rack', locals: { bottle_rack: @bottle_rack, show: false, move_in_phase: @move_in_phase } %>
                 <% end %>
             </div>
         </fieldset>

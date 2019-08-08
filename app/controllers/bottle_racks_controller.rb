@@ -48,7 +48,9 @@ class BottleRacksController < ApplicationController
   def get_info
     logger.debug "XHR get_info"
     @wlog = Wlog.find(params[:wlog_id])
-    render partial: 'rack', layout: false, locals: { bottle_rack: @bottle_rack, show: false }
+    move_in_phase = false
+    move_in_phase = true if params[:move_in_phase] =='true'
+    render partial: 'rack', layout: false, locals: { bottle_rack: @bottle_rack, show: false, move_in_phase: move_in_phase }
   end
 
   private

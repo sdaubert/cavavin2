@@ -10,13 +10,13 @@
           <td>
             <%= pos %>:
             <% if bottle.nil? %>
-                <% if show or @wlog.mvt_type == 'out' %>
+                <% if show or @wlog.mvt_type == 'out' or (@wlog.mvt_type == 'move' and !move_in_phase) %>
             empty
                 <% else %>
             <%= check_box_tag "bottle_rack[location][#{pos}]" %>
                 <% end %>
             <% else %>
-                <% if show or @wlog.mvt_type == 'in' or @wlog.millesime != bottle.millesime %>
+                <% if show or @wlog.mvt_type == 'in' or (@wlog.mvt_type == 'move' and move_in_phase) or @wlog.millesime != bottle.millesime %>
             <%= link_to "#{bottle.millesime.wine.domain} #{bottle.millesime.year}", wine_millesime_path(bottle.millesime.wine, bottle.millesime) %>
                 <% else %>
             <%= hidden_field_tag "bottle_rack[location][#{pos}]", 1 %>

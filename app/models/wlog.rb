@@ -10,8 +10,8 @@ class Wlog < ApplicationRecord
 
   validates :br_id, numericality: { only_integers: true }, allow_nil: true
   validates :pos, presence: true, if: :bottle_rack?
-  validates :move_to_br_id, numericality: { only_integers: true }, allow_nil: true, if: :mvt_type_is_move?
-  validates :move_to_pos, presence: true, if: :mvt_type_is_move?
+  validates :move_to_br_id, numericality: { only_integers: true }, allow_nil: true
+  validates :move_to_pos, presence: true, if: :move_to_bottle_rack?
 
   private
 
@@ -25,5 +25,9 @@ class Wlog < ApplicationRecord
 
   def bottle_rack?
     !br_id.nil?
+  end
+
+  def move_to_bottle_rack?
+    !move_to_br_id.nil?
   end
 end

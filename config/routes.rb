@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :wlogs, except: %i[index show] do
         member do
           get :select_rack
+          get :select_rack2
           post :save_rack
         end
       end

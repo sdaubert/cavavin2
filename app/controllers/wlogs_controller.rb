@@ -4,8 +4,8 @@ class BottleError < StandardError; end
 class WlogsController < ApplicationController
   before_action :set_wine
   before_action :set_millesime
-  before_action :set_wlog, only: %i[edit update destroy select_rack save_rack]
-  before_action :set_racks, only: %i[select_rack save_rack]
+  before_action :set_wlog, except: %i[new create]
+  before_action :set_racks, only: %i[select_rack select_rack2 save_rack]
 
   def new
     @wlog = @millesime.wlogs.build
@@ -44,18 +44,32 @@ class WlogsController < ApplicationController
     @title = case @wlog.mvt_type
              when 'in' then 'Select racks to store bottles'
              when 'out' then 'Select racks to remove bottles'
-             when 'move' then 'Select racks to move out bottles'
+             when 'move' then 'Select racks to move bottles out'
              end
+  end
+
+  def select_rack2
+    @title = 'Select racks to move bottles in'
+    @move_in_phase = true
+    render 'select_rack'
   end
 
   def save_rack
     begin
       @bottle_rack = BottleRack.find(params[:bottle_rack][:id])
-      @wlog.br_id = @bottle_rack.id
-      value_to_select = (@wlog.mvt_type == 'out' ? '0' : '1')
-      @wlog.pos = BottleRack.ary_to_pos(params[:bottle_rack][:location].
-                                        select { |k,v| v == value_to_select }.
-                                        keys)
+      phase_type = @wlog.mvt_type
+      phase_type = params['move_in_phase'] ? 'in' : 'out' if phase_type == 'move'
+      value_to_select = (phase_type == 'out' ? '0' : '1')
+      pos = BottleRack.ary_to_pos(params[:bottle_rack][:location].
+                       select { |k,v| v == value_to_select }.
+                       keys)
+      if params['move_in_phase'] == 'true'
+        @wlog.move_to_br_id = @bottle_rack.id
+        @wlog.move_to_pos = pos
+      else
+        @wlog.br_id = @bottle_rack.id
+        @wlog.pos = pos
+      end
       # rubocop:disable Lint/HandleExceptions
     rescue ActiveRecord::RecordNotFound
       # rubocop:enable Lint/HandleExceptions
@@ -65,7 +79,11 @@ class WlogsController < ApplicationController
       update_bottles @wlog
       @wlog.save
     end
-    redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
+    if @wlog.mvt_type == 'move' and params['move_in_phase'] != 'true'
+      redirect_to select_rack2_wine_millesime_wlog_path(@wine, @millesime, @wlog)
+    else
+      redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
+    end
   end
 
   private
@@ -102,6 +120,7 @@ class WlogsController < ApplicationController
       delete_bottles wlog
     when 'move'
       logger.debug "  > move case"
+      move_bottles wlog
     end
   end
 
@@ -112,6 +131,7 @@ class WlogsController < ApplicationController
     when 'out'
       generate_bottles wlog
     when 'move'
+      move_bottles wlog, rollback: true
     end
   end
 
@@ -127,5 +147,22 @@ class WlogsController < ApplicationController
     bottles = Bottle.where(millesime_id: wlog.millesime.id, br_id: wlog.br_id)
     bottles = bottles.where(pos: BottleRack.pos_to_ary(wlog.pos)) unless wlog.br_id.nil?
     bottles.limit(wlog.quantity).destroy_all
+  end
+
+  def move_bottles(wlog, rollback: false)
+    return if wlog.move_to_br_id.nil?
+
+    all_pos = BottleRack.pos_to_ary(wlog.pos)
+    all_new_pos = BottleRack.pos_to_ary(wlog.move_to_pos)
+
+    all_pos, all_new_pos = all_new_pos, all_pos if rollback
+
+    @millesime.bottles.where(pos: all_pos).each do |bottle|
+      idx = all_pos.index(bottle.pos)
+      unless idx.nil?
+        bottle.pos = all_new_pos[idx]
+        bottle.save
+      end
+    end
   end
 end
