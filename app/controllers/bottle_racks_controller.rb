@@ -46,7 +46,6 @@ class BottleRacksController < ApplicationController
   # xhr only
   # POST /bottle_racks/1/get_info
   def get_info
-    logger.debug "XHR get_info"
     @wlog = Wlog.find(params[:wlog_id])
     move_in_phase = false
     move_in_phase = true if params[:move_in_phase] =='true'

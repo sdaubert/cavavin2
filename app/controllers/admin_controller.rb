@@ -8,7 +8,6 @@ class AdminController < ApplicationController
 
     @years_to_drink_wines = YEARS_TO_DRINK_WINES
     @millesimes = Millesime.with_bottles.drink_before(YEARS_TO_DRINK_WINES).order('diff').all
-    logger.debug Millesime.with_bottles.drink_before(YEARS_TO_DRINK_WINES).inspect
     @bottles_to_drink = @millesimes.to_a.inject(0) { |sum, mil| sum + mil.quantity }
 
     @book = Wlog.order(date: :desc, id: :desc).take(CELLAR_BOOK_LAST_ENTRIES_COUNT)

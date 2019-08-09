@@ -15,7 +15,6 @@ class WlogsController < ApplicationController
 
   def create
     @wlog = @millesime.wlogs.build(wlog_params)
-    logger.debug(@wlog.inspect)
 
     if @wlog.save
       redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog), notice: 'Wlog was successfully created.'
@@ -61,8 +60,6 @@ class WlogsController < ApplicationController
     if @bottle_rack.nil?
       if @wlog.millesime.bottles.where(br_id: nil).empty? || @wlog.mvt_type_is_move?
         @wlog.errors.add(:bottle_rack, 'none selected')
-        logger.debug @wlog.errors.inspect
-        logger.debug @wlog.errors.full_messages.inspect
 
         render :select_rack
         return
@@ -110,13 +107,10 @@ class WlogsController < ApplicationController
   def update_bottles!(wlog)
     case wlog.mvt_type
     when 'in'
-      logger.debug "  > in case"
       generate_bottles! wlog
     when 'out'
-      logger.debug "  > out case"
       delete_bottles wlog
     when 'move'
-      logger.debug "  > move case"
       move_bottles! wlog
     end
   end
