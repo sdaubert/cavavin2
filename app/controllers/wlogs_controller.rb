@@ -55,31 +55,30 @@ class WlogsController < ApplicationController
   end
 
   def save_rack
-    begin
-      @bottle_rack = BottleRack.find(params[:bottle_rack][:id])
-      phase_type = @wlog.mvt_type
-      phase_type = params['move_in_phase'] ? 'in' : 'out' if phase_type == 'move'
-      value_to_select = (phase_type == 'out' ? '0' : '1')
-      pos = BottleRack.ary_to_pos(params[:bottle_rack][:location].
-                       select { |k,v| v == value_to_select }.
-                       keys)
-      if params['move_in_phase'] == 'true'
-        @wlog.move_to_br_id = @bottle_rack.id
-        @wlog.move_to_pos = pos
-      else
-        @wlog.br_id = @bottle_rack.id
-        @wlog.pos = pos
+    @bottle_rack = BottleRack.find_by(id: params[:bottle_rack][:id])
+    @move_in_phase = (params['move_in_phase'] == true)
+
+    if @bottle_rack.nil?
+      if @wlog.millesime.bottles.where(br_id: nil).empty? || @wlog.mvt_type_is_move?
+        @wlog.errors.add(:bottle_rack, 'none selected')
+        logger.debug @wlog.errors.inspect
+        logger.debug @wlog.errors.full_messages.inspect
+
+        render :select_rack
+        return
       end
-      # rubocop:disable Lint/HandleExceptions
-    rescue ActiveRecord::RecordNotFound
-      # rubocop:enable Lint/HandleExceptions
+    else
+      set_bottle_rack_info params
     end
 
     Wlog.transaction do
-      update_bottles @wlog
-      @wlog.save
+      update_bottles! @wlog
+      @wlog.save!
+    rescue ActiveRecord::RecordInvalid
+      render :select_rack
     end
-    if @wlog.mvt_type == 'move' and params['move_in_phase'] != 'true'
+
+    if (@wlog.mvt_type == 'move') && (params['move_in_phase'] != 'true')
       redirect_to select_rack2_wine_millesime_wlog_path(@wine, @millesime, @wlog)
     else
       redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
@@ -108,19 +107,17 @@ class WlogsController < ApplicationController
     params.require(:wlog).permit(:millesime_id, :date, :mvt_type, :quantity, :price, :notes)
   end
 
-  def update_bottles(wlog)
-    logger.debug "update_bottles"
-
+  def update_bottles!(wlog)
     case wlog.mvt_type
     when 'in'
       logger.debug "  > in case"
-      generate_bottles wlog
+      generate_bottles! wlog
     when 'out'
       logger.debug "  > out case"
       delete_bottles wlog
     when 'move'
       logger.debug "  > move case"
-      move_bottles wlog
+      move_bottles! wlog
     end
   end
 
@@ -129,17 +126,17 @@ class WlogsController < ApplicationController
     when 'in'
       delete_bottles wlog
     when 'out'
-      generate_bottles wlog
+      generate_bottles! wlog
     when 'move'
-      move_bottles wlog, rollback: true
+      move_bottles! wlog, rollback: true
     end
   end
 
-  def generate_bottles(wlog)
+  def generate_bottles!(wlog)
     positions = BottleRack.pos_to_ary(wlog.pos)
     wlog.quantity.times do
-      logger.debug @millesime.bottles.create(br_id: wlog.br_id,
-                                             pos: positions.shift)
+      @millesime.bottles.create!(br_id: wlog.br_id,
+                                 pos: positions.shift)
     end
   end
 
@@ -149,7 +146,7 @@ class WlogsController < ApplicationController
     bottles.limit(wlog.quantity).destroy_all
   end
 
-  def move_bottles(wlog, rollback: false)
+  def move_bottles!(wlog, rollback: false)
     return if wlog.move_to_br_id.nil?
 
     all_pos = BottleRack.pos_to_ary(wlog.pos)
@@ -161,8 +158,26 @@ class WlogsController < ApplicationController
       idx = all_pos.index(bottle.pos)
       unless idx.nil?
         bottle.pos = all_new_pos[idx]
-        bottle.save
+        bottle.save!
       end
+    end
+  end
+
+  def set_bottle_rack_info(params)
+    phase_type = @wlog.mvt_type
+    phase_type = params['move_in_phase'] ? 'in' : 'out' if phase_type == 'move'
+
+    value_to_select = (phase_type == 'out' ? '0' : '1')
+    pos = BottleRack.ary_to_pos(params[:bottle_rack][:location].
+                     select { |k,v| v == value_to_select }.
+                     keys)
+
+    if params['move_in_phase'] == 'true'
+      @wlog.move_to_br_id = @bottle_rack.id
+      @wlog.move_to_pos = pos
+    else
+      @wlog.br_id = @bottle_rack.id
+      @wlog.pos = pos
     end
   end
 end

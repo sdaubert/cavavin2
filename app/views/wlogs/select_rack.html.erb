@@ -22,6 +22,17 @@
         <% if @move_in_phase %>
         <%= hidden_field_tag "move_in_phase", true %>
         <% end %>
+        <% if @wlog.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@wlog.errors.count, "error") %> prohibited this wine log from being saved:</h2>
+
+            <ul>
+            <% @wlog.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
         <fieldset>
             <div class="field">
                 <%= label_tag :bottle_rack_id, 'Bottle rack' %>

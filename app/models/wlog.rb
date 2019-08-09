@@ -13,8 +13,6 @@ class Wlog < ApplicationRecord
   validates :move_to_br_id, numericality: { only_integers: true }, allow_nil: true
   validates :move_to_pos, presence: true, if: :move_to_bottle_rack?
 
-  private
-
   def mvt_type_is_in?
     mvt_type == 'in'
   end
@@ -22,6 +20,8 @@ class Wlog < ApplicationRecord
   def mvt_type_is_move?
     mvt_type == 'move'
   end
+
+  private
 
   def bottle_rack?
     !br_id.nil?
