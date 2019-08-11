@@ -58,7 +58,7 @@ class WlogsController < ApplicationController
     @move_in_phase = (params['move_in_phase'] == true)
 
     if @bottle_rack.nil?
-      if @wlog.millesime.bottles.where(br_id: nil).empty? || @wlog.mvt_type_is_move?
+      if (@wlog.millesime.bottles.count > 0 && @wlog.millesime.bottles.where(br_id: nil).empty?) || @wlog.mvt_type_is_move?
         @wlog.errors.add(:bottle_rack, 'none selected')
 
         render :select_rack
