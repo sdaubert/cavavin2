@@ -17,12 +17,24 @@ Rails.application.routes.draw do
   end
   resources :providers
   resources :producers
-  resources :colors, except: %i[show]
+  resources :colors, except: %i[show] do
+    collection do
+      get :stats
+    end
+  end
   resources :countries, except: %i[show] do
-    resources :regions
+    collection do
+      get :stats
+    end
+    resources :regions do
+      collection do
+        get :stats
+      end
+    end
   end
 
   get 'admin/main'
   get 'admin/book'
+  get 'admin/stats'
   root 'admin#main'
 end
