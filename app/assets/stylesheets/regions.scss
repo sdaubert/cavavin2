@@ -50,3 +50,10 @@
   .active {
     display: block;
   }
+
+  ul.ungroup {
+    li {
+      margin-left: 1.5em;
+      list-style-type: disc;
+    }
+  }

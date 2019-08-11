@@ -10,6 +10,12 @@ class RegionsController < ApplicationController
   end
 
   def show
+    @millesimes = Millesime.from_region(@region)
+                           .with_bottles
+                           .order('wines.domain, millesimes.year')
+    @drunk_millesimes = Millesime.from_region(@region)
+                                 .without_bottles
+                                 .order('wines.domain, millesimes.year')
   end
 
   def new

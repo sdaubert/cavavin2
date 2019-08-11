@@ -6,11 +6,39 @@
   <ul>
     <li>Name: <%= @region.name %></li>
     <% unless @region.root? %>
-    <li>Zone: <%= @region.root.name %></li>
-    <li>Parent: <%= @region.parent.name %></li>
+    <li>Zone: <%= link_to @region.root.name, country_region_path(@country, @region.root) %></li>
+    <li>Parent: <%= link_to @region.parent.name, country_region_path(@country, @region.parent) %></li>
     <% end %>
-    <li>Country: <%= @region.country.name %></li>
+    <li>Country: <%= link_to @region.country.name, @country %></li>
   </ul>
+
+  <% unless @region.leaf? %>
+  <h3>Subregions</h3>
+  <ul class="ungroup">
+  <% @region.children.each do |child| %>
+    <li><%= link_to child.name, country_region_path(@country, child) %></li>
+  <% end %>
+  </ul>
+  <% end %>
+</div>
+
+<div class="group">
+  <h2>Known wines</h2>
+
+  Wines with bottles:
+  <ul class="ungroup">
+    <% @millesimes.each do |millesime| %>
+    <li><%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %></li>
+    <% end %>
+  </ul>
+
+  Drunk wines (without bottles):
+  <ul class="ungroup">
+    <% @drunk_millesimes.each do |millesime| %>
+    <li><%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %></li>
+    <% end %>
+  </ul>
+
 </div>
 
 <%= link_to 'Edit', edit_country_region_path(@region.country, @region) %> |
