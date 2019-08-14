@@ -1,0 +1,28 @@
+<div class="group">
+    <h2>Select regions and colors</h2>
+
+    <%= form_tag({action: :save_regions, id: @dish}) do %>
+    <table class="select">
+        <thead>
+            <tr>
+                <th>Regions</th>
+                <th colspan="<%= @colors_count %>">Colors</th>
+            </tr>
+            <tr>
+                <th></th>
+                <% @colors.each do |color| %>
+                <th><%= color.name %></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody>
+            <%= generate_regions_table_lines(@dish) %>
+        </tbody>
+    </table>
+
+    <div class="actions">
+      <%= submit_tag 'Save' %>
+    </div>
+
+    <% end %>
+</div>

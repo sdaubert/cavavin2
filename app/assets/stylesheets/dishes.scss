@@ -1,0 +1,45 @@
+// Place all the styles related to the dishes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.country {
+    font-weight: bold;
+    font-style: italic;
+}
+
+dl.association {
+    dt {
+        font-weight: bold;
+    }
+}
+
+.association ul {
+    margin-left: 1em;
+}
+
+.select td {
+    input[type=checkbox] {
+        margin: 0;
+    }
+}
+
+.not-leaf {
+    cursor: pointer;
+}
+
+.not-leaf span::before {
+  content: "\229E";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+.not-leaf-expanded span::before {
+  content: "\229F";
+}
+
+.leaf span::before {
+    content: "\25B6";
+    display: inline-block;
+    margin-right: 6px;
+
+}

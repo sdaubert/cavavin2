@@ -4,6 +4,9 @@ class Region < ApplicationRecord
   validates_presence_of :name, :country_id
 
   belongs_to :country
+  has_many :wines
+  has_many :dras
+  has_many :dishes, through: :dras
 
   scope :by_country, lambda { |country_id| where('regions.country_id = ?', country_id) }
 

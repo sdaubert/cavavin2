@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :dishes do
+    member do
+      get :select_regions
+      post :save_regions
+    end
+  end
   resources :bottle_racks do
     member do
       post :get_info

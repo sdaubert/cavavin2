@@ -41,6 +41,15 @@
 
 </div>
 
+<div class="group">
+  <h2>Associated dishes</h2>
+  <ul>
+  <% @region.dishes.each do |dish| %>
+    <li><%= link_to dish.name, dish_path(dish) %></li>
+  <% end %>
+  </ul>
+</div>
+
 <%= link_to 'Edit', edit_country_region_path(@region.country, @region) %> |
 <%= link_to 'Back', country_regions_path(@region.country) %> |
 <%= link_to_destroy [@country, @region], no_img: true %>

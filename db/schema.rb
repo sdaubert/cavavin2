@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_133900) do
+ActiveRecord::Schema.define(version: 2019_08_12_183119) do
 
   create_table "bottle_racks", force: :cascade do |t|
     t.string "name"
@@ -34,8 +34,29 @@ ActiveRecord::Schema.define(version: 2019_08_01_133900) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "colors_regions", id: false, force: :cascade do |t|
+    t.integer "region_id", null: false
+    t.integer "color_id", null: false
+    t.index ["region_id", "color_id"], name: "index_colors_regions_on_region_id_and_color_id"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dishes", force: :cascade do |t|
+    t.string "name"
+    t.string "dish_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dras", force: :cascade do |t|
+    t.integer "dish_id"
+    t.integer "region_id"
+    t.integer "color_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
