@@ -7,6 +7,7 @@ class Region < ApplicationRecord
   has_many :wines
   has_many :dras
   has_many :dishes, through: :dras
+  has_and_belongs_to_many :colors
 
   scope :by_country, lambda { |country_id| where('regions.country_id = ?', country_id) }
 

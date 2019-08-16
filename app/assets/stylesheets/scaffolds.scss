@@ -120,6 +120,9 @@ div {
 label {
   display: block;
 }
+label.inline {
+  display: inline;
+}
 
 canvas {
   margin: 1ex;

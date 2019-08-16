@@ -10,6 +10,7 @@
     <li>Parent: <%= link_to @region.parent.name, country_region_path(@country, @region.parent) %></li>
     <% end %>
     <li>Country: <%= link_to @region.country.name, @country %></li>
+    <li>Colors: <%= @region.colors.map(&:name).join(', ') %></li>
   </ul>
 
   <% unless @region.leaf? %>

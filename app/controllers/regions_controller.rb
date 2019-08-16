@@ -6,7 +6,6 @@ class RegionsController < ApplicationController
   before_action :set_countries, only: [:new, :create, :edit, :update]
 
   def index
-    #@regions = @country.regions
   end
 
   def show
@@ -68,6 +67,6 @@ class RegionsController < ApplicationController
   end
 
   def region_params
-    params.require(:region).permit(:name, :parent_id, :country_id)
+    params.require(:region).permit(:name, :parent_id, :country_id, color_ids: [])
   end
 end
