@@ -27,18 +27,27 @@
   <h2>Known wines</h2>
 
   Wines with bottles:
+  <% if @millesimes.empty? %>
+  none
+  <% else %>
   <ul class="ungroup">
     <% @millesimes.each do |millesime| %>
     <li><%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %></li>
     <% end %>
   </ul>
+  <% end %>
 
+  <br/>
   Drunk wines (without bottles):
+  <% if @drunk_millesimes.empty? %>
+  none
+  <% else %>
   <ul class="ungroup">
     <% @drunk_millesimes.each do |millesime| %>
     <li><%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %></li>
     <% end %>
   </ul>
+  <% end %>
 
 </div>
 
