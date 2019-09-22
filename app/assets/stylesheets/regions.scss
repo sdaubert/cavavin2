@@ -41,6 +41,13 @@
     /*transform: rotate(90deg);*/
   }
 
+  /* Reserve space to align line with no caret */
+  .no-caret::before {
+    content: "\229E";
+    visibility: hidden;
+    margin-right: 6px;
+  }
+
   /* Hide the nested list */
   .nested {
     display: none;
