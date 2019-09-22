@@ -21,11 +21,11 @@ class Wlog < ApplicationRecord
     mvt_type == 'move'
   end
 
-  private
-
   def bottle_rack?
     !br_id.nil?
   end
+
+  private
 
   def move_to_bottle_rack?
     !move_to_br_id.nil?
