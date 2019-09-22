@@ -26,7 +26,7 @@
     <tbody>
     <% @millesimes.each do |m| %>
         <% wine = m.wine %>
-        <tr class="<%= m.diff < 1 ? 'lessthan1y' : nil %>">
+        <tr class="<%= m.years_to_drink_wine < 1 ? 'urgent-to-drink' : nil %>">
             <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
             <td><%= wine.color.name %></td>
             <td><%= m.year %></td>

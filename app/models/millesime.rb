@@ -23,4 +23,9 @@ class Millesime < ApplicationRecord
   def quantity
     Millesime.joins(:bottles).where(id: id).count
   end
+
+  # Give years before wine is at its culmination
+  def years_to_drink_wine
+    year + garde - Time.now.year
+  end
 end
