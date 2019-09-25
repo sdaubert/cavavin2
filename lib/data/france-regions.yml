@@ -103,11 +103,11 @@ Bordeaux:
     Côtes de Bordeaux Francs:
       colors:
         - blanc
-        - blanc liqoreux
+        - blanc liquoreux
         - rouge
     Côtes de Bordeaux Saint-Macaire:
       colors:
-        - blanc liqoreux
+        - blanc liquoreux
     Côtes de Bourg:
       colors:
         - blanc
@@ -200,11 +200,11 @@ Bordeaux:
             - rouge
     Premières Côtes de Bordeaux:
       colors:
-        - blanc moelleux
+        - blanc liquoreux
     Saint-Foy-Bordeaux:
       colors:
         - blanc
-        - blanc moelleux
+        - blanc liquoreux
         - rouge
     Sauternais:
       regions:
@@ -1200,7 +1200,7 @@ Val de Loire:
         Cour-Cheverny:
           colors:
             - blanc
-            - blanc moelleux
+            - blanc liquoreux
         Menetou-Salon:
           colors:
             - blanc
@@ -1296,7 +1296,7 @@ Val de Loire:
         Jasnières:
           colors:
             - blanc
-            - blanc moelleux
+            - blanc liquoreux
         Saint-Nicolas-de-Bourgueil:
           colors:
             - rosé
