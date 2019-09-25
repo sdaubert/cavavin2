@@ -52,6 +52,9 @@ class RegionsController < ApplicationController
     redirect_to country_regions_url(@country)
   end
 
+  def stats
+  end
+
   private
 
   def set_country

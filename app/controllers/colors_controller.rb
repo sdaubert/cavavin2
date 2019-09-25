@@ -42,6 +42,9 @@ class ColorsController < ApplicationController
     redirect_to colors_path
   end
 
+  def stats
+  end
+
   private
 
   def color_params
