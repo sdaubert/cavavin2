@@ -62,8 +62,11 @@ class AdminController < ApplicationController
   end
 
   def get_first_date
-    first_date = Wlog.order(:date).first.date.beginning_of_month
-    return first_date if EVOLUTION_YEAR_COUNT == 0
+    first_wlog = Wlog.order(:date).first
+    return Time.now.to_date if first_wlog.nil?
+
+    first_date = first_wlog.date.beginning_of_month
+    return first_date if EVOLUTION_YEAR_COUNT.zero?
 
     [first_date, Time.now.to_date.beginning_of_month - EVOLUTION_YEAR_COUNT.year].max
   end
@@ -123,7 +126,7 @@ class AdminController < ApplicationController
                   .order('year')
                   .pluck(Arel.sql('strftime("%Y", wlogs.date) as year, sum(wlogs.quantity)'))
 
-      data.unshift [first_year, 0]if data.last.first.to_i != first_year
+      data.unshift [first_year, 0] if !data.empty? && (data.last.first.to_i != first_year)
       h = {
         name: color.name,
         data: fix_holes_in_years(data)
