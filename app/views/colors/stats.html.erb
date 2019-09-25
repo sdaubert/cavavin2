@@ -1,1 +1,24 @@
-TODO
+<h2>Statistics on colors</h2>
+
+<table class="stat">
+    <thead>
+        <tr>
+            <td>Wine color</td>
+            <td>Nb of bottles by color</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @colors.each do |color, sum| %>
+        <tr>
+            <td><%= color.name %></td>
+            <td class="right"><%= sum %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= pie_chart Hash[@colors.map { |c, sum| [c.name, sum] }] %>
+
+<%= link_to 'Back', colors_path %>
+|
+<%= link_to 'Statistics', controller: 'admin', action: 'stats' %>

@@ -43,6 +43,11 @@ class ColorsController < ApplicationController
   end
 
   def stats
+    @colors = Hash[Color.all.map { |c| [c, 0] }]
+    Wine.find_each do |wine|
+      @colors[wine.color] += wine.quantity
+    end
+    @colors.delete_if { |_color, value| value.zero? }
   end
 
   private
