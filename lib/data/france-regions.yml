@@ -1,0 +1,1439 @@
+Alsace-Lorraine:
+  colors:
+    - rouge
+    - blanc
+    - rosé
+  regions:
+    Alsace Blienschwiller:
+      colors:
+        - blanc
+    Alsace Côtes de Barr:
+      colors:
+        - blanc
+    Alsace Côte de Rouffach:
+      colors:
+        - blanc
+        - rouge
+    Alsace Klevener de Heiligenstein:
+      colors:
+        - blanc
+    Alsace Ottrot:
+      colors:
+        - rouge
+    Alsace Rodern:
+      colors:
+        - rouge
+    Alsace Saint-Hippolyte:
+      colors:
+        - rouge
+    Alsace Scherwiller:
+      colors:
+        - blanc
+    Alsace Val Saint-Grégoire:
+      colors:
+        - blanc
+    Alsace Vallée Noble:
+      colors:
+        - blanc
+    Alsace Wolxheim:
+      colors:
+        - blanc
+    Alsace Bergheim:
+      colors:
+        - blanc
+    Alsace Côteaux du Haut-Koenigsbourg:
+      colors:
+        - blanc
+    Alsace Grand Cru:
+      colors:
+        - blanc
+    Crémant d'Alsace:
+      colors:
+        - blanc
+        - rosé
+    Côtes de Toul:
+      colors:
+        - blanc
+        - gris
+        - rouge
+    Moselle:
+      colors:
+        - blanc
+        - gris
+        - rosé
+        - rouge
+
+Bordeaux:
+  colors:
+    - blanc
+    - rosé
+    - rouge
+    - clairet
+  regions:
+    Blaye:
+      colors:
+        - rouge
+    Bordeaux Haut-Benauge:
+      colors:
+        - blanc
+        - blanc liquoreux
+    Bordeaux Supérieur:
+      colors:
+        - blanc
+        - rouge
+    Cadillac:
+      colors:
+        - blanc liquoreux
+    Côtes de Blaye:
+      colors:
+        - blanc
+    Côtes de Bordeaux:
+      colors:
+        - rouge
+    Côtes de Bordeaux Blaye:
+      colors:
+        - blanc
+        - rouge
+    Côtes de Bordeaux Cadillac:
+      colors:
+        - rouge
+    Côtes de Bordeaux Castillon:
+      colors:
+        - rouge
+    Côtes de Bordeaux Francs:
+      colors:
+        - blanc
+        - blanc liqoreux
+        - rouge
+    Côtes de Bordeaux Saint-Macaire:
+      colors:
+        - blanc liqoreux
+    Côtes de Bourg:
+      colors:
+        - blanc
+        - rouge
+    Crémant de Bordeaux:
+      colors:
+        - blanc
+        - rosé
+    Entre Deux Mers:
+      colors:
+        - blanc
+    Entre Deux Mers Haut-Benauge:
+      colors:
+        - blanc
+    Graves:
+      colors:
+        - blanc
+        - rouge
+      regions:
+        Cérons:
+          colors:
+            - blanc liquoreux
+        Graves Supérieures:
+          colors:
+            - blanc
+        Pessac-Léognan:
+          colors:
+            - blanc
+            - rouge
+    Graves de Vayres:
+      colors:
+        - blanc
+        - rouge
+    Libournais:
+      regions:
+        Canon-Fronsac:
+          colors:
+            - rouge
+        Fronsac:
+          colors:
+            - rouge
+        Lalande de Pomerol:
+          colors:
+            - rouge
+        Lussac-Saint-Émilion:
+          colors:
+            - rouge
+        Montagne-Saint-Émilion:
+          colors:
+            - rouge
+        Pomerol:
+          colors:
+            - rouge
+        Puisseguin-Saint-Émilion:
+          colors:
+            - rouge
+        Saint-Émilion:
+          colors:
+            - rouge
+        Saint-Émilion Grand Cru:
+          colors:
+            - rouge
+        Saint-Georges-Saint-Émilion:
+          colors:
+            - rouge
+    Médoc:
+      colors:
+        - rouge
+      regions:
+        Haut-Médoc:
+          colors:
+            - rouge
+        Listrac-Médoc:
+          colors:
+            - rouge
+        Margaux:
+          colors:
+            - rouge
+        Moulis:
+          colors:
+            - rouge
+        Pauillac:
+          colors:
+            - rouge
+        Saint-Estèphe:
+          colors:
+            - rouge
+        Saint-Julien:
+          colors:
+            - rouge
+    Premières Côtes de Bordeaux:
+      colors:
+        - blanc moelleux
+    Saint-Foy-Bordeaux:
+      colors:
+        - blanc
+        - blanc moelleux
+        - rouge
+    Sauternais:
+      regions:
+        Barsac:
+          colors:
+            - blanc liquoreux
+        Loupiac:
+          colors:
+            - blanc liquoreux
+        Sainte-Croix-du-Mont:
+          colors:
+            - blanc liquoreux
+        Sauternes:
+          colors:
+            - blanc liquoreux
+
+Bourgogne:
+  colors:
+    - blanc
+    - rosé
+    - rouge
+    - clairet
+  regions:
+    Bourgogne Aligoté:
+      colors:
+        - blanc
+    Bourgogne Mousseux:
+      colors:
+        - rouge
+    Bourgogne Passe-tout-grains:
+      colors:
+        - rosé
+        - rouge
+    Coteaux Bourguignons:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+        - clairet
+    Crémant de Bourgogne:
+      colors:
+        - blanc
+        - rosé
+    Auxerrois:
+      regions:
+        Bourgogne Chitry:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+            - clairet
+        Bourgogne Côte Saint-Jacques:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Bourgogne Côtes d'Auxerre:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+            - clairet
+        Bourgogne Coulanges-la-Vineuse:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Bourgogne Épineuil:
+          colors:
+            - rosé
+            - rouge
+        Bourgogne Tonnerre:
+          colors:
+            - blanc
+        Bourgogne Vézelay:
+          colors:
+            - blanc
+        Chablis:
+          colors:
+            - blanc
+        Chablis Grand Cru:
+          colors:
+            - blanc
+        Irancy:
+          colors:
+            - rouge
+        Saint-Bris:
+          colors:
+            - blanc
+        Saint-Véran:
+          colors:
+            - blanc
+    Beaujolais:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+      regions:
+        Beaujolais supérieur:
+          colors:
+            - rouge
+        Beaujolais Villages:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Brouilly:
+          colors:
+            - rouge
+        Chénas:
+          colors:
+            - rouge
+        Chiroubles:
+          colors:
+            - rouge
+        Côte de Brouilly:
+          colors:
+            - rouge
+        Fleurie:
+          colors:
+            - rouge
+        Juliénas:
+          colors:
+            - rouge
+        Morgon:
+          colors:
+            - rouge
+        Moulin à vent:
+          colors:
+            - rouge
+        Régnié:
+          colors:
+            - rouge
+        Saint-Amour:
+          colors:
+            - rouge
+    Côte de Beaune:
+      colors:
+        - blanc
+        - rouge
+      regions:
+        Aloxe-Corton:
+          colors:
+            - blanc
+            - rouge
+        Auxey-Duresse:
+          colors:
+            - blanc
+            - rouge
+        Bâtard-Montrachet:
+          colors:
+            - blanc
+        Beaune:
+          colors:
+            - blanc
+            - rouge
+        Bienvenues-Bâtard-Montrachet:
+          colors:
+            - blanc
+        Blagny:
+          colors:
+            - rouge
+        Bourgogne Hautes-Côtes-de-Beaune:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+            - clairet
+        Charlemagne:
+          colors:
+            - blanc
+        Chassagne-Montrachet:
+          colors:
+            - blanc
+            - rouge
+        Chevalier-Montrachet:
+          colors:
+            - blanc
+        Chorey-Lès-Beaune:
+          colors:
+            - blanc
+            - rouge
+        Corton:
+          colors:
+            - blanc
+            - rouge
+        Corton-Charlemagne:
+          colors:
+            - blanc
+        Côte de Beaune Villages:
+          colors:
+            - rouge
+        Criots-Bâtard-Montrachet:
+          colors:
+            - blanc
+        Ladoix:
+          colors:
+            - blanc
+            - rouge
+        Maranges:
+          colors:
+            - blanc
+            - rouge
+        Meursault:
+          colors:
+            - blanc
+        Monthélie:
+          colors:
+            - blanc
+            - rouge
+        Montrachet:
+          colors:
+            - blanc
+        Pernand-Vergelesses:
+          colors:
+            - blanc
+            - rouge
+        Pommard:
+          colors:
+            - rouge
+        Puligny-Montrachet:
+          colors:
+            - blanc
+            - rouge
+        Saint-Aubin:
+          colors:
+            - blanc
+            - rouge
+        Saint-Romain:
+          colors:
+            - blanc
+            - rouge
+        Santenay:
+          colors:
+            - blanc
+            - rouge
+        Savigny:
+          colors:
+            - blanc
+            - rouge
+        Volnay:
+          colors:
+            - rouge
+        Volnay-Santenots:
+          colors:
+            - rouge
+    Côte chalonnaise:
+      regions:
+        Bourgogne Côte chalonnaise:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+            - clairet
+        Bourgogne Côtes du Couchois:
+          colors:
+            - rouge
+        Bouzeron:
+          colors:
+            - blanc
+        Givry:
+          colors:
+            - blanc
+            - rouge
+        Mercurey:
+          colors:
+            - blanc
+            - rouge
+        Montagny:
+          colors:
+            - blanc
+    Côte de Nuit:
+      regions:
+        Bonnes Mares:
+          colors:
+            - rouge
+        Bourgogne Hautes-Côtes-de-Nuit:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+            - clairet
+        Chambertin:
+          colors:
+            - rouge
+        Chambertin Clos de Bèze:
+          colors:
+            - rouge
+        Chambolle-Musigny:
+          colors:
+            - rouge
+        Chapelle-Chambertin:
+          colors:
+            - rouge
+        Charmes-Chambertin:
+          colors:
+            - rouge
+        Clos de la Roche:
+          colors:
+            - rouge
+        Clos des Lambrays:
+          colors:
+            - rouge
+        Clos de Tart:
+          colors:
+            - rouge
+        Clos de Vougeot:
+          colors:
+            - rouge
+        Clos Saint-Denis:
+          colors:
+            - rouge
+        Côte de Nuit Village:
+          colors:
+            - blanc
+            - rouge
+        Échezeaux:
+          colors:
+            - rouge
+        Fixin:
+          colors:
+            - blanc
+            - rouge
+        Gevrey-Chambertin:
+          colors:
+            - rouge
+        Grand Échezeaux:
+          colors:
+            - rouge
+        Griotte-Chambertin:
+          colors:
+            - rouge
+        La Grande Rue:
+          colors:
+            - rouge
+        La Romanée:
+          colors:
+            - rouge
+        La Tâche:
+          colors:
+            - rouge
+        Latricières-Chambertin:
+          colors:
+            - rouge
+        Marsannay:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Mazis-Chambertin:
+          colors:
+            - rouge
+        Mazoyères-Chambertin:
+          colors:
+            - rouge
+        Morey-Saint-Denis:
+          colors:
+            - blanc
+            - rouge
+        Musigny:
+          colors:
+            - blanc
+            - rouge
+        Nuits-Saint-Georges:
+          colors:
+            - blanc
+            - rouge
+        Richebourg:
+          colors:
+            - rouge
+        Romanée-Conti:
+          colors:
+            - rouge
+        Romanée-Saint-Vivant:
+          colors:
+            - rouge
+        Ruchottes-Chambertin:
+          colors:
+            - rouge
+        Vosnes-Romanée:
+          colors:
+            - rouge
+        Vougeot:
+          colors:
+            - rouge
+    Mâconnais:
+      regions:
+        Mâcon:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Mâcon Villages:
+          colors:
+            - blanc
+        Pouilly Fuissé:
+          colors:
+            - blanc
+        Pouilly Loché:
+          colors:
+            - blanc
+        Pouilly Vinzelles:
+          colors:
+            - blanc
+        Rully:
+          colors:
+            - blanc
+            - rouge
+        Viré-Clessé:
+          colors:
+            - blanc
+
+Champagne:
+  colors:
+    - blanc
+    - rosé
+  regions:
+    Champagne Grand cru:
+      colors:
+        - blanc
+        - rosé
+    Coteuax champenois:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Rosé des Riceys:
+      colors:
+        - rosé
+
+Jura:
+  regions:
+    Arbois:
+      colors:
+        - blanc
+        - gris
+        - rosé
+        - jaune
+        - rouge
+        - blanc liquoreux
+    Arbois-Pupillin:
+      colors:
+        - blanc
+        - gris
+        - rosé
+        - jaune
+        - rouge
+        - blanc liquoreux
+    Château-chalon:
+      colors:
+        - jaune
+    Côtes du Jura:
+      colors:
+        - blanc
+        - rosé
+        - jaune
+        - rouge
+    Crémant du Jura:
+      colors:
+        - blanc
+        - rosé
+    L'Étoile:
+      colors:
+        - blanc
+        - jaune
+        - blanc liquoreux
+
+Languedoc-Roussilon:
+  regions:
+    Languedoc:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+      regions:
+        Berlou:
+          colors:
+            - rouge
+        Blanquette de Limoux:
+          colors:
+            - blanc
+        Cabardès:
+          colors:
+            - rosé
+            - rouge
+        Cabrières:
+          colors:
+            - rosé
+            - rouge
+        Clairette de Bellegarde:
+          colors:
+            - blanc
+        Clairette du Languedoc:
+          colors:
+            - blanc
+        Costières-de-Nîmes:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Crémant de Limoux:
+          colors:
+            - blanc
+        Duché d'Uzès':
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Faugères:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Fitou:
+          colors:
+            - rouge
+        Grès de Montpellier:
+          colors:
+            - rouge
+        La Clape:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        La Méjanelle:
+          colors:
+            - rosé
+            - rouge
+        Limoux:
+          colors:
+            - blanc
+            - rouge
+        Malepère:
+          colors:
+            - rosé
+            - rouge
+        Minervois:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Minervois La Livinière:
+          colors:
+            - rouge
+        Montpeyroux:
+          colors:
+            - rosé
+            - rouge
+        Pézenas:
+          colors:
+            - rouge
+        Picpoul de Pinet:
+          colors:
+            - blanc
+        Pic Saint-Loup:
+          colors:
+            - rosé
+            - rouge
+        Quatourze:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Saint-Chinian:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Saint-Christol:
+          colors:
+            - rosé
+            - rouge
+    Roussillon:
+      regions:
+        Boutenac:
+          colors:
+            - rouge
+        Caramany:
+          colors:
+            - rouge
+        Collioure:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Corbières:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Corbières-Boutenac:
+          colors:
+            - rouge
+        Côtes du Roussillon:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Côtes du Roussillon Villages:
+          colors:
+            - rouge
+        Latour de France:
+          colors:
+            - rouge
+        Les Aspres:
+          colors:
+            - rouge
+        Lesquerde:
+          colors:
+            - rouge
+        Tautavel:
+          colors:
+            - rouge
+        Terrasses du Larzac:
+          colors:
+            - rouge
+        Vérargues:
+          colors:
+            - rosé
+            - rouge
+
+Provence:
+  regions:
+    Bandol:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Cassis:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Coteaux d'Aix-en-Provence:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Coteaux de Pierrevert:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Coteaux varois en Provence:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Fréjus:
+      colors:
+        - rosé
+        - rouge
+    La Londe:
+      colors:
+        - rosé
+        - rouge
+    Les Baux de Provence:
+      colors:
+        - rosé
+        - rouge
+    Luberon:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Palette:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Pierrefeu:
+      colors:
+        - rosé
+        - rouge
+    Sainte-Victoire:
+      colors:
+        - rosé
+        - rouge
+
+Corse:
+  regions:
+    Ajaccio:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Patriomonio:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse Calvi:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse Cap Corse:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse Figari:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse Porto:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vin de Corse Sartène:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+
+Savoie:
+  regions:
+    Bugey:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+      regions:
+        Roussette du Bugey:
+          colors:
+            - blanc
+    Crépy:
+      colors:
+        - blanc
+    Roussette de Savoie:
+      colors:
+        - blanc
+    Seyssel:
+      colors:
+        - blanc
+    Vin de Savoie:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+        - clairet
+
+Sud-Ouest:
+  regions:
+    Bergeracois:
+      regions:
+        Bergerac:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Côtes de Bergerac:
+          colors:
+            - blanc liquoreux
+        Côtes de Duras:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Côtes de Montravel:
+          colors:
+            - blanc liquoreux
+        Monbazillac:
+          colors:
+            - blanc liquoreux
+        Montravel:
+          colors:
+            - blanc
+            - rouge
+        Pécharmant:
+          colors:
+            - rouge
+        Rosette:
+          colors:
+            - blanc liquoreux
+        Saussignac:
+          colors:
+            - blanc liquoreux
+    Midi-Pyrénées:
+      regions:
+        Brulhois:
+          colors:
+            - rosé
+            - rouge
+        Buzet:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Cahors:
+          colors:
+            - rouge
+        Coteaux du Quercy:
+          colors:
+            - rosé
+            - rouge
+        Côtes de Millau:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Côtes du Marmandais:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Entraygues-Le Fel:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Estaing:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Fronton:
+          colors:
+            - rosé
+            - rouge
+        Gaillac:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Gaillac Premières Côtes:
+          colors:
+            - blanc
+        Lavilledieu:
+          colors:
+            - rosé
+            - rouge
+        Marcillac:
+          colors:
+            - rosé
+            - rouge
+        Saint-Sardos:
+          colors:
+            - rosé
+            - rouge
+    Pyrénées:
+      regions:
+        Béarn:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Irouléguy:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Jurançon:
+          colors:
+            - blanc
+            - blanc liquoreux
+        Madiran:
+          colors:
+            - rouge
+        Pacherenc du Vic Bilh:
+          colors:
+            - blanc liquoreux
+        Saint-Mont:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Tursan:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+
+Val de Loire:
+  regions:
+    Crémant de Loire:
+      colors:
+        - blanc
+        - rosé
+    Fiefs vendéens:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Haut-Poitou:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Rosé de Loire:
+      colors:
+        - rosé
+    Anjou:
+      colors:
+        - blanc
+        - rouge
+      regions:
+        Anjou Coteaux de la Loire:
+          colors:
+            - blanc
+        Anjou Gamay:
+          colors:
+            - rouge
+        Anjou Villages:
+          colors:
+            - rouge
+        Anjou Villages Brissac:
+          colors:
+            - rouge
+        Bonnezeaux:
+          colors:
+            - blanc liquoreux
+        Cabernet d'Anjou:
+          colors:
+            - rosé
+        Cabernet de Saumur:
+          colors:
+            - rosé
+        Chaume:
+          colors:
+            - blanc liquoreux
+        Côteaux de l'Aubance:
+          colors:
+            - blanc liquoreux
+        Côteaux de Saumur:
+          colors:
+            - blanc liquoreux
+        Côteaux du Layon:
+          colors:
+            - blanc liquoreux
+        Côteaux du Layon Saint-Aubin:
+          colors:
+            - blanc liquoreux
+        Quarts de Chaume:
+          colors:
+            - blanc liquoreux
+        Rosé d'Anjou:
+          colors:
+            - rosé
+        Saumur:
+          colors:
+            - blanc
+            - rouge
+        Saumur-Champigny:
+          colors:
+            - rouge
+        Savenières:
+          colors:
+            - blanc
+    Auvergne:
+      regions:
+        Côte Roannaise:
+          colors:
+            - rouge
+        Côte D'Auvergne:
+          colors:
+            - blanc
+            - rosé
+            - gris
+            - rouge
+        Côte du Forez:
+          colors:
+            - rosé
+            - rouge
+        Saint-Pourçain:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+    Centre:
+      regions:
+        Châteaumeillant:
+          colors:
+            - rosé
+            - rouge
+        Cheverny:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Coteaux du Giennois:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Cour-Cheverny:
+          colors:
+            - blanc
+            - blanc moelleux
+        Menetou-Salon:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Montlouis sur Loire:
+          colors:
+            - blanc
+        Orléans:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Orléans-Cléry:
+          colors:
+            - rouge
+        Pouilly fumé:
+          colors:
+            - blanc
+        Pouilly-sur-Loire:
+          colors:
+            - blanc
+        Quincy:
+          colors:
+            - blanc
+        Reuilly:
+          colors:
+            - blanc
+            - rosé
+            - gris
+            - rouge
+        Sancerre:
+          colors:
+            - blanc
+            - gris
+            - rouge
+        Valençay:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Vouvray:
+          colors:
+            - blanc
+            - blanc liquoreux
+    Pays Nantais:
+      regions:
+        Coteaux d'Ancenis:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Gros plant du Pays nantais:
+          colors:
+            - blanc
+        Muscadet:
+          colors:
+            - blanc
+        Muscadet Coteaux de la Loire:
+          colors:
+            - blanc
+        Muscadet Côtes de Granlieu:
+          colors:
+            - blanc
+        Muscadet Sèvre-et-Maine:
+          colors:
+            - blanc
+    Touraine:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+      regions:
+        Bourgueil:
+          colors:
+            - rosé
+            - rouge
+        Chinon:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Coteaux du Loir:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Coteaux du Vendomois:
+          colors:
+            - blanc
+            - gris
+            - rouge
+        Jasnières:
+          colors:
+            - blanc
+            - blanc moelleux
+        Saint-Nicolas-de-Bourgueil:
+          colors:
+            - rosé
+            - rouge
+        Touraine:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Touraine Amboise:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Touraine Azay-le-Rideau:
+          colors:
+            - blanc
+            - rosé
+            - gris
+        Touraine Mesland:
+          colors:
+            - blanc
+            - rosé
+            - rouge
+        Touraine Noble joué:
+          colors:
+            - rosé
+            - gris
+
+Vallée du Rhône:
+  regions:
+    Beaume de Venise:
+      colors:
+        - rouge
+    Château Grillet:
+      colors:
+        - blanc
+    Châteauneuf-du-Pape:
+      colors:
+        - blanc
+        - rouge
+    Châtillon-en-Diois:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Clairette de Die:
+      colors:
+        - blanc
+    Condrieu:
+      colors:
+        - blanc
+    Cornas:
+      colors:
+        - rouge
+    Coteaux de Die:
+      colors:
+        - blanc
+    Coteaux du Lyonnais:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Côte Rôtie:
+      colors:
+        - rouge
+    Côtes du Rhône:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Côtes du Rhône Villages:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Crémant de Die:
+      colors:
+        - blanc
+    Crozes-Hermitage:
+      colors:
+        - blanc
+        - rouge
+    Gigondas:
+      colors:
+        - rosé
+        - rouge
+    Grigan-les-Adhémar:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Hermitage:
+      colors:
+        - blanc
+        - rouge
+    Lirac:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Luberon:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Luberon:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Rasteau:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Saint-Joseph:
+      colors:
+        - blanc
+        - rouge
+    Saint-Péray:
+      colors:
+        - blanc
+    Vacqueyras:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Tavel:
+      colors:
+        - rosé
+    Ventoux:
+      colors:
+        - blanc
+        - rosé
+        - rouge
+    Vinsobres:
+      colors:
+        - rouge
+

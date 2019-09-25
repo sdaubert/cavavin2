@@ -1,0 +1,119 @@
+#!/usr/bin/env ruby
+# frozen-string-literal: true
+
+require 'yaml'
+require 'sqlite3'
+require 'active_record'
+require 'awesome_nested_set'
+
+APPDIR = File.expand_path(File.join(__dir__, '..'))
+
+require File.join(APPDIR, 'app', 'models', 'application_record')
+require File.join(APPDIR, 'app', 'models', 'country')
+require File.join(APPDIR, 'app', 'models', 'region')
+require File.join(APPDIR, 'app', 'models', 'color')
+
+class AbortedByUser < StandardError; end
+
+
+def check_args
+  if ARGV.size != 1
+    puts "Usage: #{$PROGRAM_NAME} <region-file>"
+    exit 1
+  end
+
+  file = ARGV.shift
+
+  return file if File.exist?(file)
+
+  puts "File #{file} does not exist!"
+  exit 1
+end
+
+def get_country(file)
+  country = nil
+
+  m = file.match(/(\w+)-regions/)
+  country = m[1] unless m.nil?
+
+  puts "For which country import regions? #{country.nil? ? '' : "[#{country}] "}"
+  resp = gets.chomp
+
+  country = resp if country.nil? || !resp.empty?
+  puts "Importing regions for country '#{country}'"
+
+  country
+end
+
+def connect_to_db
+  app_db_config = YAML.load_file(File.join(APPDIR, 'config', 'database.yml'))
+  db_config = app_db_config[ENV['RAILS_ENV']]
+  db_config['database'] = File.join(APPDIR, db_config['database'])
+  db_config['pool'] = 5
+
+  ActiveRecord::Base.establish_connection(db_config)
+end
+
+def check_country(country_name)
+  country = Country.where('countries.name LIKE ?', country_name).take
+
+  return country unless country.nil?
+
+  puts "Country #{country_name} does not exist. Create it? [y/N]"
+  resp = gets.chomp.downcase
+
+  raise AbortedByUser unless ['y', ''].include?(resp)
+
+  Country.create(name: country_name)
+end
+
+def get_colors(data)
+  return [] unless data.key?('colors')
+
+  data['colors'].map do |cname|
+    color = Color.where('colors.name LIKE ?', cname).take
+    color = Color.create(name: cname) if color.nil?
+    color
+  end
+end
+
+def generate_subregions(parent, subregions)
+  subregions.each do |name, data|
+    colors = get_colors(data)
+
+    region = Region.create(name: name,
+                           parent_id: parent.id,
+                           country_id: parent.country.id,
+                           colors: colors)
+    generate_subregions(region, data['regions']) if data.key?('regions')
+  end
+end
+
+def generate_regions(filename, country:)
+  regions = YAML.load_file(filename)
+
+  regions.each do |name, data|
+    colors = get_colors(data)
+
+    print "Generate region '#{name}'..."
+    region = Region.create(name: name, country_id: country.id, colors: colors)
+    generate_subregions(region, data['regions']) if data.key?('regions')
+    puts 'done.'
+  end
+end
+
+
+file = check_args
+country_name = get_country(file)
+
+connect_to_db
+
+begin
+  country = check_country(country_name)
+  puts "country '#{country.name}' is id #{country.id}"
+
+  generate_regions(file, country: country)
+rescue AbortedByUser
+  puts 'Aborted by user.'
+  exit 1
+end
