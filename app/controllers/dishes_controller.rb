@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-  before_action :set_dish, except: %[index new create]
+  before_action :set_dish, except: %w[index new create]
   before_action :set_colors, only: %w[select_regions save_regions]
   before_action :set_countries, only: %w[select_regions save_regions]
 

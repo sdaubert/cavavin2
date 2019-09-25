@@ -14,15 +14,17 @@
   <% if @dras.empty? %>
   <p>No known associated region</p>
   <% else %>
-  <p>This kind od dish may be drunk with wines from:</p>
+  <p>This kind of dish may be drunk with wines from:</p>
   <dl class="association">
     <% @dras.each do |colorname, dras| %>
-    <dt><%= colorname %></dt>
-    <dd><ul>
-      <% dras.each do |dra| %>
-      <li><%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
+      <% unless dras.empty? %>
+        <dt><%= colorname %></dt>
+        <dd><ul>
+          <% dras.each do |dra| %>
+            <li><%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
+          <% end %>
+        </ul></dd>
       <% end %>
-    </ul></dd>
     <% end %>
   </dl>
   <% end %>
