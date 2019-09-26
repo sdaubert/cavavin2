@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     end
     resources :regions do
       collection do
+        get :country_stats
+      end
+      member do
         get :stats
       end
     end

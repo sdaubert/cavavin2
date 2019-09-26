@@ -60,5 +60,5 @@
 <% if Country.count > 1 %>
 <%= link_to 'Zone statistics', stats_coutries_path %>
 <% else %>
-<%= link_to 'Zone statistics', stats_country_regions_path(Country.first) %>
+<%= link_to 'Zone statistics', country_stats_country_regions_path(Country.first) %>
 <% end %>

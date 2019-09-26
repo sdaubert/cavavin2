@@ -2,11 +2,10 @@ require 'select_type'
 
 class RegionsController < ApplicationController
   before_action :set_country
-  before_action :set_region, only: [:show, :edit, :update, :destroy]
-  before_action :set_countries, only: [:new, :create, :edit, :update]
+  before_action :set_region, only: %i[show edit update destroy]
+  before_action :set_countries, only: %i[new create edit update]
 
-  def index
-  end
+  def index; end
 
   def show
     @millesimes = Millesime.from_region(@region)
@@ -52,6 +51,21 @@ class RegionsController < ApplicationController
     redirect_to country_regions_url(@country)
   end
 
+  def country_stats
+    @regions = {}
+    @sum_regions = 0
+
+    Wine.from_country(@country).each do |wine|
+      root_region = wine.region.root
+      rr_name = root_region.name
+      @regions[rr_name] = { nb: 0, p: 0.0, id: wine.region.root.id } unless @regions.key?(rr_name)
+      @regions[rr_name][:nb] += wine.quantity
+      @sum_regions += wine.quantity
+    end
+
+    compute_percentages
+  end
+
   def stats
   end
 
@@ -71,5 +85,15 @@ class RegionsController < ApplicationController
 
   def region_params
     params.require(:region).permit(:name, :parent_id, :country_id, color_ids: [])
+  end
+
+  def compute_percentages
+    @regions.each_key do |k|
+      if @regions[k][:nb] == 0
+        @regions.delete(k)
+      else
+        @regions[k][:p] = @regions[k][:nb].to_f / @sum_regions.to_f * 100
+      end
+    end
   end
 end

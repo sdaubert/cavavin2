@@ -9,6 +9,7 @@ class Wine < ApplicationRecord
   has_many :millesimes
 
   scope :with_bottles, -> { joins(millesimes: :bottles).distinct }
+  scope :from_country, ->(c){ joins(:region).where(regions: { country_id: c.id }) }
 
   def quantity
     Wine.joins(millesimes: :bottles).where(id: id).count
