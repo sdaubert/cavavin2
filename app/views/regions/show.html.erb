@@ -60,6 +60,7 @@
   </ul>
 </div>
 
-<%= link_to 'Edit', edit_country_region_path(@region.country, @region) %> |
-<%= link_to 'Back', country_regions_path(@region.country) %> |
+<%= link_to 'Edit', edit_country_region_path(@country, @region) %> |
+<%= link_to 'Back', country_regions_path(@country) %> |
+<%= link_to 'Region statistics', stats_country_region_path(@country, @region) %> |
 <%= link_to_destroy [@country, @region], no_img: true %>

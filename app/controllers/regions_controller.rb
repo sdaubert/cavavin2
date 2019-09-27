@@ -2,7 +2,7 @@ require 'select_type'
 
 class RegionsController < ApplicationController
   before_action :set_country
-  before_action :set_region, only: %i[show edit update destroy]
+  before_action :set_region, only: %i[show edit update destroy stats]
   before_action :set_countries, only: %i[new create edit update]
 
   def index; end
@@ -52,21 +52,21 @@ class RegionsController < ApplicationController
   end
 
   def country_stats
-    @regions = {}
-    @sum_regions = 0
-
-    Wine.from_country(@country).each do |wine|
-      root_region = wine.region.root
-      rr_name = root_region.name
-      @regions[rr_name] = { nb: 0, p: 0.0, id: wine.region.root.id } unless @regions.key?(rr_name)
-      @regions[rr_name][:nb] += wine.quantity
-      @sum_regions += wine.quantity
-    end
-
-    compute_percentages
+    compute_statistics_on_wines(Wine.from_country(@country), &:root)
   end
 
   def stats
+    subregions = @region.children
+    if subregions.empty?
+      @regions = {}
+      return
+    end
+
+    subregions += [@region]
+    wines = Wine.from_region_and_its_descendant(@region)
+    compute_statistics_on_wines(wines) do |region|
+      region.self_and_ancestors.reverse.find { |r| subregions.include?(r) }
+    end
   end
 
   private
@@ -87,13 +87,28 @@ class RegionsController < ApplicationController
     params.require(:region).permit(:name, :parent_id, :country_id, color_ids: [])
   end
 
-  def compute_percentages
+  def clean_and_compute_percentages
     @regions.each_key do |k|
-      if @regions[k][:nb] == 0
+      if @regions[k][:nb].zero?
         @regions.delete(k)
       else
         @regions[k][:p] = @regions[k][:nb].to_f / @sum_regions.to_f * 100
       end
     end
+  end
+
+  def compute_statistics_on_wines(wines)
+    @regions = {}
+    @sum_regions = 0
+
+    wines.each do |wine|
+      reference_region = yield wine.region
+      rr_name = reference_region.name
+      @regions[rr_name] = { nb: 0, p: 0.0, id: reference_region.id } unless @regions.key?(rr_name)
+      @regions[rr_name][:nb] += wine.quantity
+      @sum_regions += wine.quantity
+    end
+
+    clean_and_compute_percentages
   end
 end

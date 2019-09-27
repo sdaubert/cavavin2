@@ -1,1 +1,37 @@
-TODO
+<h2><%= @region.name.capitalize %> statistics</h2>
+
+<% unless @regions.empty? %>
+<table class="stat">
+    <thead>
+        <tr>
+            <th>Region</th>
+            <th>Nb of bottles</th>
+            <th>Percentage</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td>Total</td>
+            <td class="right"><%= @sum_regions %></td>
+            <td class="right">100.0%</td>
+        </tr>
+    </tfoot>
+    <tbody>
+        <% @regions.each do |region, data| %>
+        <tr>
+            <td><%= link_to region, country_region_path(@country, data[:id]) %></td>
+            <td class="right"><%= data[:nb] %></td>
+            <td class="right"><%= sprintf("%.1f%%", data[:p]) %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= pie_chart Hash[@regions.map { |name, data| [name, data[:nb]] }] %>
+<% else %>
+<p>No subregion or no wine, so no statistics.</p>
+<% end %>
+
+<%= link_to 'Back', country_region_path(@country, @region) %>
+|
+<%= link_to 'Statistics', controller: 'admin', action: 'stats' %>
