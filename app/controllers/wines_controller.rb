@@ -2,7 +2,7 @@ class WinesController < ApplicationController
   before_action :set_wine, only: %i[show edit update destroy]
   before_action :set_producers, only: %i[new create edit update]
   before_action :set_providers, only: %i[new create edit update]
-  before_action :set_regions, only: %i[new create edit update]
+  before_action :set_regions, only: %i[new edit]
 
   # GET /wines
   def index
@@ -20,6 +20,10 @@ class WinesController < ApplicationController
   # GET /wines/new
   def new
     @wine = Wine.new
+    @millesime = @wine.millesimes.build
+    @wlog = @millesime.wlogs.build
+    @wlog.mvt_type = 'in'
+    @wlog.date = Time.now.to_date
   end
 
   # GET /wines/1/edit
@@ -33,6 +37,7 @@ class WinesController < ApplicationController
     if @wine.save
       redirect_to @wine, notice: 'Wine was successfully created.'
     else
+      set_regions
       render :new
     end
   end
@@ -42,6 +47,7 @@ class WinesController < ApplicationController
     if @wine.update(wine_params)
       redirect_to @wine, notice: 'Wine was successfully updated.'
     else
+      set_regions
       render :edit
     end
   end
@@ -60,7 +66,13 @@ class WinesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def wine_params
-    params.require(:wine).permit(:domain, :effervescent, :organic, :garde, :color_id, :region_id, :producer_id, :provider_id, :notes)
+    params.require(:wine)
+          .permit(:domain, :effervescent, :organic, :garde, :color_id, :region_id,
+                  :producer_id, :provider_id, :notes,
+                  millesimes_attributes: [:id, :year, :garde, :notes,
+                                          wlogs_attributes: [:date, :mvt_type,
+                                                             :quantity, :price,
+                                                             :notes]])
   end
 
   def handles_sort_by(params)

@@ -4,6 +4,8 @@
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
 </div>
 
-<%= render 'form' %>
+<%= form_with(model: [@wine, @millesime], local: true) do |form| %>
+  <%= render partial: 'form', locals: { subform: false, form: form } %>
+<% end %>
 
 <%= link_to 'Back', wine_path(@wine) %>
