@@ -1,32 +1,34 @@
+<% unless show %>
 <p>Bottles to place: <span id="to-be-processed"><%= @wlog.quantity %></span></p>
 <%= hidden_field_tag "bottle_rack[id]", bottle_rack.id %>
+<% end %>
 
-  <table class="bottle_rack">
-    <% bottles = @bottle_rack.bottles.all %>
-    <% @bottle_rack.lines.times do |i| %>
-      <tr>
-        <% @bottle_rack.columns.times do |j| %>
-          <% pos = j + i * @bottle_rack.columns + 1 %>
-          <% bottle = bottles.find { |b| b.pos == pos } %>
-          <td>
-            <%= pos %>:
-            <% if bottle.nil? %>
-                <% if show or @wlog.mvt_type == 'out' or (@wlog.mvt_type == 'move' and !move_in_phase) %>
-            empty
-                <% else %>
-            <%= check_box_tag "bottle_rack[location][#{pos}]" %>
-                <% end %>
-            <% else %>
-                <% if show or @wlog.mvt_type == 'in' or (@wlog.mvt_type == 'move' and move_in_phase) or @wlog.millesime != bottle.millesime %>
-            <%= link_to "#{bottle.millesime.wine.domain} #{bottle.millesime.year}", wine_millesime_path(bottle.millesime.wine, bottle.millesime) %>
-                <% else %>
-            <%= hidden_field_tag "bottle_rack[location][#{pos}]", 1 %>
-            <%= check_box_tag "bottle_rack[location][#{pos}]", "0" %>
-            <%= "#{bottle.millesime.wine.domain} #{bottle.millesime.year}" %>
-                <% end %>
-            <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </table>
+<table class="bottle_rack">
+  <% bottles = @bottle_rack.bottles.all %>
+  <% @bottle_rack.lines.times do |i| %>
+    <tr>
+      <% @bottle_rack.columns.times do |j| %>
+        <% pos = j + i * @bottle_rack.columns + 1 %>
+        <% bottle = bottles.find { |b| b.pos == pos } %>
+        <td>
+          <%= pos %>:
+          <% if bottle.nil? %>
+              <% if show or @wlog.mvt_type == 'out' or (@wlog.mvt_type == 'move' and !move_in_phase) %>
+          empty
+              <% else %>
+          <%= check_box_tag "bottle_rack[location][#{pos}]" %>
+              <% end %>
+          <% else %>
+              <% if show or @wlog.mvt_type == 'in' or (@wlog.mvt_type == 'move' and move_in_phase) or @wlog.millesime != bottle.millesime %>
+          <%= link_to "#{bottle.millesime.wine.domain} #{bottle.millesime.year}", wine_millesime_path(bottle.millesime.wine, bottle.millesime) %>
+              <% else %>
+          <%= hidden_field_tag "bottle_rack[location][#{pos}]", 1 %>
+          <%= check_box_tag "bottle_rack[location][#{pos}]", "0" %>
+          <%= "#{bottle.millesime.wine.domain} #{bottle.millesime.year}" %>
+              <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
