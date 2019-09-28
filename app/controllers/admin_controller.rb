@@ -76,7 +76,11 @@ class AdminController < ApplicationController
     last_date = Time.now.to_date.end_of_month
 
     first_value = Wlog.where('date <= ?', first_date.end_of_month)
+                      .where(mvt_type: 'in')
                       .sum(:quantity)
+    first_value -= Wlog.where('date <= ?', first_date.end_of_month)
+                       .where(mvt_type: 'out')
+                       .sum(:quantity)
 
     @evolution = [[first_date.strftime('%Y-%m'), first_value ]]
 
@@ -91,7 +95,7 @@ class AdminController < ApplicationController
     outval = Hash[outval]
     outval.default = 0
 
-    (first_date..last_date).select { |d| d.day == 1}.each do |month|
+    (first_date.next_month..last_date).select { |d| d.day == 1}.each do |month|
       ym = month.strftime('%Y-%m')
       @evolution << [ym, @evolution.last.last + inval[ym] - outval[ym]]
     end
