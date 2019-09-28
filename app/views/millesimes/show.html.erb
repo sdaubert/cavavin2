@@ -3,23 +3,8 @@
 <div class="group">
   <h2>Wine #<%= @wine.id %>, millesime <%= @millesime.year %></h2>
 
+  <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
   <ul>
-    <li>Domain: <%= @millesime.wine.domain %></li>
-    <li>
-      Region:
-      <%= link_to @wine.region.name, country_region_path(@wine.region.country, @wine.region) %>
-    </li>
-    <li>
-      Zone:
-      <%= link_to @wine.region.root.name, country_region_path(@wine.region.country, @wine.region.root) %>
-      (<%= link_to @wine.region.country.name, country_path(@wine.region.country) %>)
-    </li>
-    <li>
-      Color: <%= @wine.color.name %>
-      <% if @wine.effervescent %>
-        (effervescent)
-      <% end %>
-    </li>
     <li>Garde: <%= @millesime.garde %></li>
     <li>Quantity: <%= @millesime.quantity %></li>
     <li>

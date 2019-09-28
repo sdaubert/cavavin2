@@ -1,4 +1,8 @@
-<h1>Editing Millesime</h1>
+<h1>Editing Millesime <%= @millesime.year %>, wine #<%= @wine.id %></h1>
+
+<div class="group">
+  <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
+</div>
 
 <%= render 'form' %>
 
