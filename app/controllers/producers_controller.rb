@@ -51,7 +51,7 @@ class ProducersController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_producer
+  def at_producer
     @producer = Producer.find(params[:id])
   end
 
