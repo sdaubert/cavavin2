@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <td>Wine color</td>
-            <td>Nb of bottles by color</td>
+            <td>Bottles</td>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
     </tbody>
 </table>
 
-<%= pie_chart Hash[@colors.map { |c, sum| [c.name, sum] }] %>
+<%= pie_chart Hash[@colors.map { |c, sum| [c.name, sum] }], colors: @colors.map { |c, _sum| c.color } %>
 
 <%= link_to 'Back', colors_path %>
 |

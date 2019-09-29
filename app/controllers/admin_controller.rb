@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   EVOLUTION_YEAR_COUNT = 3
   DRINKING_YEAR_COUNT = 5
 
-  SELECT_QUANTITY_PER_MONTH = 'strftime("%Y-%m", date) as ym, sum(quantity)'
+  SELECT_QUANTITY_PER_MONTH = 'strftime("%Y-%m", date) as ym, sum(quantity)'.freeze
 
   FakeSpending = Struct.new(:year, :total)
 
@@ -136,8 +136,11 @@ class AdminController < ApplicationController
 
   def compute_drinking
     first_year = DRINKING_YEAR_COUNT.years.ago.year
+    colors = Color.with_bottles
 
-    @drinking = Color.all.map do |color|
+    @colors = colors.map(&:color)
+
+    @drinking = colors.map do |color|
       year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
       data = color.wines
                   .drunk

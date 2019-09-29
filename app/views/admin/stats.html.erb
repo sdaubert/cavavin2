@@ -54,7 +54,7 @@
 
 <h3>Out movements</h3>
 
-<%= column_chart @drinking %>
+<%= column_chart @drinking, colors: @colors %>
 
 <%= link_to'Color statistics', stats_colors_path %> |
 <% if Country.count > 1 %>

@@ -3,10 +3,6 @@ class ColorsController < ApplicationController
     @colors = Color.all
   end
 
-  def show
-    @color = Color.find(params[:id])
-  end
-
   def new
     @color = Color.new
   end
@@ -19,7 +15,7 @@ class ColorsController < ApplicationController
     @color = Color.new(color_params)
 
     if @color.save
-      redirect_to @color
+      redirect_to colors_path
     else
       render 'new'
     end
@@ -29,7 +25,7 @@ class ColorsController < ApplicationController
     @color = Color.find(params[:id])
 
     if @color.update(color_params)
-      redirect_to @color
+      redirect_to colors_path
     else
       render 'edit'
     end
@@ -53,6 +49,6 @@ class ColorsController < ApplicationController
   private
 
   def color_params
-    params.require(:color).permit(:name)
+    params.require(:color).permit(:name, :color)
   end
 end
