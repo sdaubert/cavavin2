@@ -2,12 +2,11 @@ class Millesime < ApplicationRecord
   DRINK_DIFF = 'millesimes.garde + millesimes.year - ' \
                "cast(strftime('%Y', date('now')) AS integer)".freeze
 
-  belongs_to :wine
+  belongs_to :wine, required: false
   has_many :wlogs
   accepts_nested_attributes_for :wlogs
   has_many :bottles
 
-  validates :wine, presence: true
   validates :year, presence: true,
                    numericality: { only_integer: true },
                    uniqueness: { scope: :wine_id }
@@ -18,6 +17,7 @@ class Millesime < ApplicationRecord
     joins(wine: :region).where(wines: { region: region.id })
   end
 
+  scope :from_producer, ->(prod) { joins(:wine).where(wines: { producer: prod.id }) }
   scope :with_bottles, -> { joins(:bottles).distinct }
 
   # Cannot define it with scope!

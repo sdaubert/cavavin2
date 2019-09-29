@@ -9,7 +9,10 @@ class ProducersController < ApplicationController
 
   # GET /producers/1
   # GET /producers/1.json
-  def show; end
+  def show
+    @millesimes_to_drink = Millesime.with_bottles.from_producer(@producer)
+    @drunk_millesimes = Millesime.without_bottles.from_producer(@producer).to_a
+  end
 
   # GET /producers/new
   def new

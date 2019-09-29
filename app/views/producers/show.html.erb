@@ -29,6 +29,41 @@
     </li>
     <%end%>
   </ul>
+</div>
+
+<div class="group">
+  <h2>Known wines</h2>
+
+  <h3>Wines to drink</h3>
+  <% if @millesimes_to_drink.count.positive? %>
+    <ul>
+      <% @millesimes_to_drink.each do |mil| %>
+        <li>
+          <% wine = mil.wine %>
+          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= wine.region.name %> <%= wine.color.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No known wines from this producer.</p>
+  <% end %>
+
+  <h3>Drunk wines</h3>
+  <% if @drunk_millesimes.count.positive? %>
+    <ul>
+      <% @drunk_millesimes.each do |mil| %>
+        <li>
+          <% wine = mil.wine %>
+          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= wine.region.name %> <%= wine.color.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No known drunk wines from this producer.</p>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_producer_path(@producer) %> |
 <%= link_to 'Back', producers_path %>
