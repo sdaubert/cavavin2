@@ -10,6 +10,7 @@ class Wine < ApplicationRecord
   accepts_nested_attributes_for :millesimes
 
   scope :with_bottles, -> { joins(millesimes: :bottles).distinct }
+  scope :drunk, -> { joins(millesimes: [:wlogs]).where(wlogs: { mvt_type: 'out' }) }
 
   # Cannot define it with scope!
   def self.from_country(country)

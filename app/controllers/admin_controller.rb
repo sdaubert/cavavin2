@@ -5,6 +5,8 @@ class AdminController < ApplicationController
   EVOLUTION_YEAR_COUNT = 3
   DRINKING_YEAR_COUNT = 5
 
+  SELECT_QUANTITY_PER_MONTH = 'strftime("%Y-%m", date) as ym, sum(quantity)'
+
   FakeSpending = Struct.new(:year, :total)
 
   def main
@@ -73,34 +75,46 @@ class AdminController < ApplicationController
     [first_date, ago].max
   end
 
-  def compute_evolution
-    first_date = compute_first_date
-    last_date = Time.now.to_date.end_of_month
-
+  def compute_first_value(first_date)
     first_value = Wlog.where('date <= ?', first_date.end_of_month)
                       .where(mvt_type: 'in')
                       .sum(:quantity)
-    first_value -= Wlog.where('date <= ?', first_date.end_of_month)
-                       .where(mvt_type: 'out')
-                       .sum(:quantity)
+    first_value - Wlog.where('date <= ?', first_date.end_of_month)
+                      .where(mvt_type: 'out')
+                      .sum(:quantity)
+  end
 
-    @evolution = [[first_date.strftime('%Y-%m'), first_value]]
+  def compute_evolution_values(req, type:)
+    values = req.where(mvt_type: type)
+                .pluck(Arel.sql(SELECT_QUANTITY_PER_MONTH))
+    values = Hash[values]
+    values.default = 0
 
+    values
+  end
+
+  def evolution_values(first_date, last_date)
+    data = []
     request = Wlog.group_by_month_of_year(:date, range: first_date..last_date)
 
-    inval = request.where(mvt_type: 'in')
-                   .pluck(Arel.sql('strftime("%Y-%m", date) as ym, sum(quantity)'))
-    inval = Hash[inval]
-    inval.default = 0
-    outval = request.where(mvt_type: 'out')
-                    .pluck(Arel.sql('strftime("%Y-%m", date) as ym, sum(quantity)'))
-    outval = Hash[outval]
-    outval.default = 0
+    inval = compute_evolution_values(request, type: 'in')
+    outval = compute_evolution_values(request, type: 'out')
 
     (first_date.next_month..last_date).select { |d| d.day == 1 }.each do |month|
       ym = month.strftime('%Y-%m')
-      @evolution << [ym, @evolution.last.last + inval[ym] - outval[ym]]
+      data << [ym, @evolution.last.last + inval[ym] - outval[ym]]
     end
+
+    data
+  end
+
+  def compute_evolution
+    first_date = compute_first_date
+    first_value = compute_first_value(first_date)
+    last_date = Time.now.to_date.end_of_month
+
+    @evolution = [[first_date.strftime('%Y-%m'), first_value]]
+    @evolution.concat(evolution_values(first_date, last_date))
   end
 
   def compute_garde
@@ -121,24 +135,19 @@ class AdminController < ApplicationController
   end
 
   def compute_drinking
-    @drinking = []
     first_year = DRINKING_YEAR_COUNT.years.ago.year
 
-    Color.all.each do |color|
+    @drinking = Color.all.map do |color|
       year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
       data = color.wines
-                  .joins(millesimes: [:wlogs])
+                  .drunk
                   .group_by_year('wlogs.date', range: year_range)
-                  .where(wlogs: { mvt_type: 'out' })
                   .order('year')
                   .pluck(Arel.sql('strftime("%Y", wlogs.date) as year, sum(wlogs.quantity)'))
 
       data.unshift [first_year, 0] if !data.empty? && (data.last.first.to_i != first_year)
-      h = {
-        name: color.name,
-        data: fix_holes_in_years(data)
-      }
-      @drinking << h
+
+      { name: color.name, data: fix_holes_in_years(data) }
     end
   end
 end
