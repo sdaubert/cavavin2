@@ -1,5 +1,5 @@
 class ProducersController < ApplicationController
-  before_action :set_producer, only: [:show, :edit, :update, :destroy]
+  before_action :at_producer, only: %i[show edit update destroy]
 
   # GET /producers
   # GET /producers.json
@@ -9,8 +9,7 @@ class ProducersController < ApplicationController
 
   # GET /producers/1
   # GET /producers/1.json
-  def show
-  end
+  def show; end
 
   # GET /producers/new
   def new
@@ -18,36 +17,27 @@ class ProducersController < ApplicationController
   end
 
   # GET /producers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /producers
   # POST /producers.json
   def create
     @producer = Producer.new(producer_params)
 
-    respond_to do |format|
-      if @producer.save
-        format.html { redirect_to @producer, notice: 'Producer was successfully created.' }
-        format.json { render :show, status: :created, location: @producer }
-      else
-        format.html { render :new }
-        format.json { render json: @producer.errors, status: :unprocessable_entity }
-      end
+    if @producer.save
+      redirect_to @producer, notice: 'Producer was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /producers/1
   # PATCH/PUT /producers/1.json
   def update
-    respond_to do |format|
-      if @producer.update(producer_params)
-        format.html { redirect_to @producer, notice: 'Producer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @producer }
-      else
-        format.html { render :edit }
-        format.json { render json: @producer.errors, status: :unprocessable_entity }
-      end
+    if @producer.update(producer_params)
+      redirect_to @producer, notice: 'Producer was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -55,20 +45,21 @@ class ProducersController < ApplicationController
   # DELETE /producers/1.json
   def destroy
     @producer.destroy
-    respond_to do |format|
-      format.html { redirect_to producers_url, notice: 'Producer was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to producers_url, notice: 'Producer was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_producer
-      @producer = Producer.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def producer_params
-      params.require(:producer).permit(:name, :address, :zip, :city, :country_id, :notes, :phone, :web, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_producer
+    @producer = Producer.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
+  def producer_params
+    params.require(:producer)
+          .permit(:name, :address, :zip, :city, :country_id, :notes, :phone,
+                  :web, :email)
+  end
 end

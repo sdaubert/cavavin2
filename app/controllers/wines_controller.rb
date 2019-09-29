@@ -1,8 +1,8 @@
 class WinesController < ApplicationController
-  before_action :set_wine, only: %i[show edit update destroy]
-  before_action :set_producers, only: %i[new create edit update]
-  before_action :set_providers, only: %i[new create edit update]
-  before_action :set_regions, only: %i[new edit]
+  before_action :at_wine, only: %i[show edit update destroy]
+  before_action :at_producers, only: %i[new create edit update]
+  before_action :at_providers, only: %i[new create edit update]
+  before_action :at_regions, only: %i[new edit]
 
   # GET /wines
   def index
@@ -69,8 +69,8 @@ class WinesController < ApplicationController
   # through.
   def wine_params
     params.require(:wine)
-          .permit(:domain, :effervescent, :organic, :garde, :color_id, :region_id,
-                  :producer_id, :provider_id, :notes,
+          .permit(:domain, :effervescent, :organic, :garde, :color_id,
+                  :region_id, :producer_id, :provider_id, :notes,
                   millesimes_attributes: [:id, :year, :garde, :notes,
                                           wlogs_attributes: %i[date mvt_type
                                                                quantity price
@@ -95,7 +95,7 @@ class WinesController < ApplicationController
              when 'color'
                @wines.where('wines.color_id = ?', params[:filter_id].to_i)
              when 'region'
-               @wines.where('Wines.region_id = ?', params[:filter_id].to_i)
+               @wines.where('wines.region_id = ?', params[:filter_id].to_i)
              when 'zone'
                begin
                  region = Region.find(params[:filter_id].to_i)

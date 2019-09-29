@@ -1,19 +1,17 @@
 class CountriesController < ApplicationController
-  before_action :set_country, only: [:show, :edit, :update, :destroy]
+  before_action :at_country, only: %i[show edit update destroy]
 
   def index
     @countries = Country.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @country = Country.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @country = Country.new(country_params)
@@ -40,7 +38,7 @@ class CountriesController < ApplicationController
 
   private
 
-  def set_country
+  def at_country
     @country = Country.find(params[:id])
   end
 

@@ -10,8 +10,17 @@ class Wine < ApplicationRecord
   accepts_nested_attributes_for :millesimes
 
   scope :with_bottles, -> { joins(millesimes: :bottles).distinct }
-  scope :from_country, ->(c) { joins(:region).where(regions: { country_id: c.id }) }
-  scope :from_region_and_its_descendant, ->(r) { joins(:region).where('regions.lft >= ? AND regions.rgt <= ?', r.lft, r.rgt) }
+
+  # Cannot define it with scope!
+  def self.from_country(country)
+    joins(:region).where(regions: { country_id: country.id })
+  end
+
+  # Cannot define it with scope!
+  def self.from_region_and_its_descendant(region)
+    joins(:region).where('regions.lft >= ? AND regions.rgt <= ?',
+                         region.lft, region.rgt)
+  end
 
   def quantity
     Wine.joins(millesimes: :bottles).where(id: id).count

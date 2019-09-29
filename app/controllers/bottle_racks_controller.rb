@@ -1,5 +1,5 @@
 class BottleRacksController < ApplicationController
-  before_action :set_bottle_rack, only: %i[show edit update destroy get_info]
+  before_action :at_bottle_rack, only: %i[show edit update destroy get_info]
 
   # GET /bottle_racks
   def index
@@ -40,26 +40,32 @@ class BottleRacksController < ApplicationController
   # DELETE /bottle_racks/1
   def destroy
     @bottle_rack.destroy
-    redirect_to bottle_racks_url, notice: 'Bottle rack was successfully destroyed.'
+    redirect_to bottle_racks_url,
+                notice: 'Bottle rack was successfully destroyed.'
   end
 
   # xhr only
   # POST /bottle_racks/1/get_info
+  # rubocop:disable Naming/AccessorMethodName
   def get_info
     @wlog = Wlog.find(params[:wlog_id])
     move_in_phase = false
-    move_in_phase = true if params[:move_in_phase] =='true'
-    render partial: 'rack', layout: false, locals: { bottle_rack: @bottle_rack, show: false, move_in_phase: move_in_phase }
+    move_in_phase = true if params[:move_in_phase] == 'true'
+    render partial: 'rack', layout: false,
+           locals: { bottle_rack: @bottle_rack, show: false,
+                     move_in_phase: move_in_phase }
   end
+  # rubocop:enable Naming/AccessorMethodName
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_bottle_rack
+  def at_bottle_rack
     @bottle_rack = BottleRack.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def bottle_rack_params
     params.require(:bottle_rack).permit(:name, :lines, :columns)
   end

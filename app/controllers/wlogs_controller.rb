@@ -2,10 +2,10 @@
 class BottleError < StandardError; end
 
 class WlogsController < ApplicationController
-  before_action :set_wine
-  before_action :set_millesime
-  before_action :set_wlog, except: %i[new create]
-  before_action :set_racks, only: %i[select_rack select_rack2 save_rack]
+  before_action :at_wine
+  before_action :at_millesime
+  before_action :at_wlog, except: %i[new create]
+  before_action :at_racks, only: %i[select_rack select_rack2 save_rack]
 
   def new
     @wlog = @millesime.wlogs.build
@@ -17,7 +17,8 @@ class WlogsController < ApplicationController
     @wlog = @millesime.wlogs.build(wlog_params)
 
     if @wlog.save
-      redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog), notice: 'Wlog was successfully created.'
+      redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog),
+                  notice: 'Wlog was successfully created.'
     else
       render :new
     end
@@ -25,7 +26,8 @@ class WlogsController < ApplicationController
 
   def update
     if @wlog.update(wlog_params)
-      redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog), notice: 'Wlog was successfully updated.'
+      redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog),
+                  notice: 'Wlog was successfully updated.'
     else
       render :edit
     end
@@ -58,14 +60,13 @@ class WlogsController < ApplicationController
     @move_in_phase = (params['move_in_phase'] == true)
 
     if @bottle_rack.nil?
-      if (@wlog.millesime.bottles.count > 0 && @wlog.millesime.bottles.where(br_id: nil).empty?) || @wlog.mvt_type_is_move?
+      if need_bottle_rack?
         @wlog.errors.add(:bottle_rack, 'none selected')
-
         render :select_rack
         return
       end
     else
-      set_bottle_rack_info params
+      record_bottle_rack_info params
     end
 
     Wlog.transaction do
@@ -73,23 +74,20 @@ class WlogsController < ApplicationController
       @wlog.save!
     rescue ActiveRecord::RecordInvalid
       render :select_rack
+      return
     end
 
-    if (@wlog.mvt_type == 'move') && (params['move_in_phase'] != 'true')
-      redirect_to select_rack2_wine_millesime_wlog_path(@wine, @millesime, @wlog)
-    else
-      redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
-    end
+    redirect_after_save_rack
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_wlog
+  def at_wlog
     @wlog = @millesime.wlogs.find(params[:id])
   end
 
-  def set_racks
+  def at_racks
     if @wlog.mvt_type == 'in'
       @racks = BottleRack.all.order('name').map { |r| [r.name, r.id] }
     else
@@ -99,9 +97,11 @@ class WlogsController < ApplicationController
     @racks.unshift(['No rack', nil])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def wlog_params
-    params.require(:wlog).permit(:millesime_id, :date, :mvt_type, :quantity, :price, :notes)
+    params.require(:wlog).permit(:millesime_id, :date, :mvt_type, :quantity,
+                                 :price, :notes)
   end
 
   def update_bottles!(wlog)
@@ -136,16 +136,22 @@ class WlogsController < ApplicationController
 
   def delete_bottles(wlog)
     bottles = Bottle.where(millesime_id: wlog.millesime.id, br_id: wlog.br_id)
-    bottles = bottles.where(pos: BottleRack.pos_to_ary(wlog.pos)) unless wlog.br_id.nil?
+    pos_ary = BottleRack.pos_to_ary(wlog.pos)
+    bottles = bottles.where(pos: pos_ary) unless wlog.br_id.nil?
     bottles.limit(wlog.quantity).destroy_all
+  end
+
+  def generate_pos(wlog)
+    all_pos = BottleRack.pos_to_ary(wlog.pos)
+    all_new_pos = BottleRack.pos_to_ary(wlog.move_to_pos)
+
+    [all_pos, all_new_pos]
   end
 
   def move_bottles!(wlog, rollback: false)
     return if wlog.move_to_br_id.nil?
 
-    all_pos = BottleRack.pos_to_ary(wlog.pos)
-    all_new_pos = BottleRack.pos_to_ary(wlog.move_to_pos)
-
+    all_pos, all_new_pos = generate_pos(wlog)
     all_pos, all_new_pos = all_new_pos, all_pos if rollback
 
     @millesime.bottles.where(pos: all_pos).each do |bottle|
@@ -157,14 +163,14 @@ class WlogsController < ApplicationController
     end
   end
 
-  def set_bottle_rack_info(params)
+  def record_bottle_rack_info(params)
     phase_type = @wlog.mvt_type
     phase_type = params['move_in_phase'] ? 'in' : 'out' if phase_type == 'move'
 
     value_to_select = (phase_type == 'out' ? '0' : '1')
-    pos = BottleRack.ary_to_pos(params[:bottle_rack][:location].
-                     select { |k,v| v == value_to_select }.
-                     keys)
+    pos = BottleRack.ary_to_pos(params[:bottle_rack][:location]
+                    .select { |_k, v| v == value_to_select }
+                    .keys)
 
     if params['move_in_phase'] == 'true'
       @wlog.move_to_br_id = @bottle_rack.id
@@ -172,6 +178,20 @@ class WlogsController < ApplicationController
     else
       @wlog.br_id = @bottle_rack.id
       @wlog.pos = pos
+    end
+  end
+
+  def need_bottle_rack?
+    bottles = @wlog.millesime.bottles
+    (bottles.count.positive? && bottles.where(br_id: nil).empty?) ||
+      @wlog.mvt_type_is_move?
+  end
+
+  def redirect_after_save_rack
+    if (@wlog.mvt_type == 'move') && (params['move_in_phase'] != 'true')
+      redirect_to select_rack2_wine_millesime_wlog_path(@wine, @millesime, @wlog)
+    else
+      redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
     end
   end
 end

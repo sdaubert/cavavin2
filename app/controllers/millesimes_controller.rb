@@ -1,6 +1,6 @@
 class MillesimesController < ApplicationController
-  before_action :set_wine
-  before_action :set_millesime, only: [:show, :edit, :update, :destroy]
+  before_action :at_wine
+  before_action :at_millesime, only: %i[show edit update destroy]
 
   def show
     @racks = BottleRack.millesime(@millesime).all
@@ -38,11 +38,12 @@ class MillesimesController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_millesime
+  def at_millesime
     @millesime = @wine.millesimes.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def millesime_params
     params.require(:millesime).permit(:year, :garde, :wine_id, :notes)
   end

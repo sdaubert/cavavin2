@@ -1,6 +1,5 @@
 class BottleRack < ApplicationRecord
-
-  NO_POS = []
+  NO_POS = [].freeze
 
   has_many :wlogs
   has_many :bottles, foreign_key: 'br_id'
@@ -9,7 +8,11 @@ class BottleRack < ApplicationRecord
   validates :lines, numericality: { only_integers: true }
   validates :columns, numericality: { only_integers: true }
 
-  scope :millesime, ->(mil) { joins(:bottles).includes(:bottles).where(bottles: { millesime_id: mil.id }).distinct.order(:name) }
+  def self.millesime(mil)
+    joins(:bottles).includes(:bottles)
+                   .where(bottles: { millesime_id: mil.id })
+                   .distinct.order(:name)
+  end
 
   def self.pos_to_ary(pos)
     if pos.nil?

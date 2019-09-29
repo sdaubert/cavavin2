@@ -23,10 +23,10 @@ class AdminController < ApplicationController
   end
 
   def stats
-    set_spendings
-    set_evolution
-    set_garde
-    set_drinking
+    compute_spendings
+    compute_evolution
+    compute_garde
+    compute_drinking
   end
 
   private
@@ -43,7 +43,7 @@ class AdminController < ApplicationController
       current_year = ary.first.to_i
       last_known_year = new_ary_of_ary.last.first.to_i
       while current_year != last_known_year + 1
-        new_ary_of_ary << ["#{last_known_year + 1}", 0.0]
+        new_ary_of_ary << [(last_known_year + 1).to_s, 0.0]
         last_known_year = new_ary_of_ary.last.first.to_i
       end
       new_ary_of_ary << ary
@@ -52,27 +52,29 @@ class AdminController < ApplicationController
     new_ary_of_ary
   end
 
-  def set_spendings
+  def compute_spendings
+    date_range = SPENDINGS_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
     spendings = Wlog.where(mvt_type: 'in')
                     .group_by_year(:date,
-                                   range: SPENDINGS_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now)
+                                   range: date_range)
                     .pluck(Arel.sql('strftime("%Y", date), sum(quantity*price) as total'))
 
     @spendings = fix_holes_in_years(spendings)
   end
 
-  def get_first_date
+  def compute_first_date
     first_wlog = Wlog.order(:date).first
     return Time.now.to_date if first_wlog.nil?
 
     first_date = first_wlog.date.beginning_of_month
     return first_date if EVOLUTION_YEAR_COUNT.zero?
 
-    [first_date, Time.now.to_date.beginning_of_month - EVOLUTION_YEAR_COUNT.year].max
+    ago = Time.now.to_date.beginning_of_month - EVOLUTION_YEAR_COUNT.year
+    [first_date, ago].max
   end
 
-  def set_evolution
-    first_date = get_first_date
+  def compute_evolution
+    first_date = compute_first_date
     last_date = Time.now.to_date.end_of_month
 
     first_value = Wlog.where('date <= ?', first_date.end_of_month)
@@ -82,7 +84,7 @@ class AdminController < ApplicationController
                        .where(mvt_type: 'out')
                        .sum(:quantity)
 
-    @evolution = [[first_date.strftime('%Y-%m'), first_value ]]
+    @evolution = [[first_date.strftime('%Y-%m'), first_value]]
 
     request = Wlog.group_by_month_of_year(:date, range: first_date..last_date)
 
@@ -95,13 +97,13 @@ class AdminController < ApplicationController
     outval = Hash[outval]
     outval.default = 0
 
-    (first_date.next_month..last_date).select { |d| d.day == 1}.each do |month|
+    (first_date.next_month..last_date).select { |d| d.day == 1 }.each do |month|
       ym = month.strftime('%Y-%m')
       @evolution << [ym, @evolution.last.last + inval[ym] - outval[ym]]
     end
   end
 
-  def set_garde
+  def compute_garde
     before5 = Millesime.drink_before(5)
                        .joins(:bottles)
                        .count
@@ -118,14 +120,15 @@ class AdminController < ApplicationController
               ['More than 10 years', after10]]
   end
 
-  def set_drinking
+  def compute_drinking
     @drinking = []
     first_year = DRINKING_YEAR_COUNT.years.ago.year
 
     Color.all.each do |color|
+      year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
       data = color.wines
                   .joins(millesimes: [:wlogs])
-                  .group_by_year('wlogs.date', range: DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now)
+                  .group_by_year('wlogs.date', range: year_range)
                   .where(wlogs: { mvt_type: 'out' })
                   .order('year')
                   .pluck(Arel.sql('strftime("%Y", wlogs.date) as year, sum(wlogs.quantity)'))

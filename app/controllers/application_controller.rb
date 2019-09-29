@@ -1,14 +1,13 @@
 require 'select_type'
 
 class ApplicationController < ActionController::Base
-
   private
 
-  def set_producers
+  def at_producers
     @producers = Producer.all
   end
 
-  def set_providers
+  def at_providers
     @providers = Provider.all
   end
 
@@ -16,11 +15,11 @@ class ApplicationController < ActionController::Base
     if region.level.zero?
       "* #{region.name}"
     else
-      ("\u00A0" * (region.level * 2 + 2)) + "#{region.name}"
+      ("\u00A0" * (region.level * 2 + 2)) + region.name.to_s
     end
   end
 
-  def region_group(country=nil)
+  def region_group(country = nil)
     country_name = country.nil? ? '' : country.name
     country_id = country.nil? ? @country.id : country.id
 
@@ -35,24 +34,24 @@ class ApplicationController < ActionController::Base
     group
   end
 
-  def set_regions(country_id=nil)
+  def at_regions(country_id = nil)
     @regions = []
     if country_id.nil?
-     Country.all.each do |c|
-       group = region_group(c)
-       @regions << group
-     end
+      Country.all.each do |c|
+        group = region_group(c)
+        @regions << group
+      end
     else
-     group = region_group
-     @regions << group
+      group = region_group
+      @regions << group
     end
   end
 
-  def set_wine
+  def at_wine
     @wine = Wine.find(params[:wine_id])
   end
 
-  def set_millesime
+  def at_millesime
     @millesime = @wine.millesimes.find(params[:millesime_id])
   end
 end

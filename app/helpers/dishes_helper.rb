@@ -15,45 +15,58 @@ module DishesHelper
     raw out
   end
 
-  def generate_line(dish, region, level=0)
+  def generate_line(dish, region, level = 0)
+    content = content_tag(:tr, tr_opts(region)) do
+      tr_content = content_tag(:td, td_opts(region)) do
+        raw(aligner(level) + content_tag(:span, region.name))
+      end << "\n"
+
+      tr_content << raw(generate_columns(dish, region))
+    end
+
+    content << generate_children_region(region, dish, level + 1)
+  end
+
+  private
+
+  def tr_opts(region)
     tr_opts = {}
     unless region.root?
-      #tr_opts[:class] = region.ancestors.map { |a| "child-of-#{a.id}" }
       tr_opts[:class] = ["child-of-#{region.parent.id}"]
       tr_opts[:class] += region.parent.ancestors.map { |a| "subchild-of-#{a.id}" }
       tr_opts[:class] << 'not-root'
     end
 
-    td_opts = {}
-    td_opts[:class] = if region.leaf?
-                        'leaf'
-                      else
-                        'not-leaf'
-                      end
+    tr_opts
+  end
 
-    content = content_tag(:tr, tr_opts) do
-      aligner = '&nbsp;' * (level * 4)
-      td_content = aligner + '&nbsp;' + content_tag(:span, region.name)
-      tr_content = content_tag(:td, raw(td_content), td_opts) << "\n"
+  def td_opts(region)
+    klass_opt = if region.leaf?
+                  'leaf'
+                else
+                  'not-leaf'
+                end
 
-      @colors.each do |color|
-        dish_has_region_color = dish.dras
-                                    .where(region: region.id, color: color.id)
-                                    .count == 1
-        tr_content << content_tag(:td) do
-          field_id = "regions[#{region.id}][#{color.id}]"
-          check_box_tag(field_id, 'true', dish_has_region_color)
-        end
-        tr_content << "\n"
-      end
+    { class: klass_opt }
+  end
 
-      tr_content
-    end
+  def aligner(level)
+    '&nbsp;' * (level * 4 + 1)
+  end
 
-    unless region.leaf?
-      content << raw(region.children.map { |subr| generate_line(dish, subr, level+1) }.join)
-    end
+  def generate_columns(dish, region)
+    @colors.map do |color|
+      next raw(content_tag(:td)) unless region.color?(color)
 
-    raw content
+      checked = dish.region_color?(region, color)
+      field_id = "regions[#{region.id}][#{color.id}]"
+      raw content_tag(:td, check_box_tag(field_id, 'true', checked, title: color.name))
+    end.join("\n") << "\n"
+  end
+
+  def generate_children_region(region, dish, level)
+    return raw('') if region.leaf?
+
+    raw region.children.map { |subr| generate_line(dish, subr, level) }.join
   end
 end

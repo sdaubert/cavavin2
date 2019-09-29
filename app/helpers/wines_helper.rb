@@ -1,5 +1,5 @@
 module WinesHelper
-  def build_params(h={})
-    @url_params.merge(h)
+  def build_params(hsh = {})
+    @url_params.merge(hsh)
   end
 end

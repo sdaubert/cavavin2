@@ -1,9 +1,9 @@
 require 'select_type'
 
 class RegionsController < ApplicationController
-  before_action :set_country
-  before_action :set_region, only: %i[show edit update destroy stats]
-  before_action :set_countries, only: %i[new create edit update]
+  before_action :at_country
+  before_action :at_region, only: %i[show edit update destroy stats]
+  before_action :at_countries, only: %i[new create edit update]
 
   def index; end
 
@@ -29,7 +29,8 @@ class RegionsController < ApplicationController
     @region = @country.regions.build(region_params)
 
     if @region.save
-      redirect_to([@region.country, @region], notice: 'Region was successfully created.')
+      redirect_to [@region.country, @region],
+                  notice: 'Region was successfully created.'
     else
       set_regions @country.id
       render action: 'new'
@@ -38,7 +39,8 @@ class RegionsController < ApplicationController
 
   def update
     if @region.update_attributes(region_params)
-      redirect_to([@region.country, @region], notice: 'Region was successfully updated.')
+      redirect_to [@region.country, @region],
+                  notice: 'Region was successfully updated.'
     else
       set_regions @country.id
       render action: 'edit'
@@ -71,20 +73,21 @@ class RegionsController < ApplicationController
 
   private
 
-  def set_country
+  def at_country
     @country = Country.find(params[:country_id])
   end
 
-  def set_countries
+  def at_countries
     @countries = Country.order('name')
   end
 
-  def set_region
+  def at_region
     @region = @country.regions.find(params[:id])
   end
 
   def region_params
-    params.require(:region).permit(:name, :parent_id, :country_id, color_ids: [])
+    params.require(:region)
+          .permit(:name, :parent_id, :country_id, color_ids: [])
   end
 
   def clean_and_compute_percentages
@@ -102,13 +105,17 @@ class RegionsController < ApplicationController
     @sum_regions = 0
 
     wines.each do |wine|
-      reference_region = yield wine.region
-      rr_name = reference_region.name
-      @regions[rr_name] = { nb: 0, p: 0.0, id: reference_region.id } unless @regions.key?(rr_name)
+      ref_region = yield wine.region
+      rr_name = ref_region.name
+      @regions[rr_name] = init_region_stat(ref_region) unless @regions.key?(rr_name)
       @regions[rr_name][:nb] += wine.quantity
       @sum_regions += wine.quantity
     end
 
     clean_and_compute_percentages
+  end
+
+  def init_region_stat(region)
+    { nb: 0, p: 0.0, id: region.id }
   end
 end

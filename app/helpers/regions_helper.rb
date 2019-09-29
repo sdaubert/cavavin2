@@ -9,25 +9,23 @@ module RegionsHelper
     end
   end
 
-  # Should not be used directly
+  private
+
   def tree_from(nodes)
     out = +''
 
     nodes.each do |node|
-      descendants = node.direct_descendants.all
+      descendants = node.direct_descendants
       out << content_tag(:li) do
-               if descendants.count.positive?
-                 out2 = content_tag(:span, link_to_region(node), class: 'caret')
-                 out2 << content_tag(:ul, class: 'nested') do
-                   tree_from descendants
-                 end
-                 out2
-
-                 out2
-               else
-                 content_tag(:span, link_to_region(node), class: 'no-caret')
-               end
-             end
+        if descendants.count.positive?
+          out2 = content_tag(:span, link_to_region(node), class: 'caret')
+          out2 << content_tag(:ul, class: 'nested') do
+            tree_from descendants
+          end
+        else
+          content_tag(:span, link_to_region(node), class: 'no-caret')
+        end
+      end
 
       out << "\n"
     end
