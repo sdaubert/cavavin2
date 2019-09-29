@@ -3,6 +3,7 @@ class Millesime < ApplicationRecord
 
   belongs_to :wine
   has_many :wlogs
+  accepts_nested_attributes_for :wlogs
   has_many :bottles
 
   validates :wine, presence: true

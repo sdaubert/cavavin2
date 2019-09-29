@@ -4,6 +4,7 @@
   <h2>Wine #<%= @wine.id %>, millesime <%= @millesime.year %></h2>
 
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
+
   <ul>
     <li>Garde: <%= @millesime.garde %></li>
     <li>Quantity: <%= @millesime.quantity %></li>
@@ -22,9 +23,6 @@
       </ul>
       <% end %>
     </li>
-    <% if @wine.organic? %>
-    <li><%= image_tag('organic.png', alt: 'Organic wine', size: '64x42') %></li>
-    <% end %>
   </ul>
 
   <% if @wine.attribute_present? :notes %>

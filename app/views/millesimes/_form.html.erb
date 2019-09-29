@@ -24,8 +24,15 @@
   <%= form.text_area :notes %>
 </div>
 
+<% if @millesime.new_record? %>
+  <h2>Wine log</h2>
+  <%= form.fields_for(:wlogs) do |fw| %>
+    <%= render partial: 'wlogs/form', locals: { subform: true, form: fw } %>
+  <% end %>
+<% end %>
+
 <% unless subform %>
-<div class="actions">
-  <%= form.submit %>
-</div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
 <% end %>

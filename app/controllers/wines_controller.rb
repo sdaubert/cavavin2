@@ -14,8 +14,7 @@ class WinesController < ApplicationController
   end
 
   # GET /wines/1
-  def show
-  end
+  def show; end
 
   # GET /wines/new
   def new
@@ -27,15 +26,17 @@ class WinesController < ApplicationController
   end
 
   # GET /wines/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /wines
   def create
     @wine = Wine.new(wine_params)
 
     if @wine.save
-      redirect_to @wine, notice: 'Wine was successfully created.'
+      millesime = @wine.millesimes.first
+      wlog = millesime.wlogs.first
+      redirect_to select_rack_wine_millesime_wlog_url(@wine, millesime, wlog),
+                  notice: 'Wine was successfully created.'
     else
       set_regions
       render :new
@@ -64,15 +65,16 @@ class WinesController < ApplicationController
     @wine = Wine.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list
+  # through.
   def wine_params
     params.require(:wine)
           .permit(:domain, :effervescent, :organic, :garde, :color_id, :region_id,
                   :producer_id, :provider_id, :notes,
                   millesimes_attributes: [:id, :year, :garde, :notes,
-                                          wlogs_attributes: [:date, :mvt_type,
-                                                             :quantity, :price,
-                                                             :notes]])
+                                          wlogs_attributes: %i[date mvt_type
+                                                               quantity price
+                                                               notes]])
   end
 
   def handles_sort_by(params)
