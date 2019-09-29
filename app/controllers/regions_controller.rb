@@ -2,6 +2,7 @@ require 'select_type'
 
 class RegionsController < ApplicationController
   before_action :at_country
+  before_action :at_regions, only: %i[new edit]
   before_action :at_region, only: %i[show edit update destroy stats]
   before_action :at_countries, only: %i[new create edit update]
 
@@ -18,12 +19,9 @@ class RegionsController < ApplicationController
 
   def new
     @region = @country.regions.build
-    set_regions @country.id
   end
 
-  def edit
-    set_regions @country.id
-  end
+  def edit; end
 
   def create
     @region = @country.regions.build(region_params)
