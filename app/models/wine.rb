@@ -6,7 +6,7 @@ class Wine < ApplicationRecord
   belongs_to :region
   belongs_to :producer, optional: true
   belongs_to :provider, optional: true
-  has_many :millesimes
+  has_many :millesimes, -> { order('year') }
   accepts_nested_attributes_for :millesimes
 
   scope :with_bottles, -> { joins(millesimes: :bottles).distinct }

@@ -38,7 +38,9 @@ class WinesController < ApplicationController
       redirect_to select_rack_wine_millesime_wlog_url(@wine, millesime, wlog),
                   notice: 'Wine was successfully created.'
     else
-      set_regions
+      at_regions
+      @millesime = @wine.millesimes.first
+      @wlog = @millesime.wlogs.first
       render :new
     end
   end
@@ -48,7 +50,7 @@ class WinesController < ApplicationController
     if @wine.update(wine_params)
       redirect_to @wine, notice: 'Wine was successfully updated.'
     else
-      set_regions
+      at_regions
       render :edit
     end
   end
