@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   def levelize(region)
-    region.level.zero? ? "* #{region.name}" : ('+' * region.level) + " #{region.name}"
+    if region.level.zero?
+      "* #{region.name}"
+    else
+      ("\u00A0" * (region.level * 2 + 2)) + "#{region.name}"
+    end
   end
 
   def region_group(country=nil)
@@ -34,13 +38,13 @@ class ApplicationController < ActionController::Base
   def set_regions(country_id=nil)
     @regions = []
     if country_id.nil?
-      Country.all.each do |c|
-        group = region_group(c)
-        @regions << group
-      end
+     Country.all.each do |c|
+       group = region_group(c)
+       @regions << group
+     end
     else
-      group = region_group
-      @regions << group
+     group = region_group
+     @regions << group
     end
   end
 
