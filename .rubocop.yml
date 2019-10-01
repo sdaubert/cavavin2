@@ -1,5 +1,5 @@
 Metrics/LineLength:
-  Max: 84
+  Max: 85
 Metrics/MethodLength:
   Max: 20
 Metrics/ClassLength:
