@@ -110,15 +110,15 @@ class AdminController < ApplicationController
   def compute_garde
     before5 = Millesime.drink_before(5)
                        .joins(:bottles)
-                       .count
+                       .count('bottles.id')
     between5and10 = Millesime.drink_after(5)
                              .drink_before(10)
                              .joins(:bottles)
-                             .count
+                             .count('bottles.id')
     after10 = Millesime.with_bottles
                        .drink_after(10)
                        .joins(:bottles)
-                       .count
+                       .count('bottles.id')
     @garde = [['Less than 5 years', before5],
               ['Between 5 and 10 years', between5and10],
               ['More than 10 years', after10]]

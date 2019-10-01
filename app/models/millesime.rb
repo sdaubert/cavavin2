@@ -1,6 +1,6 @@
 class Millesime < ApplicationRecord
-  DRINK_DIFF = 'millesimes.garde + millesimes.year - ' \
-               "cast(strftime('%Y', date('now')) AS integer)".freeze
+  DRINK_DIFF = '(millesimes.garde + millesimes.year - ' \
+               "cast(strftime('%Y', date('now')) AS integer))".freeze
 
   belongs_to :wine, required: false
   has_many :wlogs
