@@ -75,15 +75,6 @@ class AdminController < ApplicationController
     [first_date, ago].max
   end
 
-  def compute_first_value(first_date)
-    first_value = Wlog.where('date <= ?', first_date.end_of_month)
-                      .where(mvt_type: 'in')
-                      .sum(:quantity)
-    first_value - Wlog.where('date <= ?', first_date.end_of_month)
-                      .where(mvt_type: 'out')
-                      .sum(:quantity)
-  end
-
   def compute_evolution_values(req, type:)
     values = req.where(mvt_type: type)
                 .pluck(Arel.sql(SELECT_QUANTITY_PER_MONTH))
@@ -100,9 +91,10 @@ class AdminController < ApplicationController
     inval = compute_evolution_values(request, type: 'in')
     outval = compute_evolution_values(request, type: 'out')
 
-    (first_date.next_month..last_date).select { |d| d.day == 1 }.each do |month|
+    (first_date..last_date).select { |d| d.day == 1 }.each do |month|
       ym = month.strftime('%Y-%m')
-      data << [ym, @evolution.last.last + inval[ym] - outval[ym]]
+      previous_value = data.empty? ? 0 : data.last[1]
+      data << [ym, previous_value + inval[ym] - outval[ym]]
     end
 
     data
@@ -110,11 +102,9 @@ class AdminController < ApplicationController
 
   def compute_evolution
     first_date = compute_first_date
-    first_value = compute_first_value(first_date)
     last_date = Time.now.to_date.end_of_month
 
-    @evolution = [[first_date.strftime('%Y-%m'), first_value]]
-    @evolution.concat(evolution_values(first_date, last_date))
+    @evolution = evolution_values(first_date, last_date)
   end
 
   def compute_garde
