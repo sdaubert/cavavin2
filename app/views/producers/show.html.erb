@@ -12,7 +12,7 @@
     </li>
     <%end%>
     <% if @producer.country %>
-    <li>Country: <%= link_to @producer.country.name, country_path(@producer.country) %></li>
+    <li>Country: <%= @producer.country.name %></li>
     <%end%>
     <% unless @producer.phone.empty? %>
     <li>Phone: <%= @producer.phone %></li>

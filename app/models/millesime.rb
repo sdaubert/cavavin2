@@ -18,6 +18,7 @@ class Millesime < ApplicationRecord
   end
 
   scope :from_producer, ->(prod) { joins(:wine).where(wines: { producer: prod.id }) }
+  scope :from_provider, ->(prov) { joins(:wine).where(wines: { provider: prov.id }) }
   scope :with_bottles, -> { joins(:bottles).distinct }
 
   # Cannot define it with scope!

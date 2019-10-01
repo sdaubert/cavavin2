@@ -9,7 +9,10 @@ class ProvidersController < ApplicationController
 
   # GET /providers/1
   # GET /providers/1.json
-  def show; end
+  def show
+    @millesimes_to_drink = Millesime.with_bottles.from_provider(@provider)
+    @drunk_millesimes = Millesime.without_bottles.from_provider(@provider).to_a
+  end
 
   # GET /providers/new
   def new

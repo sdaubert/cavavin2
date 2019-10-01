@@ -12,7 +12,7 @@
     </li>
     <%end%>
     <% if @provider.country %>
-    <li>Country: <%= link_to @provider.country.name, country_path(@provider.country) %></li>
+    <li>Country: <%= @provider.country.name %></li>
     <%end%>
     <% unless @provider.phone.empty? %>
     <li>Phone: <%= @provider.phone %></li>
@@ -29,6 +29,41 @@
     </li>
     <%end%>
   </ul>
+</div>
+
+<div class="group">
+  <h2>Known wines</h2>
+
+  <h3>Wines to drink</h3>
+  <% if @millesimes_to_drink.count.positive? %>
+    <ul>
+      <% @millesimes_to_drink.each do |mil| %>
+        <li>
+          <% wine = mil.wine %>
+          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= wine.region.name %> <%= wine.color.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No known wines from this producer.</p>
+  <% end %>
+
+  <h3>Drunk wines</h3>
+  <% if @drunk_millesimes.count.positive? %>
+    <ul>
+      <% @drunk_millesimes.each do |mil| %>
+        <li>
+          <% wine = mil.wine %>
+          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= wine.region.name %> <%= wine.color.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No known drunk wines from this producer.</p>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_provider_path(@provider) %> |
 <%= link_to 'Back', providers_path %>
