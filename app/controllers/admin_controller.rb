@@ -129,6 +129,7 @@ class AdminController < ApplicationController
     colors = Color.with_bottles
 
     @colors = colors.map(&:color)
+    @colors = nil if @colors.compact.empty?
 
     @drinking = colors.map do |color|
       year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now

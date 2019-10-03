@@ -17,7 +17,7 @@
     </tbody>
 </table>
 
-<%= pie_chart Hash[@colors.map { |c, sum| [c.name, sum] }], colors: @colors.map { |c, _sum| c.color } %>
+<%= pie_chart Hash[@colors.map { |c, sum| [c.name, sum] }], colors: @rgb_colors %>
 
 <%= link_to 'Back', colors_path %>
 |

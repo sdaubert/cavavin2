@@ -44,6 +44,9 @@ class ColorsController < ApplicationController
       @colors[wine.color] += wine.quantity
     end
     @colors.delete_if { |_color, value| value.zero? }
+
+    @rgb_colors = @colors.map { |c, _sum| c.color }
+    @rgb_colors = nil if @rgb_colors.compact.empty?
   end
 
   private
