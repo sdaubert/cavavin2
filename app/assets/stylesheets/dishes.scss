@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'common';
+
 .country {
     font-weight: bold;
     font-style: italic;
@@ -29,7 +31,7 @@ dl.association {
 
 .not-leaf span::before {
   content: "\229E";
-  color: black;
+  color: $color;
   display: inline-block;
   margin-right: 6px;
 }

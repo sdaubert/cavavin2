@@ -1,0 +1,18 @@
+$bg-color: #111;
+$menu-bg-color: #333;
+$color: #fff;
+
+$link-color: #f77;
+$hover-link-color: black;
+
+$error-color: #c00;
+
+$table-border-color: #711;
+
+$group-border-color: #977;
+
+$radius: 10px;
+
+@mixin border-radius {
+    border-radius: $radius;
+}

@@ -1,6 +1,8 @@
+@import 'common';
+
 body {
-  background-color: #fff;
-  color: #333;
+  background-color: $bg-color;
+  color: $color;
   margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -15,28 +17,28 @@ p, ol, ul, td {
 }
 
 pre {
-  background-color: #eee;
+  background-color: $bg-color;
   padding: 10px;
   font-size: 11px;
 }
 
 a {
-  color: #c03;
+  color: $link-color;
   text-decoration: none;
   padding: 0 1px;
 
   &:visited {
-    color: #c03;
+    color: $link-color;
   }
 
   &:hover {
-    color: white;
-    background-color: #c03;
+    color: $hover-link-color;
+    background-color: $link-color;
   }
 }
 
 table {
-  border: 2px solid #f77;
+  border: 3px solid $table-border-color;
   border-collapse: collapse;
   padding: 0;
 }
@@ -44,7 +46,7 @@ table {
 thead {
   margin: 0;
   padding: 0;
-  background-color: #f77;
+  background-color: $table-border-color;
 }
 
 tbody tr {
@@ -52,7 +54,7 @@ tbody tr {
   margin: 0;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: $menu-bg-color;
   }
 }
 
@@ -62,7 +64,7 @@ th {
 }
 
 th a {
-  color: black;
+  color: $link-color;
 }
 
 td {
@@ -72,7 +74,7 @@ td {
 
 div {
   &.field, &.actions {
-    margin-bottom: 10px;
+    margin-bottom: $radius;
   }
 }
 
@@ -81,22 +83,23 @@ div {
 }
 
 #alert {
-  color: red;
+  color: $error-color;
   font-weight: bold;
-  border: 2px solid red;
-  border-radius: 5px;
+  border: 2px solid $error-color;
+  @include border-radius;
   padding: 1ex 1em;
 }
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
+  background-color: $error-color;
   display: table;
 }
 
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid $error-color;
+  @include border-radius;
   padding: 7px 7px 0;
   margin-bottom: 20px;
   background-color: #f0f0f0;
@@ -107,7 +110,7 @@ div {
     padding: 5px 5px 5px 15px;
     font-size: 12px;
     margin: -7px -7px 0;
-    background-color: #c00;
+    background-color: $error-color;
     color: #fff;
   }
 
@@ -129,8 +132,8 @@ canvas {
 }
 
 div.group {
-  border: 2px black solid;
-  border-radius: 10px;
+  border: 2px $group-border-color solid;
+  @include border-radius;
   padding: 1ex 1em;
   margin: 1em 0;
 
@@ -149,7 +152,7 @@ div.group {
   li.notes {
     p {
       border: 2px solid lightgrey;
-      border-radius: 5px;
+      @include border-radius;
       margin: 0 0 1.5ex 1em;
       max-width: 60em;
       padding: 1ex 1em;
@@ -170,12 +173,12 @@ div.group {
   top: 0;
   left: 0;
   overflow-x: hidden;
-  background-color: #111;
+  background-color: $menu-bg-color;
 }
 
 .menu {
   width: 180px;
-  color: #eee;
+  color: $color;
   padding: 1ex 1em;
 }
 
@@ -187,13 +190,13 @@ div.group {
 .menu li a {
   display: block;
   &:hover {
-    color: black;
+    color: $hover-link-color;
   }
 }
 
 .menu li.separator {
   margin: 0.5ex 0;
-  border-bottom: 1px solid #c03;
+  border-bottom: 1px solid #c00;
 }
 
 #real-content {
