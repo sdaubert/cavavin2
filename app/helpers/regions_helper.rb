@@ -5,7 +5,7 @@ module RegionsHelper
 
   def generate_region_tree(country)
     content_tag(:ul, class: 'treeview') do
-      tree_from country.regions.roots.all
+      tree_from country.regions.roots.order('name')
     end
   end
 
