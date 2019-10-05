@@ -6,9 +6,9 @@ class WinesController < ApplicationController
 
   # GET /wines
   def index
-    @wines = Millesime.includes(wine: [:color, { region: :country }])
-    handles_sort_by params
+    @wines = Millesime.joins(wine: [:color, { region: :country }])
     handles_filter params
+    handles_sort_by params
     @wines = @wines.page(params[:page])
     @url_params = params.permit(:sort_by, :filter, :filter_id)
   end
