@@ -2,9 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'common';
+
 tr.urgent-to-drink {
-    background-color: #fdd;
-    &:hover {
-        background-color: lightgrey;
+  background-color: #444;
+  a {
+    color: #e66;
+  }
+  &:hover {
+      background-color: #777;
+      color: black;
+      a {
+        color: #802;
       }
     }
+}
