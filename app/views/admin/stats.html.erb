@@ -36,15 +36,15 @@
     </thead>
     <tbody>
         <tr>
-            <td><%= @garde[0][0] %></td>
+            <td><%= link_to @garde[0][0], wines_path(before: 5) %></td>
             <td><%= @garde[0][1] %></td>
         </tr>
         <tr>
-            <td><%= @garde[1][0] %></td>
+            <td><%= link_to @garde[1][0], wines_path(before: 10, after: 5) %></td>
             <td><%= @garde[1][1] %></td>
         </tr>
         <tr>
-            <td><%= @garde[2][0] %></td>
+            <td><%= link_to @garde[2][0], wines_path(after: 10) %></td>
             <td><%= @garde[2][1] %></td>
         </tr>
     </tbody>
