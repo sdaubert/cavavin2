@@ -7,10 +7,11 @@ class WinesController < ApplicationController
   # GET /wines
   def index
     @wines = Millesime.joins(wine: [:color, { region: :country }])
+    handles_before_after params
     handles_filter params
     handles_sort_by params
     @wines = @wines.page(params[:page])
-    @url_params = params.permit(:sort_by, :filter, :filter_id)
+    @url_params = params.permit(:sort_by, :filter, :filter_id, :after, :before)
   end
 
   # GET /wines/1
@@ -77,6 +78,15 @@ class WinesController < ApplicationController
                                           wlogs_attributes: %i[date mvt_type
                                                                quantity price
                                                                notes]])
+  end
+
+  def handles_before_after(params)
+    if params['before']&.to_i&.positive?
+      @wines = @wines.drink_before(params['before'].to_i)
+    end
+    if params['after']&.to_i&.positive?
+      @wines = @wines.drink_after(params['after'].to_i)
+    end
   end
 
   def handles_sort_by(params)
