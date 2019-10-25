@@ -1,0 +1,45 @@
+<h2>Search results</h2>
+
+<div class="group">
+    <h3>Wines</h3>
+    <% if @millesimes.empty? %>
+        <p>No information found.</p>
+    <% else %>
+        <ul>
+            <% @millesimes.each do |millesime| %>
+                <% wine = millesime.wine %>
+                <li>
+                    <%= link_to "#{millesime.millesime_wine}", [wine, millesime] %>,
+                    <%= wine.color.name %>, <%= wine.region.name %>,
+                    <%= wine.region.country.name %>
+                </li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <h3>Producers</h3>
+    <% if @producers.empty? %>
+        <p>No information found.</p>
+    <% else %>
+        <ul>
+            <% @producers.each do |producer| %>
+                <li>
+                    <%= link_to producer.name, producer %>
+                </li>
+            <% end %>
+        </ul>
+    <% end %>
+
+    <h3>Providers</h3>
+    <% if @providers.empty? %>
+        <p>No information found.</p>
+    <% else %>
+        <ul>
+            <% @providers.each do |provider| %>
+                <li>
+                    <%= link_to provider.name, provider %>
+                </li>
+            <% end %>
+        </ul>
+    <% end %>
+</div>

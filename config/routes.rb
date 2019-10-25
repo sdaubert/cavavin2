@@ -45,5 +45,6 @@ Rails.application.routes.draw do
   get 'admin/main'
   get 'admin/book'
   get 'admin/stats'
+  get 'admin/search'
   root 'admin#main'
 end

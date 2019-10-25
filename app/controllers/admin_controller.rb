@@ -31,6 +31,35 @@ class AdminController < ApplicationController
     compute_drinking
   end
 
+  def search
+    keywords = params[:search].to_s.split
+    return if keywords.length.zero?
+
+    mil_fields = {
+      wine: %i[domain notes],
+      millesime: %i[notes],
+      region: %i[name],
+      country: %i[name],
+      color: %i[name]
+    }
+    @millesimes = Millesime.joins(wine: [:color, { region: :country }])
+                           .concat_fields_like(mil_fields, keywords)
+
+    prod_fields = {
+      producer: %i[name address zip city phone web email notes],
+      country: %i[name]
+    }
+    @producers = Producer.joins(:country)
+                         .concat_fields_like(prod_fields, keywords)
+
+    prov_fields = {
+      provider: %i[name address zip city phone web email notes],
+      country: %i[name]
+    }
+    @providers = Provider.joins(:country)
+                         .concat_fields_like(prov_fields, keywords)
+  end
+
   private
 
   def fix_holes_in_years(ary_of_ary)

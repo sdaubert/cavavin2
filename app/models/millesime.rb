@@ -40,4 +40,10 @@ class Millesime < ApplicationRecord
   def years_to_drink_wine
     year + garde - Time.now.year
   end
+
+  # Return millesime'd wine
+  def millesime_wine
+    mil = year.zero? ? '' : " #{year}"
+    "#{wine.domain}#{mil}"
+  end
 end
