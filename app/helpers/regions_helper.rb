@@ -5,7 +5,7 @@ module RegionsHelper
 
   def generate_region_tree(country)
     content_tag(:ul, class: 'treeview') do
-      tree_from country.regions.roots.order('name')
+      tree_from country.regions.roots.by_name
     end
   end
 
@@ -15,7 +15,7 @@ module RegionsHelper
     out = +''
 
     nodes.each do |node|
-      descendants = node.direct_descendants
+      descendants = node.direct_descendants.by_name
       out << content_tag(:li) do
         if descendants.count.positive?
           out2 = content_tag(:span, link_to_region(node), class: 'caret')

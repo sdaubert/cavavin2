@@ -2,7 +2,7 @@ class CountriesController < ApplicationController
   before_action :at_country, only: %i[show edit update destroy]
 
   def index
-    @countries = Country.all
+    @countries = Country.by_name.all
   end
 
   def new

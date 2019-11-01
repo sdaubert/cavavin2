@@ -76,7 +76,7 @@ class RegionsController < ApplicationController
   end
 
   def at_countries
-    @countries = Country.order('name')
+    @countries = Country.by_name
   end
 
   def at_region

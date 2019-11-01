@@ -1,6 +1,6 @@
 class ColorsController < ApplicationController
   def index
-    @colors = Color.all
+    @colors = Color.by_name.all
   end
 
   def new

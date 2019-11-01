@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     country_name = country.nil? ? '' : country.name
 
     group = SelectType.new(country_name)
-    roots = country.regions.roots.order('name')
+    roots = country.regions.roots.by_name
     roots.each do |root|
       root.self_and_descendants.each do |r|
         group << SelectOptions.new(r.id, levelize(r))

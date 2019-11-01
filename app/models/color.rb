@@ -7,4 +7,5 @@ class Color < ApplicationRecord
   validates :color, presence: true
 
   scope :with_bottles, -> { joins(wines: [millesimes: [:bottles]]).distinct }
+  scope :by_name, -> { order(:name) }
 end

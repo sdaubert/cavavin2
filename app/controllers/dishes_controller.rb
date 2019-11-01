@@ -5,13 +5,13 @@ class DishesController < ApplicationController
 
   # GET /dishes
   def index
-    @dishes = Dish.all
+    @dishes = Dish.by_name.all
   end
 
   # GET /dishes/1
   def show
     @dras = {}
-    Color.order(:name).each do |color|
+    Color.by_name.each do |color|
       @dras[color.name] = @dish.dras.of_color(color).by_regions
     end
   end
@@ -96,12 +96,12 @@ class DishesController < ApplicationController
   end
 
   def at_colors
-    @colors = Color.order(:name)
+    @colors = Color.by_name
     @colors_count = @colors.count
   end
 
   def at_countries
-    @countries = Country.order(:name)
+    @countries = Country.by_name
   end
 
   # Never trust parameters from the scary internet, only allow the white list

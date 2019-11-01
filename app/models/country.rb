@@ -4,4 +4,6 @@ class Country < ApplicationRecord
   has_many :provider
 
   validates :name, presence: true, uniqueness: true
+
+  scope :by_name, -> { order(:name) }
 end

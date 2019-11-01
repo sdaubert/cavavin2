@@ -10,6 +10,7 @@ class Region < ApplicationRecord
   has_and_belongs_to_many :colors
 
   scope :by_country, ->(country_id) { where('regions.country_id = ?', country_id) }
+  scope :by_name, -> { order(:name) }
 
   def direct_descendants
     Region.children_of(self.id)

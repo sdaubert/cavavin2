@@ -18,7 +18,7 @@
 
    <div class="field">
     <%= f.label :color %>
-    <%= f.collection_check_boxes :color_ids, Color.order(:name).all, :id, :name do |b|%>
+    <%= f.collection_check_boxes :color_ids, Color.by_name.all, :id, :name do |b|%>
     <% b.label(class: 'inline') + b.check_box + raw('&nbsp;&nbsp;') %>
     <% end %>
   </div>

@@ -4,7 +4,7 @@ class ProvidersController < ApplicationController
   # GET /providers
   # GET /providers.json
   def index
-    @providers = Provider.page(params[:page])
+    @providers = Provider.by_name.page(params[:page])
   end
 
   # GET /providers/1

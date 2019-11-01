@@ -8,6 +8,8 @@ class BottleRack < ApplicationRecord
   validates :lines, numericality: { only_integers: true }
   validates :columns, numericality: { only_integers: true }
 
+  scope :by_name, -> { order(:name) }
+
   def self.millesime(mil)
     joins(:bottles).includes(:bottles)
                    .where(bottles: { millesime_id: mil.id })

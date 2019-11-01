@@ -89,7 +89,7 @@ class WlogsController < ApplicationController
 
   def at_racks
     if @wlog.mvt_type == 'in'
-      @racks = BottleRack.all.order('name').map { |r| [r.name, r.id] }
+      @racks = BottleRack.by_name.all.map { |r| [r.name, r.id] }
     else
       @racks = BottleRack.millesime(@millesime).all.map { |r| [r.name, r.id] }
       @bottle_rack = @wlog.bottle_rack
