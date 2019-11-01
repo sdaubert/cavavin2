@@ -53,11 +53,17 @@
 
 <div class="group">
   <h2>Associated dishes</h2>
-  <ul>
-  <% @region.dishes.each do |dish| %>
-    <li><%= link_to dish.name, dish_path(dish) %></li>
+  <% @region.colors.by_name.each do |color| %>
+    <% dishes = @region.dishes_by_color(color) %>
+    <% unless dishes.empty? %>
+      <h3><%= color.name %></h3>
+      <ul>
+        <% dishes.each do |dish| %>
+          <li><%= link_to dish.name, dish_path(dish) %></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
-  </ul>
 </div>
 
 <%= link_to 'Edit', edit_country_region_path(@country, @region) %> |

@@ -19,4 +19,8 @@ class Region < ApplicationRecord
   def color?(color)
     colors.where(id: color.id).count.positive?
   end
+
+  def dishes_by_color(color)
+    dras.by_regions.of_color(color).map(&:dish)
+  end
 end
