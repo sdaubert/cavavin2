@@ -47,7 +47,7 @@ module DishesHelper
                   'not-leaf'
                 end
 
-    { class: klass_opt }
+    { class: klass_opt, id: "region_#{region.id}" }
   end
 
   def aligner(level)

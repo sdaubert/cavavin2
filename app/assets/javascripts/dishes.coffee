@@ -4,8 +4,8 @@
 
 $(document).ready ->
     get_id =(el) ->
-        check_id = $(el).next().children("input[type='checkbox']").attr('id')
-        id = check_id.match(/regions_(\d+)_/)[1]
+        check_id = $(el).attr('id')
+        id = check_id.match(/region_(\d+)/)[1]
 
     expand = (el) ->
         $(".child-of-"+get_id(el)).show()
