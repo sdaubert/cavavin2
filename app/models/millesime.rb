@@ -32,6 +32,9 @@ class Millesime < ApplicationRecord
   scope :drink_before, ->(years) { where("#{DRINK_DIFF} < ?", years) }
   scope :drink_after, ->(years) { where("#{DRINK_DIFF} >= ?", years) }
 
+  scope :of_color, ->(color) { joins(wine: [:color]).where(wines: { color: color.id }) }
+  scope :by_year, -> { order(:year) }
+
   def quantity
     Millesime.joins(:bottles).where(id: id).count
   end
