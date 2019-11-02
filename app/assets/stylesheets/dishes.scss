@@ -15,8 +15,13 @@ dl.association {
     }
 }
 
-.association ul {
-    margin-left: 1em;
+.association {
+    ul {
+        margin-left: 1em;
+    }
+    li {
+        position: relative;
+    }
 }
 
 .select td {
@@ -44,4 +49,23 @@ dl.association {
     display: inline-block;
     margin-right: 6px;
 
+}
+
+.region-wines {
+    position: absolute;
+    top: 1ex;
+    left: 2em;
+    z-index: 10;
+    margin: 0;
+    padding: 1ex 0;
+    background-color: $menu-bg-color;
+    border: 2px solid $group-border-color;
+    border-radius: 2px 10px 10px;
+    margin: 0;
+    ul {
+        margin: 0;
+    }
+    li {
+        padding: 0 1em;
+    }
 }

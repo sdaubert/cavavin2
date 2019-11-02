@@ -26,4 +26,18 @@ $(document).ready ->
 
     $(".not-root").hide()
 
+
+    add_wines = (el) ->
+        $(el).children('ul.region-wines').slideDown()
+
+    remove_wines = (el) ->
+        $(el).children('ul.region-wines').slideUp()
+
+    $(".association dd ul li").hover ->
+        if $(this).hasClass('wines-got')
+            remove_wines(this)
+        else
+            add_wines(this)
+        $(this).toggleClass('wines-got')
+
     true

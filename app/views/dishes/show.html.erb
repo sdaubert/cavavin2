@@ -21,7 +21,20 @@
         <dt><%= colorname %></dt>
         <dd><ul>
           <% dras.each do |dra| %>
-            <li><%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
+            <li>
+              <%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
+              <% wines = Millesime.from_region(dra.region).of_color(dra.color).by_year.with_bottles %>
+              <% unless wines.empty? %>
+                <ul class="region-wines" style="display:none;">
+                  <% wines.each do |mil| %>
+                    <li>
+                      <%= link_to "#{mil.wine.domain} #{mil.year}", wine_millesime_path(mil.wine, mil) %>
+                      (<%= pluralize(mil.quantity, 'bottle') %>)
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </li>
           <% end %>
         </ul></dd>
       <% end %>
