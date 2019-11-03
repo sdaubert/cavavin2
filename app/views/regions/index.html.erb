@@ -2,4 +2,5 @@
 
 <%= generate_region_tree(@country) %>
 
-<%= link_to 'New Region', new_country_region_path(params[:country_id]) %>
+<%= link_to 'New Region', new_country_region_path(@country) %> |
+<%= link_to 'Statistics', country_stats_country_regions_path(@country) %>
