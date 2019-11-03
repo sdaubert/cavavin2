@@ -1,0 +1,12 @@
+  <% if wines.empty? %>
+    none
+  <% else %>
+    <ul class="ungroup">
+      <% wines.each do |millesime| %>
+      <li>
+        <%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %>,
+        <%= millesime.wine.color.name %>
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
