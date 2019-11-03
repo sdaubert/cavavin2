@@ -3,7 +3,7 @@ require 'select_type'
 class RegionsController < ApplicationController
   before_action :at_country
   before_action :at_regions, only: %i[new edit]
-  before_action :at_region, only: %i[show edit update destroy stats]
+  before_action :at_region, only: %i[show edit update destroy stats wine_list_by_color]
   before_action :at_countries, only: %i[new create edit update]
 
   def index; end
@@ -67,6 +67,13 @@ class RegionsController < ApplicationController
     compute_statistics_on_wines(wines) do |region|
       region.self_and_ancestors.reverse.find { |r| subregions.include?(r) }
     end
+  end
+
+  # Ajax only
+  def wine_list_by_color
+    color = Color.find(params[:color_id])
+    wines = Millesime.from_region(@region).of_color(color).by_year.with_bottles
+    render partial: 'wine_list_by_color', layout: false, locals: { wines: wines }
   end
 
   private

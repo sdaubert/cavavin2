@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       end
       member do
         get :stats
+        post :wine_list_by_color
       end
     end
   end
