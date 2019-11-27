@@ -16,7 +16,7 @@ class MillesimesController < ApplicationController
     @millesime = @wine.millesimes.build(millesime_params)
 
     if @millesime.save
-      redirect_to @millesime.wine, notice: 'Millesime was successfully created.'
+      redirect_to [@millesime.wine, @millesime], notice: 'Millesime was successfully created.'
     else
       render :new
     end
@@ -24,7 +24,7 @@ class MillesimesController < ApplicationController
 
   def update
     if @millesime.update(millesime_params)
-      redirect_to @millesime.wine, notice: 'Millesime was successfully updated.'
+      redirect_to [@wine, @millesime], notice: 'Millesime was successfully updated.'
     else
       render :edit
     end
