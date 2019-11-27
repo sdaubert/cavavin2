@@ -10,6 +10,7 @@ class WinesController < ApplicationController
     handles_before_after params
     handles_filter params
     handles_sort_by params
+    @wines = @wines.with_bottles unless Preference.value('show_wines_without_bottles')
     @wines = @wines.page(params[:page])
     @url_params = params.permit(:sort_by, :filter, :filter_id, :after, :before)
   end

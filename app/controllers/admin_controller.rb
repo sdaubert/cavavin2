@@ -60,6 +60,34 @@ class AdminController < ApplicationController
                          .concat_fields_like(prov_fields, keywords)
   end
 
+  def preferences
+    @preferences = Preference.all
+  end
+
+  def set_preferences
+    @preferences = Preference.all
+
+    no_error = true
+
+    @preferences.each do |pref|
+      if params['pref'].nil? || params['pref'][pref.setting].nil?
+        next unless pref.boolean?
+
+        pref.value = 'false'
+      elsif !params['pref'].nil?
+        pref.value = params['pref'][pref.setting]
+      end
+
+      no_error &&= pref.save
+    end
+
+    if no_error
+      redirect_to admin_preferences_path
+    else
+      render 'preferences', notice: 'Preferences saved'
+    end
+  end
+
   private
 
   def fix_holes_in_years(ary_of_ary)

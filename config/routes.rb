@@ -47,5 +47,7 @@ Rails.application.routes.draw do
   get 'admin/book'
   get 'admin/stats'
   get 'admin/search'
+  get 'admin/preferences'
+  post 'admin/set_preferences'
   root 'admin#main'
 end

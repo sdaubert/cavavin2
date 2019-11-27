@@ -1,0 +1,36 @@
+<h2>Preferences</h2>
+
+<%= form_tag('set_preferences', method: :post) %>
+<% if @preferences.any? { |pref| pref.errors.any? } %>
+  <div id="error_explanation">
+    <h4>Errors detected in preferences:</h4>
+    <ul>
+      <% @preferences.each do |pref| %>
+        <% pref.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<table>
+    <thead>
+        <tr>
+            <td>Setting</td>
+            <td>Type</td>
+            <td>Value</td>
+        </tr>
+    </thead>
+    <tbody>
+    <% @preferences.each do |pref| %>
+        <tr>
+            <td><%= pref.setting %></td>
+            <td><%= pref.stype %></td>
+            <td><%= preference_field(pref) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<%= submit_tag 'Save' %>
+</form>
