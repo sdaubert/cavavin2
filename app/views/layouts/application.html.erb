@@ -44,6 +44,12 @@
       </div>
 
       <div id="real-content">
+        <% if flash[:notice] %>
+          <p id="notice"><%= notice %></p>
+        <% elsif flash[:alert] %>
+          <p id="alert">Error: <%= flash[:alert] %></p>
+        <% end %>
+
         <%= yield %>
       </div>
     </div>
