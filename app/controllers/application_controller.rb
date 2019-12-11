@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   private
 
   def at_producers
-    @producers = Producer.all
+    @producers = Producer.order(:name).all
   end
 
   def at_providers
-    @providers = Provider.all
+    @providers = Provider.order(:name).all
   end
 
   def levelize(region)
