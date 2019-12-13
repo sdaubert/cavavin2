@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Wine #<%= @wine.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @wine.id %></h2>
 
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: false } %>
 
@@ -40,7 +40,7 @@
   <p> No millesime.</p>
   <% end %>
 
-  <%= link_to 'New millesime', new_wine_millesime_path(@wine) %>
+  <%= link_to t_action(:new, Millesime), new_wine_millesime_path(@wine) %>
 </div>
 
 <div class="group">
@@ -67,5 +67,5 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_wine_path(@wine) %> |
-<%= link_to 'Back', wines_path %>
+<%= link_to t_action(:edit), edit_wine_path(@wine) %> |
+<%= link_to t_action(:index), wines_path %>

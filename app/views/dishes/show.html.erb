@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2> Dish #<%= @dish.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @dish.id %></h2>
 
   <ul>
     <li>Name: <%= @dish.name %></li>
@@ -32,5 +32,5 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to t_action(:edit), edit_dish_path(@dish) %> |
+<%= link_to t_action(:index), dishes_path %>

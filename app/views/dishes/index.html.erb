@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Dishes</h1>
+<h1><%= t_title(:index) %></h1>
 
 <table>
   <thead>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Dish', new_dish_path %>
+<%= link_to t_action(:new), new_dish_path %>

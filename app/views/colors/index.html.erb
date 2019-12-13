@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Colors</h2>
+<h2><%= t_title(:index) %></h2>
 
 <table>
   <thead>
@@ -15,7 +15,7 @@
       <tr>
         <td><%= color.name %></td>
         <td><%= colored_square(color) %>
-        <td><%= link_to 'Edit', edit_color_path(color) %></td>
+        <td><%= link_to t_action(:edit), edit_color_path(color) %></td>
         <td><%= link_to_destroy color %></td>
       </tr>
     <% end %>

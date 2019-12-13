@@ -1,6 +1,6 @@
-<h1>Editing Wine</h1>
+<h1><%= t_title(:edit) %></h1>
 
 <%= render 'form', wine: @wine %>
 
-<%= link_to 'Show', @wine %> |
-<%= link_to 'Back', wines_path %>
+<%= link_to t_action(:show), @wine %> |
+<%= link_to t_action(:index), wines_path %>

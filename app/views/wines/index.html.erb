@@ -1,4 +1,4 @@
-<h1>Wines</h1>
+<h1><%= t_title(:index) %></h1>
 
 <table>
   <thead>
@@ -28,7 +28,7 @@
           <td><%= link_to wine.region.root.name, wines_path(build_params({ filter: 'zone', filter_id: wine.region.root })) %></td>
           <td><%= wine.region.country.name %></td>
           <td><%= wine.organic %></td>
-          <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
+          <td><%= link_to t_action(:edit), edit_wine_path(wine) %></td>
           <td><%= link_to_destroy wine %></td>
         </tr>
     <% end %>
@@ -40,4 +40,4 @@
 
 <%= will_paginate @wines %>
 
-<%= link_to 'New Wine', new_wine_path %>
+<%= link_to t_action(:new), new_wine_path %>

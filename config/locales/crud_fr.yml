@@ -1,0 +1,32 @@
+en:
+  messages:
+    confirm_delete: "Confirmer la suppression du %{model} %{record}?"
+    select_prompt:  "Select %{model}"
+
+  crud:
+    notices:
+      create: "%{model} %{record} créé."
+      update: "%{model} %{record} modifié."
+      destroy: "%{model} %{record} supprimé."
+    title:
+      index:  "Liste des %{model}"
+      edit:   "Édition du %{model}"
+      update: "Édition du %{model}"
+      show:   "%{model}"
+      new:    "Nouveau %{model}"
+      create: "Nouveau %{model}"
+      delete: "Suppression d'un %{model}"
+      destroy: "Suppression d'un %{model}"
+    action:
+      index:    "Index"
+      edit:     "Édition"
+      update:   "Édition"
+      show:     "Voir"
+      new:      "Nouveau"
+      create:   "Nouveau"
+      delete:   "Suppression"
+      destroy:  "Suppression"
+      cancel:   "Annulation"
+      back:     "Retour en arrière"
+      previous: "Précédent"
+      next:     "Suivant"

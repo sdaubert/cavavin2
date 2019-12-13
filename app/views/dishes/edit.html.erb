@@ -1,6 +1,6 @@
-<h1>Editing Dish</h1>
+<h1><%= t_title(:edit) %>/h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @dish %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to t_action(:show), @dish %> |
+<%= link_to t_action(:index), dishes_path %>

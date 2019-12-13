@@ -32,6 +32,6 @@
 <p>No subregion or no wine, so no statistics.</p>
 <% end %>
 
-<%= link_to 'Back', country_region_path(@country, @region) %>
+<%= link_to t_action(:index), country_region_path(@country, @region) %>
 |
 <%= link_to 'Statistics', controller: 'admin', action: 'stats' %>

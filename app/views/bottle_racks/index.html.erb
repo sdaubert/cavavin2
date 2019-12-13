@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Bottle Racks</h1>
+<h1><%= t_title(:index) %></h1>
 
 <table>
   <thead>
@@ -18,7 +18,7 @@
         <td><%= link_to bottle_rack.name, bottle_rack %></td>
         <td><%= bottle_rack.lines %></td>
         <td><%= bottle_rack.columns %></td>
-        <td><%= link_to 'Edit', edit_bottle_rack_path(bottle_rack) %></td>
+        <td><%= link_to t_action(:edit), edit_bottle_rack_path(bottle_rack) %></td>
         <td><%= link_to_destroy bottle_rack %></td>
       </tr>
     <% end %>
@@ -27,4 +27,4 @@
 
 <%= will_paginate @bottle_racks %>
 
-<%= link_to 'New Bottle Rack', new_bottle_rack_path %>
+<%= link_to t_action(:new), new_bottle_rack_path %>

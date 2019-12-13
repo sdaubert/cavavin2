@@ -1,5 +1,5 @@
-<h2>New region</h2>
+<h2><%= t_title(:new) %>></h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', country_regions_path(@region.country) %>
+<%= link_to t_action(:index), country_regions_path(@region.country) %>

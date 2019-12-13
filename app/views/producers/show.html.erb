@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Producer #<%= @producer.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @producer.id %></h2>
 
   <ul>
     <li>Name: <%= @producer.name %></li>
@@ -65,5 +65,5 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_producer_path(@producer) %> |
-<%= link_to 'Back', producers_path %>
+<%= link_to t_action(:edit), edit_producer_path(@producer) %> |
+<%= link_to t_action(:index), producers_path %>

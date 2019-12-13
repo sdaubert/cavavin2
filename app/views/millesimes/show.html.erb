@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Wine #<%= @wine.id %>, millesime <%= @millesime.year %></h2>
+  <h2><%= @millesime.wine.domain %> <%= @millesime.year %></h2>
 
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
 
@@ -42,8 +42,8 @@
 <div class="group">
     <h2>Log entries</h2>
     <%= render 'wlogs/wlogs' %>
-    <%= link_to 'New log entry', new_wine_millesime_wlog_path(@wine, @millesime) %>
+    <%= link_to t_action(:new, Wlog), new_wine_millesime_wlog_path(@wine, @millesime) %>
 </div>
 
-<%= link_to 'Edit', edit_wine_millesime_path(@wine, @millesime) %> |
-<%= link_to 'Back to wine', wine_path(@wine) %>
+<%= link_to t_action(:edit), edit_wine_millesime_path(@wine, @millesime) %> |
+<%= link_to 'Wine', wine_path(@wine) %>

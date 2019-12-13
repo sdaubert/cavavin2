@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Countries</h2>
+<h2><%= t_title(:index) %></h2>
 
 <table>
   <thead>
@@ -14,7 +14,7 @@
     <% @countries.each do |country| %>
       <tr>
         <td><%= link_to country.name, country_regions_path(country) %></td>
-        <td><%= link_to 'Edit', edit_country_path(country) %></td>
+        <td><%= link_to t_action(:edit), edit_country_path(country) %></td>
         <td><%= link_to_destroy country %></td>
       </tr>
     <% end %>
@@ -23,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Country', new_country_path %>
+<%= link_to t_action(:new), new_country_path %>

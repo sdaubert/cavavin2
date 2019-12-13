@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Region #<%= @region.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @region.id %></h2>
 
   <ul>
     <li>Name: <%= @region.name %></li>
@@ -49,7 +49,7 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_country_region_path(@country, @region) %> |
-<%= link_to 'Back', country_regions_path(@country) %> |
+<%= link_to t_action(:edit), edit_country_region_path(@country, @region) %> |
+<%= link_to t_action(:index), country_regions_path(@country) %> |
 <%= link_to 'Region statistics', stats_country_region_path(@country, @region) %> |
 <%= link_to_destroy [@country, @region], no_img: true %>

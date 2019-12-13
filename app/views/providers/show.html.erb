@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Provider #<%= @provider.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @provider.id %></h2>
 
   <ul>
     <li>Name: <%= @provider.name %></li>
@@ -65,5 +65,5 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_provider_path(@provider) %> |
-<%= link_to 'Back', providers_path %>
+<%= link_to t_action(:edit), edit_provider_path(@provider) %> |
+<%= link_to t_action(:index), providers_path %>

@@ -1,0 +1,135 @@
+fr:
+  activerecord:
+    models:
+      bottle: Bouteille  #g
+      bottle_rack: Porte-bouteilles  #g
+      color: Couleur  #g
+      country: Pays  #g
+      dish: Plat  #g
+      dra: Dra  #g
+      habtm_colors: Couleurs Habtm  #g
+      habtm_regions: Régions Habtm  #g
+      millesime: Millésime  #g
+      preference: Préférence  #g
+      producer: Producteur  #g
+      provider: Fournisseur  #g
+      region: Région  #g
+      wine: Du vin  #g
+      wlog: Wlog  #g
+
+    attributes:
+      bottle:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        millesime: :activerecord.models.millesime  #g
+        pos: Pos  #g
+
+      bottle_rack:
+        bottles: Bouteilles  #g
+        columns: Colonnes  #g
+        lines: Lignes  #g
+        name: Nom
+        wlogs: Wlogs  #g
+
+      color:
+        color: Couleur  #g
+        dras: Dras  #g
+        name: Nom
+        regions: Les régions  #g
+        wines: Vins  #g
+
+      country:
+        name: Nom
+        producer: Producteur  #g
+        provider: Fournisseur  #g
+        regions: Les régions  #g
+
+      dish:
+        dish_type: Type de plat  #g
+        dras: Dras  #g
+        name: Nom
+        regions: Les régions  #g
+
+      dra:
+        color: :activerecord.models.color  #g
+        dish: :activerecord.models.dish  #g
+        region: :activerecord.models.region  #g
+
+      habtm_colors:
+        color: :activerecord.models.color  #g
+        left_side: :activerecord.models.left_side  #g
+
+      habtm_regions:
+        left_side: :activerecord.models.left_side  #g
+        region: :activerecord.models.region  #g
+
+      millesime:
+        bottles: Bouteilles  #g
+        garde: Garde  #g
+        notes: Remarques  #g
+        wine: :activerecord.models.wine  #g
+        wlogs: Wlogs  #g
+        year: Année
+
+      preference:
+        setting: Réglage  #g
+        stype: Stype  #g
+        value: Valeur  #g
+
+      producer:
+        address: Adresse  #g
+        city: Ville  #g
+        country: :activerecord.models.country  #g
+        email: Email  #g
+        name: Nom
+        notes: Remarques  #g
+        phone: Téléphone  #g
+        web: Web  #g
+        wines: Vins  #g
+        zip: 'Zip *: français'  #g
+
+      provider:
+        address: Adresse  #g
+        city: Ville  #g
+        country: :activerecord.models.country  #g
+        email: Email  #g
+        name: Nom
+        notes: Remarques  #g
+        phone: Téléphone  #g
+        web: Web  #g
+        wines: Vins  #g
+        zip: 'Code postal'
+
+      region:
+        children: Enfants
+        colors: Couleurs  #g
+        country: :activerecord.models.country  #g
+        depth: Profondeur  #g
+        dishes: Plats
+        dras: Dras  #g
+        lft: Lft  #g
+        name: Nom
+        parent: :activerecord.models.parent  #g
+        rgt: Rgt  #g
+        wines: Vins  #g
+
+      wine:
+        color: :activerecord.models.color  #g
+        domain: Domaine  #g
+        effervescent: Effervescent  #g
+        millesimes: Millésimes  #g
+        notes: Remarques  #g
+        organic: Biologique  #g
+        producer: :activerecord.models.producer  #g
+        provider: :activerecord.models.provider  #g
+        region: :activerecord.models.region  #g
+
+      wlog:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        date: Date
+        millesime: :activerecord.models.millesime  #g
+        move_to_pos: Déplacer vers pos  #g
+        mvt_type: Type de MVT  #g
+        notes: Remarques  #g
+        pos: Pos  #g
+        price: Prix  #g
+        quantity: Quantité  #g

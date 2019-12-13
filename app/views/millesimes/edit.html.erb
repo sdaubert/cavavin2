@@ -1,4 +1,4 @@
-<h1>Editing Millesime <%= @millesime.year %>, wine #<%= @wine.id %></h1>
+<h1><%= t_title(:edit) %></h1>
 
 <div class="group">
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
@@ -8,4 +8,4 @@
   <%= render partial: 'form', locals: { subform: false, form: form } %>
 <% end %>
 
-<%= link_to 'Back', wine_path(@wine) %>
+<%= link_to t_action(:index), wine_path(@wine) %>

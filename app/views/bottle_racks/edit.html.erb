@@ -1,6 +1,6 @@
-<h1>Editing Bottle Rack</h1>
+<h1><%= t_title(:edit) %></h1>
 
 <%= render 'form', bottle_rack: @bottle_rack %>
 
-<%= link_to 'Show', @bottle_rack %> |
-<%= link_to 'Back', bottle_racks_path %>
+<%= link_to t_action(:show), @bottle_rack %> |
+<%= link_to t_action(:index), bottle_racks_path %>

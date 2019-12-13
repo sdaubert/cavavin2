@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Producers</h2>
+<h2><%= t_title(:index) %></h2>
 
 <table>
   <thead>
@@ -21,7 +21,7 @@
         <td><%= producer.zip %></td>
         <td><%= producer.city %></td>
         <td><%= producer.country.name %></td>
-        <td><%= link_to 'Edit', edit_producer_path(producer) %></td>
+        <td><%= link_to t_action(:edit), edit_producer_path(producer) %></td>
         <td><%= link_to_destroy producer %></td>
       </tr>
     <% end %>
@@ -30,4 +30,4 @@
 
 <%= will_paginate @producers %>
 
-<%= link_to 'New Producer', new_producer_path %>
+<%= link_to t_action(:new), new_producer_path %>
