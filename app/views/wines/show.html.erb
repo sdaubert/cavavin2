@@ -7,19 +7,19 @@
 
   <% if @wine.attribute_present? :notes %>
   <dl>
-    <dt>Notes:</dt>
+    <dt><%= t('activerecord.attributes.wine.notes') %>:</dt>
     <dd><%= @wine.notes %></dd>
   </dl>
   <% end %>
 
-  <h3>Millesimes</h3>
+  <h3><%= t('activerecord.models.millesime', count: 2) %></h3>
   <% unless @wine.millesimes.empty? %>
   <table>
     <thead>
       <tr>
-        <th>Year</th>
-        <th>Garde</th>
-        <th>Quantity</th>
+        <th><%= t('activerecord.attributes.millesime.year') %></th>
+        <th><%= t('activerecord.attributes.millesime.garde') %></th>
+        <th><%= t('activerecord.attributes.wlog.quantity') %></th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -28,8 +28,8 @@
       <% @wine.millesimes.each do |millesime| %>
         <tr>
           <td><%= link_to millesime.year, [@wine, millesime] %></td>
-          <td><%= millesime.garde %></td>
-          <td><%= millesime.quantity %></td>
+          <td class="right"><%= millesime.garde %></td>
+          <td class="right"><%= millesime.quantity %></td>
           <td><%= link_to 'Edit', edit_wine_millesime_path(@wine, millesime) %></td>
           <td><%= link_to_destroy [@wine, millesime] %></td>
         </tr>
@@ -37,33 +37,33 @@
     </tbody>
   </table>
   <% else %>
-  <p> No millesime.</p>
+  <p><%= t('activerecord.models.millesime', count: 0) %>.</p>
   <% end %>
 
   <%= link_to t_action(:new, Millesime), new_wine_millesime_path(@wine) %>
 </div>
 
 <div class="group">
-  <h2>Producer</h2>
+  <h2><%= t('activerecord.models.producer', count: 2) %></h2>
   <% if @wine.producer %>
   <ul>
     <li><%= link_to @wine.producer.name, @wine.producer %></li>
     <li><%= @wine.producer.city %>, <%= @wine.producer.zip %></li>
   </ul>
   <% else %>
-  <p>No producer</p>
+  <p><%= t('activerecord.models.producer', count: 0) %>.</p>
   <% end %>
 </div>
 
 <div class="group">
-  <h2>Provider</h2>
+  <h2><%= t('activerecord.models.provider', count: 2) %></h2>
   <% if @wine.provider %>
   <ul>
     <li><%= link_to @wine.provider.name, @wine.provider %></li>
     <li><%= @wine.provider.city %>, <%= @wine.provider.zip %></li>
   </ul>
   <% else %>
-  <p>No provider</p>
+  <p><%= t('activerecord.models.provider', count: 0) %>.</p>
   <% end %>
 </div>
 

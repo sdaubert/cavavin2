@@ -9,13 +9,22 @@ en:
       dra: Dra  #g
       habtm_colors: Habtm colors  #g
       habtm_regions: Habtm regions  #g
-      millesime: Millesime  #g
+      millesime:
+        zero: No millesime
+        one: Millesime
+        other: Millesimes
       preference: Preference  #g
-      producer: Producer  #g
-      provider: Provider  #g
+      producer:
+        zero: No producer
+        one: Producer
+        other: Producers
+      provider:
+        zero: No providers
+        one: Provider
+        other: Providers
       region: Region  #g
       wine: Wine  #g
-      wlog: Wlog  #g
+      wlog: Wine log
 
     attributes:
       bottle:
@@ -128,8 +137,25 @@ en:
         date: Date  #g
         millesime: :activerecord.models.millesime  #g
         move_to_pos: Move to pos  #g
-        mvt_type: Mvt type  #g
+        mvt_type: Movement type  #g
         notes: Notes  #g
         pos: Pos  #g
         price: Price  #g
         quantity: Quantity  #g
+
+  region:
+    zone: Zone
+
+  wlog:
+    mvt:
+      in: In
+      out: Out
+      move: Move
+
+  view:
+    reset_filters: 'Reset filters'
+    alt_organic_wine: '(organic wine)'
+    effervescent: '(effervescent)'
+
+  form:
+    cannot_save: "%{count} errors prohibited this %{model} from being saved:"

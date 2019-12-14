@@ -1,6 +1,7 @@
 <% if !subform && @millesime.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@millesime.errors.count, "error") %> prohibited this millesime from being saved:</h2>
+    <% count = @millesime.errors.count %>
+    <h2><%= t('form.cannot_save', model: t('activerecord.models.millesime', count: count), count: count) %></h2>
     <ul>
     <% @millesime.errors.full_messages.each do |message| %>
       <li><%= message %></li>
@@ -25,7 +26,7 @@
 </div>
 
 <% if @millesime.new_record? %>
-  <h2>Wine log</h2>
+  <h2><%= t('activerecord.models.wlog', count: 1) %></h2>
   <%= form.fields_for(:wlogs) do |fw| %>
     <%= render partial: 'wlogs/form', locals: { subform: true, form: fw } %>
   <% end %>

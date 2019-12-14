@@ -9,13 +9,22 @@ fr:
       dra: Dra  #g
       habtm_colors: Couleurs Habtm  #g
       habtm_regions: Régions Habtm  #g
-      millesime: Millésime  #g
+      millesime:
+        zero: Aucun Millésime
+        one: Millésime
+        other: Millésimes
       preference: Préférence  #g
-      producer: Producteur  #g
-      provider: Fournisseur  #g
+      producer:
+        zero: Aucun producteur
+        one: Producteur
+        other: Producteurs
+      provider:
+        zero: Aucun fournisseurs
+        one: Fournisseur
+        other: Fournisseurs
       region: Région  #g
-      wine: Du vin  #g
-      wlog: Wlog  #g
+      wine: Vin
+      wlog: Entrée du livre de cave
 
     attributes:
       bottle:
@@ -128,8 +137,25 @@ fr:
         date: Date
         millesime: :activerecord.models.millesime  #g
         move_to_pos: Déplacer vers pos  #g
-        mvt_type: Type de MVT  #g
+        mvt_type: Mouvement  #g
         notes: Remarques  #g
         pos: Pos  #g
         price: Prix  #g
         quantity: Quantité  #g
+
+  region:
+    zone: Zone
+
+  wlog:
+    mvt:
+      in: Entrée
+      out: Sortie
+      move: Déplacement
+
+  view:
+    reset_filters: 'Effacer les filtres'
+    alt_organic_wine: '(vin bio)'
+    effervescent: '(effervescent)'
+
+  form:
+    cannot_save: "%{count} erreur(s) empêche ce(tte) %{model} d'être enregisté:"

@@ -1,4 +1,4 @@
   <div class="field">
-    <%= form.label :provider_id %><br />
+    <%= form.label :provider %>
     <%= form.select(:provider_id, @providers.map { |p| [p.name, p.id] }, include_blank: true) %>
   </div>
