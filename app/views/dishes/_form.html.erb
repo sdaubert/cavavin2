@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :dish_type %>
-    <%= form.select :dish_type, Dish::TYPES.zip(Dish::TYPES) %>
+    <%= form.select :dish_type, Dish::TYPES.map { |t| [localized_dish_type(t), t] } %>
   </div>
 
   <div class="actions">

@@ -169,6 +169,15 @@ fr:
       out: Sortie
       move: Déplacement
 
+  dish:
+    type:
+      starter: 'Entrée'
+      meat: 'Viande'
+      fish: 'Poisson/Fruits de mer'
+      speciality: 'Spécialité'
+      cheese: 'Fromage'
+      dessert: 'Dessert'
+
   view:
     reset_filters: 'Effacer les filtres'
     alt_organic_wine: '(vin bio)'
@@ -181,6 +190,10 @@ fr:
     drunk_wines: 'Vins bus'
     no_known_wine: 'Aucun vin connu de ce %{model}.'
     no_drunk_wine: 'Aucun vin bu de ce %{model}.'
+    dish:
+      associated_regions: 'Régions associées'
+      associated_regions_intro: 'Ce plat peut être bu avec des vins provenant des régions suivantes :'
+      select_regions_and_color: 'Sélection des régions et couleurs de vins'
     rack:
       select_in:  "Sélection du casier pour l'ajout de bouteilles"
       select_out: 'Sélection du casier pour la sortie de bouteilles'

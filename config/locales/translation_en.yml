@@ -15,7 +15,7 @@ en:
       dish:
         zero: No dish
         one: Dish
-        oter: Dishes
+        other: Dishes
       dra: Dra  #g
       habtm_colors: Habtm colors  #g
       habtm_regions: Habtm regions  #g
@@ -171,6 +171,15 @@ en:
       out: Out
       move: Move
 
+  dish:
+    type:
+      starter: 'Starter'
+      meat: 'Meat'
+      fish: 'Fish/Seafood'
+      speciality: 'Speciality'
+      cheese: 'Cheese'
+      dessert: 'Dessert'
+
   view:
     reset_filters: 'Reset filters'
     alt_organic_wine: '(organic wine)'
@@ -183,6 +192,10 @@ en:
     drunk_wines: 'Drunk wines'
     no_known_wine: 'No known wines from this %{model}.'
     no_drunk_wine: 'No known drunk wines from this %{model}.'
+    dish:
+      associated_regions: 'Associated regions'
+      associated_regions_intro: 'This kind of dish may be drunk with wines from:'
+      select_regions_and_color: 'Select regions and colors'
     rack:
       select_in: 'Select racks to store bottles'
       select_out: 'Select racks to remove bottles'
