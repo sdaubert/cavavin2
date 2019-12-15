@@ -1,7 +1,7 @@
 <ul>
   <li><%= t('activerecord.attributes.wine.domain') %>: <%= wine.domain %></li>
   <li>
-    <%= t('activerecord.attributes.wine.region') %>:
+    <%= t('activerecord.attributes.wine.region', count: 1) %>:
     <%= link_to wine.region.name, country_region_path(wine.region.country, wine.region) %>
   </li>
   <li>

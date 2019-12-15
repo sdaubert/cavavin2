@@ -117,7 +117,7 @@ en:
         dras: Dras  #g
         lft: Lft  #g
         name: Name  #g
-        parent: :activerecord.models.parent  #g
+        parent: Parent
         rgt: Rgt  #g
         wines: Wines  #g
 
@@ -156,6 +156,8 @@ en:
     reset_filters: 'Reset filters'
     alt_organic_wine: '(organic wine)'
     effervescent: '(effervescent)'
+    notes_about_wine: 'Notes about wine:'
+    notes_about_millesime: 'Notes about millesime:'
 
   form:
     cannot_save: "%{count} errors prohibited this %{model} from being saved:"

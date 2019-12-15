@@ -7,7 +7,7 @@
       <th><%= link_to t('activerecord.attributes.wine.color'), wines_path(build_params(sort_by: 'color')) %></th>
       <th><%= link_to t('activerecord.attributes.millesime.year'), wines_path(build_params(sort_by: 'millesime')) %></th>
       <th><%= t('activerecord.attributes.wlog.quantity') %></th>
-      <th><%= t('activerecord.attributes.wine.region') %></th>
+      <th><%= t('activerecord.attributes.wine.region', count: 1) %></th>
       <th><%= t('region.zone') %></th>
       <th><%= link_to t('activerecord.attributes.region.country'), wines_path(build_params(sort_by: 'country')) %></th>
       <th colspan="2"></th>

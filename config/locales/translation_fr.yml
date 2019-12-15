@@ -2,10 +2,16 @@ fr:
   activerecord:
     models:
       bottle: Bouteille  #g
-      bottle_rack: Porte-bouteilles  #g
+      bottle_rack:
+        zero: Aucun casier à bouteilles
+        one: Casier à bouteilles
+        other: Casiers à bouteilles
       color: Couleur  #g
       country: Pays  #g
-      dish: Plat  #g
+      dish:
+        zero: Aucun plat
+        one: Plat
+        other: Plats
       dra: Dra  #g
       habtm_colors: Couleurs Habtm  #g
       habtm_regions: Régions Habtm  #g
@@ -22,9 +28,18 @@ fr:
         zero: Aucun fournisseurs
         one: Fournisseur
         other: Fournisseurs
-      region: Région  #g
-      wine: Vin
-      wlog: Entrée du livre de cave
+      region:
+        zero: Aucune région
+        one: Région
+        other: Régions
+      wine:
+        zero: Aucun vin
+        one: Vin
+        other: Vins
+      wlog:
+        zero: Aucune entrée
+        one: Entrée du livre de cave
+        other: Entrée du livre de cave
 
     attributes:
       bottle:
@@ -37,7 +52,7 @@ fr:
         columns: Colonnes  #g
         lines: Lignes  #g
         name: Nom
-        wlogs: Wlogs  #g
+        wlogs: :activerecord.models.wlog
 
       color:
         color: Couleur  #g
@@ -76,7 +91,7 @@ fr:
         garde: Garde  #g
         notes: Remarques  #g
         wine: :activerecord.models.wine  #g
-        wlogs: Wlogs  #g
+        wlogs: :activerecord.models.wlog
         year: Année
 
       preference:
@@ -94,7 +109,7 @@ fr:
         phone: Téléphone  #g
         web: Web  #g
         wines: Vins  #g
-        zip: 'Zip *: français'  #g
+        zip: 'Code postal'
 
       provider:
         address: Adresse  #g
@@ -117,7 +132,7 @@ fr:
         dras: Dras  #g
         lft: Lft  #g
         name: Nom
-        parent: :activerecord.models.parent  #g
+        parent: Parent
         rgt: Rgt  #g
         wines: Vins  #g
 
@@ -156,6 +171,8 @@ fr:
     reset_filters: 'Effacer les filtres'
     alt_organic_wine: '(vin bio)'
     effervescent: '(effervescent)'
+    notes_about_wine: 'Remarques sur le vin :'
+    notes_about_millesime: 'Remarques sur le millésime :'
 
   form:
     cannot_save: "%{count} erreur(s) empêche ce(tte) %{model} d'être enregisté:"

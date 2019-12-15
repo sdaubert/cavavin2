@@ -9,14 +9,15 @@ en:
       update: "%{model} %{record} modifié."
       destroy: "%{model} %{record} supprimé."
     title:
-      index:  "%{model} : index"
-      edit:   "%{model} : édition"
-      update: "%{model} : édition"
+      index:  "Liste des %{model}"
+      edit:   "Édition d'un(e) %{model}"
+      update: "Édition d'un(e) %{model}"
       show:   "%{model}"
-      new:    "%{model} : création"
-      create: "%{model} : création"
+      new:    "Création d'un(e) %{model}"
+      create: "Création d'un(e) %{model}"
       delete: "Suppression d'un %{model}"
-      destroy: "Suppression d'un %{model}"
+      destroy: "Suppression d'un(e) %{model}"
+      pluralize_index: true
     action:
       index:    "Index"
       edit:     "Édition"
