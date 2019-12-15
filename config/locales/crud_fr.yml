@@ -1,4 +1,4 @@
-en:
+fr:
   messages:
     confirm_delete: "Confirmer la suppression du %{model} %{record}?"
     select_prompt:  "Select %{model}"

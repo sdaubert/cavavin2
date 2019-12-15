@@ -5,10 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Zip</th>
-      <th>City</th>
-      <th>Country</th>
+      <th><%= t('activerecord.attributes.provider.name') %></th>
+      <th><%= t('activerecord.attributes.provider.adress') %></th>
+      <th><%= t('activerecord.attributes.provider.zip') %></th>
+      <th><%= t('activerecord.attributes.provider.city') %></th>
+      <th><%= t('activerecord.attributes.provider.country') %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -17,10 +18,11 @@
     <% @providers.each do |provider| %>
       <tr>
         <td><%= link_to provider.name, provider %></td>
+        <td><%= provider.address %></td>
         <td><%= provider.zip %></td>
         <td><%= provider.city %></td>
         <td><%= provider.country.name %></td>
-        <td><%= link_to 'Edit', edit_provider_path(provider) %></td>
+        <td><%= link_to t_action(:edit), edit_provider_path(provider) %></td>
         <td><%= link_to_destroy provider %></td>
       </tr>
     <% end %>

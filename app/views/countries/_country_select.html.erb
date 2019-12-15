@@ -1,5 +1,5 @@
   <div class="field">
-    <%= form.label :country_id %><br />
+    <%= form.label :country %>
     <%= form.select(:country_id) do %>
       <% Country.all.each do |country| %>
         <%= content_tag(:option, country.name, value: country.id) %>

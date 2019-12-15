@@ -105,25 +105,25 @@ fr:
         address: Adresse  #g
         city: Ville  #g
         country: :activerecord.models.country  #g
-        email: Email  #g
+        email: Courriel  #g
         name: Nom
         notes: Remarques  #g
         phone: Téléphone  #g
-        web: Web  #g
+        web: Site web  #g
         wines: Vins  #g
         zip: 'Code postal'
 
       provider:
-        address: Adresse  #g
-        city: Ville  #g
+        address: :activerecord.attributes.producer.address
+        city: :activerecord.attributes.producer.city
         country: :activerecord.models.country  #g
-        email: Email  #g
-        name: Nom
-        notes: Remarques  #g
-        phone: Téléphone  #g
-        web: Web  #g
-        wines: Vins  #g
-        zip: 'Code postal'
+        email: :activerecord.attributes.producer.email
+        name: :activerecord.attributes.producer.name
+        notes: :activerecord.attributes.producer.notes
+        phone: :activerecord.attributes.producer.phone
+        web: :activerecord.attributes.producer.web
+        wines: :activerecord.attributes.producer.wines
+        zip: :activerecord.attributes.producer.zip
 
       region:
         children: Enfants
@@ -176,6 +176,11 @@ fr:
     notes_about_wine: 'Remarques sur le vin :'
     notes_about_millesime: 'Remarques sur le millésime :'
     cellar_book: 'Livre de cave'
+    known_wines: 'Vins connus'
+    wines_to_drink: 'Vins à boire'
+    drunk_wines: 'Vins bus'
+    no_known_wine: 'Aucun vin connu de ce %{model}.'
+    no_drunk_wine: 'Aucun vin bu de ce %{model}.'
     rack:
       select_in:  "Sélection du casier pour l'ajout de bouteilles"
       select_out: 'Sélection du casier pour la sortie de bouteilles'

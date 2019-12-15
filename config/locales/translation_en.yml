@@ -178,6 +178,11 @@ en:
     notes_about_wine: 'Notes about wine:'
     notes_about_millesime: 'Notes about millesime:'
     cellar_book: 'Cellar book'
+    known_wines: 'Known wines'
+    wines_to_drink: 'Wines to drink'
+    drunk_wines: 'Drunk wines'
+    no_known_wine: 'No known wines from this %{model}.'
+    no_drunk_wine: 'No known drunk wines from this %{model}.'
     rack:
       select_in: 'Select racks to store bottles'
       select_out: 'Select racks to remove bottles'

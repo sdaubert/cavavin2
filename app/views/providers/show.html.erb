@@ -4,27 +4,27 @@
   <h2><%= t_title(:show) %> #<%= @provider.id %></h2>
 
   <ul>
-    <li>Name: <%= @provider.name %></li>
+    <li><%= t('activerecord.attributes.provider.name') %>: <%= @provider.name %></li>
     <% unless @provider.address.empty? && @provider.zip.empty? && @provider.city.empty? %>
     <li>
-      Address: <%= @provider.address %>
+      <%= t('activerecord.attributes.provider.address') %>: <%= @provider.address %>
       <%= @provider.zip %> <%= @provider.city %>
     </li>
     <%end%>
     <% if @provider.country %>
-    <li>Country: <%= @provider.country.name %></li>
+    <li><%= t('activerecord.attributes.provider.country') %>: <%= @provider.country.name %></li>
     <%end%>
     <% unless @provider.phone.empty? %>
-    <li>Phone: <%= @provider.phone %></li>
+    <li><%= t('activerecord.attributes.provider.phone') %>: <%= @provider.phone %></li>
     <%end%>
     <% unless @provider.web.empty? %>
-    <li>Web: <%= link_to h(@provider.web), @provider.web %></li>
+    <li><%= t('activerecord.attributes.provider.web') %>: <%= link_to h(@provider.web), @provider.web %></li>
     <%end%>
     <% unless @provider.email.empty? %>
-    <li>E-mail: <%= mail_to @provider.email %></li>
+    <li><%= t('activerecord.attributes.provider.email') %>: <%= mail_to @provider.email %></li>
     <%end%>
     <% unless @provider.notes.empty? %>
-    <li class="notes">Notes:
+    <li class="notes"><%= t('activerecord.attributes.provider.notes') %>:
       <p><%= @provider.notes %></p>
     </li>
     <%end%>
@@ -32,9 +32,9 @@
 </div>
 
 <div class="group">
-  <h2>Known wines</h2>
+  <h2><%= t('view.known_wines') %></h2>
 
-  <h3>Wines to drink</h3>
+  <h3><%= t('view.wines_to_drink') %></h3>
   <% if @millesimes_to_drink.count.positive? %>
     <ul>
       <% @millesimes_to_drink.each do |mil| %>
@@ -46,10 +46,10 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No known wines from this producer.</p>
+    <p><%= t('view.no_known_wine', model: t('activerecord.models.provider', count: 1)) %></p>
   <% end %>
 
-  <h3>Drunk wines</h3>
+  <h3><%= t('view.drunk_wines') %></h3>
   <% if @drunk_millesimes.count.positive? %>
     <ul>
       <% @drunk_millesimes.each do |mil| %>
@@ -61,7 +61,7 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No known drunk wines from this producer.</p>
+    <p><%= t('view.no_drunk_wine', model: t('activerecord.models.provider', count: 1)) %></p>
   <% end %>
 </div>
 
