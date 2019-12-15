@@ -2,10 +2,20 @@ en:
   activerecord:
     models:
       bottle: Bottle  #g
-      bottle_rack: Bottle rack  #g
-      color: Color  #g
-      country: Country  #g
-      dish: Dish  #g
+      bottle_rack:
+        zero: No bottle rack
+        one: Bottle rack
+        other: Bottle racks
+      color:
+        one: Color
+        other: Colors
+      country:
+        one: Country
+        oter: Countries
+      dish:
+        zero: No dish
+        one: Dish
+        oter: Dishes
       dra: Dra  #g
       habtm_colors: Habtm colors  #g
       habtm_regions: Habtm regions  #g
@@ -22,9 +32,18 @@ en:
         zero: No providers
         one: Provider
         other: Providers
-      region: Region  #g
-      wine: Wine  #g
-      wlog: Wine log
+      region:
+        zero: No region
+        one: Region
+        other: Regions
+      wine:
+        zero: No wine
+        one: Wine
+        other: Wines
+      wlog:
+        zero: No log
+        one: Wine log
+        other: Wine logs
 
     attributes:
       bottle:
@@ -158,6 +177,22 @@ en:
     effervescent: '(effervescent)'
     notes_about_wine: 'Notes about wine:'
     notes_about_millesime: 'Notes about millesime:'
+    cellar_book: 'Cellar book'
+    rack:
+      select_in: 'Select racks to store bottles'
+      select_out: 'Select racks to remove bottles'
+      select_move1: 'Select racks to move bottles out'
+      select_move2: 'Select racks to move bottles in'
+    errors:
+      none_selected: 'none selected'
+    notice:
+      saved: '%{model} was successfully saved.'
 
   form:
     cannot_save: "%{count} errors prohibited this %{model} from being saved:"
+    save: 'Save change'
+
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"

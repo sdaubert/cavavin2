@@ -1,7 +1,7 @@
-<h1>Editing wine log</h1>
+<h1><%= t_title(:edit) %></h1>
 
 <%= form_with(model: [@wine, @millesime, @wlog], local: true) do |form| %>
     <%= render partial: 'form', locals: { subform: false, form: form } %>
 <% end %>
 
-<%= link_to 'Back', wine_millesime_path(@wine, @millesime) %>
+<%= link_to t('activerecord.model.millesime', count: 1), wine_millesime_path(@wine, @millesime) %>

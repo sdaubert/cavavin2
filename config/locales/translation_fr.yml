@@ -3,10 +3,12 @@ fr:
     models:
       bottle: Bouteille  #g
       bottle_rack:
-        zero: Aucun casier à bouteilles
+        zero: Aucun casier
         one: Casier à bouteilles
         other: Casiers à bouteilles
-      color: Couleur  #g
+      color:
+        one: Couleur
+        other: Couleurs
       country: Pays  #g
       dish:
         zero: Aucun plat
@@ -173,6 +175,22 @@ fr:
     effervescent: '(effervescent)'
     notes_about_wine: 'Remarques sur le vin :'
     notes_about_millesime: 'Remarques sur le millésime :'
+    cellar_book: 'Livre de cave'
+    rack:
+      select_in:  "Sélection du casier pour l'ajout de bouteilles"
+      select_out: 'Sélection du casier pour la sortie de bouteilles'
+      select_move1: 'Sélection du casier pour un mouvement (retrait)'
+      select_move2: 'Sélection du casier pour un mouvement (ajout)'
+    errors:
+      none_selected: 'aucun sélectionné'
+    notice:
+      saved: '%{model} enregistré.'
 
   form:
     cannot_save: "%{count} erreur(s) empêche ce(tte) %{model} d'être enregisté:"
+    save: 'Sauvegarder'
+
+  will_paginate:
+    previous_label: "&#8592; Précédent"
+    next_label: "Suivant &#8594;"
+    page_gap: "&hellip;"

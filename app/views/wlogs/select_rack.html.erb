@@ -1,7 +1,7 @@
 <h1><%= @title %></h2>
 
 <div class="group">
-    <h2>Wine</h3>
+    <h2><%= t('activerecord.models.wine', count: 1) %></h3>
     <ul>
         <li><%= @wine.domain %></li>
         <li><%= @wine.region.name %> <%= @wine.color.name %> <%= @millesime.year %>
@@ -10,11 +10,11 @@
 </div>
 
 <div class="group">
-    <h2>Log entry</h2>
+    <h2><%= t('activerecord.models.wlog', count: 1) %></h2>
     <ul>
         <li><%= @wlog.date %></li>
-        <li>Type: <%= @wlog.mvt_type %></li>
-        <li>Quantity: <%= @wlog.quantity %></li>
+        <li><%= t('activerecord.attributes.wlog.mvt_type') %>: <%= t("wlog.mvt.#{@wlog.mvt_type}") %></li>
+        <li><%= t('activerecord.attributes.wlog.quantity') %>: <%= @wlog.quantity %></li>
     </ul>
 
     <%= form_tag({action: :save_rack, id: @wlog}) do %>
@@ -24,8 +24,8 @@
         <% end %>
         <% if @wlog.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@wlog.errors.count, "error") %> prohibited this wine log from being saved:</h2>
-
+            <% count = @wlog.errors.count %>
+            <h2><%= t('form.cannot_save', model: t('activerecord.models.wlog', count: count), count: count) %></h2>
             <ul>
             <% @wlog.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -35,7 +35,7 @@
         <% end %>
         <fieldset>
             <div class="field">
-                <%= label_tag :bottle_rack_id, 'Bottle rack' %>
+                <%= label_tag :bottle_rack_id, t('activerecord.models.bottle_rack', count: 1) %>
                 <%= select :bottle_rack, :id, @racks %>
                 <%= image_tag 'ajax-loader.gif', id: 'spinner', style: "display: none" %>
             </div>
@@ -46,7 +46,7 @@
             </div>
         </fieldset>
         <div class="actions">
-          <%= submit_tag 'Save racks' %>
+          <%= submit_tag t('form.save') %>
         </div>
     <% end %>
 </div>

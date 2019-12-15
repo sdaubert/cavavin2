@@ -18,7 +18,7 @@ class WlogsController < ApplicationController
 
     if @wlog.save
       redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog),
-                  notice: 'Wlog was successfully created.'
+                  redirect_notice
     else
       render :new
     end
@@ -27,7 +27,7 @@ class WlogsController < ApplicationController
   def update
     if @wlog.update(wlog_params)
       redirect_to select_rack_wine_millesime_wlog_url(@wine, @millesime, @wlog),
-                  notice: 'Wlog was successfully updated.'
+                  redirect_notice
     else
       render :edit
     end
@@ -38,19 +38,19 @@ class WlogsController < ApplicationController
       rollback_bottles @wlog
       @millesime.wlogs.destroy @wlog
     end
-    redirect_to [@wine, @millesime], notice: 'Wlog was successfully destroyed.'
+    redirect_to [@wine, @millesime], redirect_notice
   end
 
   def select_rack
     @title = case @wlog.mvt_type
-             when 'in' then 'Select racks to store bottles'
-             when 'out' then 'Select racks to remove bottles'
-             when 'move' then 'Select racks to move bottles out'
+             when 'in' then t('view.rack.select_in')
+             when 'out' then t('view.rack.select_out')
+             when 'move' then t('view.rack.select_move1')
              end
   end
 
   def select_rack2
-    @title = 'Select racks to move bottles in'
+    @title = t('view.rack.select_move2')
     @move_in_phase = true
     render 'select_rack'
   end
@@ -61,7 +61,7 @@ class WlogsController < ApplicationController
 
     if @bottle_rack.nil?
       if need_bottle_rack?
-        @wlog.errors.add(:bottle_rack, 'none selected')
+        @wlog.errors.add(:bottle_rack, t('view.errors.none_selected'))
         render :select_rack
         return
       end
@@ -94,7 +94,7 @@ class WlogsController < ApplicationController
       @racks = BottleRack.millesime(@millesime).all.map { |r| [r.name, r.id] }
       @bottle_rack = @wlog.bottle_rack
     end
-    @racks.unshift(['No rack', nil])
+    @racks.unshift([t('activerecord.models.bottle_rack', count: 0), nil])
   end
 
   # Never trust parameters from the scary internet, only allow the white list
@@ -191,7 +191,7 @@ class WlogsController < ApplicationController
     if (@wlog.mvt_type == 'move') && (params['move_in_phase'] != 'true')
       redirect_to select_rack2_wine_millesime_wlog_path(@wine, @millesime, @wlog)
     else
-      redirect_to [@wine, @millesime], notice: 'Wlog was successfully saved.'
+      redirect_to [@wine, @millesime], notice: t('view.notice.saved', model: t('activerecord.models.wlog'))
     end
   end
 end
