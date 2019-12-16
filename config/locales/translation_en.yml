@@ -162,6 +162,16 @@ en:
         price: Price  #g
         quantity: Quantity  #g
 
+  helpers:
+    label:
+      region:
+        color: Colors
+
+  helpers:
+    label:
+      region:
+        color: Colors
+
   region:
     zone: Zone
 
@@ -192,19 +202,31 @@ en:
     drunk_wines: 'Drunk wines'
     no_known_wine: 'No known wines from this %{model}.'
     no_drunk_wine: 'No known drunk wines from this %{model}.'
+    statistics: 'Statistics'
     dish:
       associated_regions: 'Associated regions'
       associated_regions_intro: 'This kind of dish may be drunk with wines from:'
       select_regions_and_color: 'Select regions and colors'
+    errors:
+      none_selected: 'none selected'
+    notice:
+      saved: '%{model} was successfully saved.'
     rack:
       select_in: 'Select racks to store bottles'
       select_out: 'Select racks to remove bottles'
       select_move1: 'Select racks to move bottles out'
       select_move2: 'Select racks to move bottles in'
-    errors:
-      none_selected: 'none selected'
-    notice:
-      saved: '%{model} was successfully saved.'
+    region:
+      subregions: Subregions
+      associated_dishes: 'Associated dishes'
+      region_stats: 'Region statistics'
+      no_stats: 'No subregion or no wine, so no statistics.'
+    statistic:
+      country_title: 'Regions statistics in %{country}'
+      region_title: '%{region} Statistics'
+      nb_bottles: 'Bottle count'
+      percentage: Percentage
+      sum: Sum
 
   form:
     cannot_save: "%{count} errors prohibited this %{model} from being saved:"

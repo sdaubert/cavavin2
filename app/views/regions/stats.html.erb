@@ -1,17 +1,17 @@
-<h2><%= @region.name.capitalize %> statistics</h2>
+<h2><%= @country.name %> &gt; <%= t('view.statistic.region_title', region: @region.name) %></h2>
 
 <% unless @regions.empty? %>
 <table class="stat">
     <thead>
         <tr>
-            <th>Region</th>
-            <th>Nb of bottles</th>
-            <th>Percentage</th>
+            <th><%= t('activerecord.models.region', count: 1) %></th>
+            <th><%= t('view.statistic.nb_bottles') %></th>
+            <th><%= t('view.statistic.percentage') %></th>
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td>Total</td>
+            <td><%= t('view.statistic.sum') %></td>
             <td class="right"><%= @sum_regions %></td>
             <td class="right">100.0%</td>
         </tr>
@@ -29,9 +29,9 @@
 
 <%= pie_chart Hash[@regions.map { |name, data| [name, data[:nb]] }] %>
 <% else %>
-<p>No subregion or no wine, so no statistics.</p>
+<p><%= t('view.region.no_stats') %></p>
 <% end %>
 
-<%= link_to t_action(:index), country_region_path(@country, @region) %>
+<%= link_to t('activerecord.models.region', count: 1), country_region_path(@country, @region) %>
 |
-<%= link_to 'Statistics', controller: 'admin', action: 'stats' %>
+<%= link_to t('view.statistics'), controller: 'admin', action: 'stats' %>

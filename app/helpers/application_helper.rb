@@ -1,7 +1,7 @@
 module ApplicationHelper
   def link_to_destroy(object, options={})
     content = if options[:no_img]
-                'Destroy'
+                t_action(:destroy)
               else
                 image_tag('delete.png', alt: 'Destroy')
               end

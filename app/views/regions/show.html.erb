@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= t_title(:show) %> #<%= @region.id %></h2>
+  <h2><%= @country.name %> &gt; <%= t_title(:show) %> #<%= @region.id %></h2>
 
   <ul>
-    <li>Name: <%= @region.name %></li>
+    <li><%= t('activerecord.attributes.region.name') %>: <%= @region.name %></li>
     <% unless @region.root? %>
-    <li>Zone: <%= link_to @region.root.name, country_region_path(@country, @region.root) %></li>
-    <li>Parent: <%= link_to @region.parent.name, country_region_path(@country, @region.parent) %></li>
+    <li><%= t('region.zone') %>: <%= link_to @region.root.name, country_region_path(@country, @region.root) %></li>
+    <li><%= t('activerecord.attributes.region.parent') %>: <%= link_to @region.parent.name, country_region_path(@country, @region.parent) %></li>
     <% end %>
-    <li>Country: <%= link_to @region.country.name, country_regions_path(@country) %></li>
-    <li>Colors: <%= @region.colors.map(&:name).join(', ') %></li>
+    <li><%= t('activerecord.attributes.region.country') %>: <%= link_to @region.country.name, country_regions_path(@country) %></li>
+    <li><%= t('activerecord.attributes.region.colors') %>: <%= @region.colors.map(&:name).join(', ') %></li>
   </ul>
 
   <% unless @region.leaf? %>
-  <h3>Subregions</h3>
+  <h3><%= t('view.region.subregions') %></h3>
   <ul class="ungroup">
   <% @region.children.each do |child| %>
     <li><%= link_to child.name, country_region_path(@country, child) %></li>
@@ -24,18 +24,18 @@
 </div>
 
 <div class="group">
-  <h2>Known wines</h2>
+  <h2><%= t('view.known_wines') %></h2>
 
-  Wines with bottles:
+  <%= t('view.wines_to_drink') %>:
   <%= render partial: 'wine_list', locals: { wines: @millesimes } %>
 
   <br/>
-  Drunk wines (without bottles):
+  <%= t('view.drunk_wines') %>:
   <%= render partial: 'wine_list', locals: { wines: @drunk_millesimes } %>
 </div>
 
 <div class="group">
-  <h2>Associated dishes</h2>
+  <h2><%= t('view.region.associated_dishes') %></h2>
   <% @region.colors.by_name.each do |color| %>
     <% dishes = @region.dishes_by_color(color) %>
     <% unless dishes.empty? %>
@@ -51,5 +51,5 @@
 
 <%= link_to t_action(:edit), edit_country_region_path(@country, @region) %> |
 <%= link_to t_action(:index), country_regions_path(@country) %> |
-<%= link_to 'Region statistics', stats_country_region_path(@country, @region) %> |
+<%= link_to t('view.region.region_stats'), stats_country_region_path(@country, @region) %> |
 <%= link_to_destroy [@country, @region], no_img: true %>

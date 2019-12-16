@@ -1,5 +1,5 @@
   <% if wines.empty? %>
-    none
+    <%= t('activerecord.models.wine', count: 0) %>
   <% else %>
     <ul class="ungroup">
       <% wines.each do |millesime| %>
