@@ -1,10 +1,10 @@
-<h2>Statistics on colors</h2>
+<h2><%= t('view.statistic.color_title') %></h2>
 
 <table class="stat">
     <thead>
         <tr>
-            <td>Wine color</td>
-            <td>Bottles</td>
+            <td><%= t('activerecord.attributes.wine.color') %></td>
+            <td><%= t('view.statistic.nb_bottles') %></td>
         </tr>
     </thead>
     <tbody>
@@ -21,4 +21,4 @@
 
 <%= link_to t_action(:index), colors_path %>
 |
-<%= link_to 'Statistics', controller: 'admin', action: 'stats' %>
+<%= link_to t('view.statistics'), controller: 'admin', action: 'stats' %>

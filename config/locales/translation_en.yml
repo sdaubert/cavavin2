@@ -141,7 +141,7 @@ en:
         wines: Wines  #g
 
       wine:
-        color: :activerecord.models.color  #g
+        color: Color
         domain: Domain  #g
         effervescent: Effervescent  #g
         millesimes: Millesimes  #g
@@ -224,6 +224,7 @@ en:
     statistic:
       country_title: 'Regions statistics in %{country}'
       region_title: '%{region} Statistics'
+      color_title: 'Color statistics'
       nb_bottles: 'Bottle count'
       percentage: Percentage
       sum: Sum

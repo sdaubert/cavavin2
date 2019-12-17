@@ -16,7 +16,7 @@ module ApplicationHelper
              object
            end
 
-    link_to content, object, method: :delete, data: { confirm: t_confirm_delete(name) }
+    link_to content, object, method: :delete, data: { confirm: I18n.t('messages.confirm_delete', model: t_model(object), record: name) }
   end
 
   # Redefinition of t_model from i18n_rails_helper
