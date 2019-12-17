@@ -100,7 +100,7 @@ en:
 
       preference:
         setting: Setting  #g
-        stype: Stype  #g
+        stype: Type
         value: Value  #g
 
       producer:
@@ -190,6 +190,11 @@ en:
       cheese: 'Cheese'
       dessert: 'Dessert'
 
+  preference:
+    type:
+      boolean: boolean
+      integer: integer
+
   view:
     reset_filters: 'Reset filters'
     alt_organic_wine: '(organic wine)'
@@ -216,6 +221,10 @@ en:
       select_out: 'Select racks to remove bottles'
       select_move1: 'Select racks to move bottles out'
       select_move2: 'Select racks to move bottles in'
+      empty: empty
+      size: 'Size: %{lines}x%{columns} (%{size} locations)'
+      free_locations: 'Free locations: '
+      bottles_to_place: 'Bottles to place: '
     region:
       subregions: Subregions
       associated_dishes: 'Associated dishes'

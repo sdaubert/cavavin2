@@ -1,5 +1,5 @@
 <% unless show %>
-<p>Bottles to place: <span id="to-be-processed"><%= @wlog.quantity %></span></p>
+<p><%= t('view.rack.bottles_to_place') %><span id="to-be-processed"><%= @wlog.quantity %></span></p>
 <%= hidden_field_tag "bottle_rack[id]", bottle_rack.id %>
 <% end %>
 
@@ -14,7 +14,7 @@
           <%= pos %>:
           <% if bottle.nil? %>
               <% if show or @wlog.mvt_type == 'out' or (@wlog.mvt_type == 'move' and !move_in_phase) %>
-          empty
+                <%= t('view.rack.empty') %>
               <% else %>
           <%= check_box_tag "bottle_rack[location][#{pos}]" %>
               <% end %>

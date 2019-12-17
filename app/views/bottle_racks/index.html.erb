@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Lines</th>
-      <th>Columns</th>
+      <th><%= t('activerecord.attributes.bottle_rack.name') %></th>
+      <th><%= t('activerecord.attributes.bottle_rack.lines') %></th>
+      <th><%= t('activerecord.attributes.bottle_rack.columns') %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -16,8 +16,8 @@
     <% @bottle_racks.each do |bottle_rack| %>
       <tr>
         <td><%= link_to bottle_rack.name, bottle_rack %></td>
-        <td><%= bottle_rack.lines %></td>
-        <td><%= bottle_rack.columns %></td>
+        <td class="right"><%= bottle_rack.lines %></td>
+        <td class="right"><%= bottle_rack.columns %></td>
         <td><%= link_to t_action(:edit), edit_bottle_rack_path(bottle_rack) %></td>
         <td><%= link_to_destroy bottle_rack %></td>
       </tr>

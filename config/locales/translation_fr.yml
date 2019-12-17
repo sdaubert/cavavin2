@@ -21,7 +21,10 @@ fr:
         zero: Aucun Millésime
         one: Millésime
         other: Millésimes
-      preference: Préférence  #g
+      preference:
+        zero: Aucune préférence
+        one: Préférence
+        other: Préférences
       producer:
         zero: Aucun producteur
         one: Producteur
@@ -98,7 +101,7 @@ fr:
 
       preference:
         setting: Réglage  #g
-        stype: Stype  #g
+        stype: Type
         value: Valeur  #g
 
       producer:
@@ -183,6 +186,11 @@ fr:
       cheese: 'Fromage'
       dessert: 'Dessert'
 
+  preference:
+    type:
+      boolean: booléen
+      integer: entier
+
   view:
     reset_filters: 'Effacer les filtres'
     alt_organic_wine: '(vin bio)'
@@ -209,6 +217,10 @@ fr:
       select_out: 'Sélection du casier pour la sortie de bouteilles'
       select_move1: 'Sélection du casier pour un mouvement (retrait)'
       select_move2: 'Sélection du casier pour un mouvement (ajout)'
+      empty: vide
+      size: 'Taille: %{lines}x%{columns} (%{size} emplacements)'
+      free_locations: 'Emplacements vides : '
+      bottles_to_place: 'Bouteilles à placer : '
     region:
       subregions: Sous-régions
       associated_dishes: Plats associés
