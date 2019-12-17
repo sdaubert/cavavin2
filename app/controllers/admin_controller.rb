@@ -176,9 +176,9 @@ class AdminController < ApplicationController
                        .drink_after(10)
                        .joins(:bottles)
                        .count('bottles.id')
-    @garde = [['Less than 5 years', before5],
-              ['Between 5 and 10 years', between5and10],
-              ['More than 10 years', after10]]
+    @garde = [[t('view.statistic.lt5'), before5],
+              [t('view.statistic.bt5and10'), between5and10],
+              [t('view.statistic.gt10'), after10]]
   end
 
   def compute_drinking

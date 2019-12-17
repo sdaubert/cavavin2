@@ -1,0 +1,45 @@
+<p>
+    Sont référencées dans la cave <%= @bottle_count%> bouteilles de  <%= @wine_count %> vins differents.
+</p>
+
+<h2 id='todrink'>Vins à boire dans les <%= @years_to_drink_wines %> ans</h2>
+
+<p>
+    Ce tableau liste les bouteilles à boire rapidement. Il est recommandé de boire les bouteilles sur fond gris dans l'année.
+</p>
+
+<% if !@millesimes.nil? and @bottles_to_drink > 0 %>
+<table>
+    <thead>
+        <tr>
+            <th>Domaine</th>
+            <th>Couleur</th>
+            <th>Millésime</th>
+            <th>Quantité</th>
+            <th>Région</th>
+            <th>Zone</th>
+            <th>Pays</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @millesimes.each do |m| %>
+        <% wine = m.wine %>
+        <tr class="<%= m.years_to_drink_wine < 1 ? 'urgent-to-drink' : nil %>">
+            <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
+            <td><%= wine.color.name %></td>
+            <td><%= m.year %></td>
+            <td><%= m.quantity %></td>
+            <td><%= wine.region.name %></td>
+            <td><%= wine.region.root.name %></td>
+            <td><%= wine.region.country.name %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<% else %>
+<p>Il n'y a aucun vin à boire rapidement.</p>
+<% end %>
+
+<h2 id="lastentries">Dernières entrées du livre de cave</h2>
+
+<%= render partial: 'wlogs/book', locals: { show_comments: false } %>

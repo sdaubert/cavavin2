@@ -1,12 +1,12 @@
-<h2>Statistics</h2>
+<h2><%= t('view.statistics') %></h2>
 
-<h3>Yearly spendings</h3>
+<h3><%= t('view.statistic.yearly_spendings') %></h3>
 
 <table class="stat">
     <thead>
         <tr>
-            <td>Year</td>
-            <td>Total spendings</td>
+            <td><%= t('activerecord.attributes.millesime.year') %></td>
+            <td><%= t('view.statistic.total_spendings') %></td>
         </tr>
     </thead>
     <tbody>
@@ -21,44 +21,44 @@
 
 <%= column_chart @spendings %>
 
-<h3>Evolution</h3>
+<h3><%= t('view.statistic.evolution') %></h3>
 
 <%= line_chart @evolution %>
 
-<h3>Garde</h3>
+<h3><%= t('activerecord.attributes.millesime.garde') %></h3>
 
 <table class="stat">
     <thead>
         <tr>
-            <th>Garde time</th>
-            <th>Bottles</th>
+            <th><%= t('activerecord.attributes.millesime.garde') %></th>
+            <th><%= t('view.statistic.nb_bottles') %></th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><%= link_to @garde[0][0], wines_path(before: 5) %></td>
-            <td><%= @garde[0][1] %></td>
+            <td class="right"><%= @garde[0][1] %></td>
         </tr>
         <tr>
             <td><%= link_to @garde[1][0], wines_path(before: 10, after: 5) %></td>
-            <td><%= @garde[1][1] %></td>
+            <td class="right"><%= @garde[1][1] %></td>
         </tr>
         <tr>
             <td><%= link_to @garde[2][0], wines_path(after: 10) %></td>
-            <td><%= @garde[2][1] %></td>
+            <td class="right"><%= @garde[2][1] %></td>
         </tr>
     </tbody>
 </table>
 
 <%= column_chart @garde %>
 
-<h3>Out movements</h3>
+<h3><%= t('view.statistic.out_mvt') %></h3>
 
 <%= column_chart @drinking, colors: @colors %>
 
-<%= link_to'Color statistics', stats_colors_path %> |
+<%= link_to t('view.statistic.color_title'), stats_colors_path %> |
 <% if Country.count > 1 %>
-<%= link_to 'Zone statistics', stats_coutries_path %>
+<%= link_to t('view.statistic.zone_title'), stats_coutries_path %>
 <% else %>
-<%= link_to 'Zone statistics', country_stats_country_regions_path(Country.first) %>
+<%= link_to t('view.statistic.zone_title'), country_stats_country_regions_path(Country.first) %>
 <% end %>

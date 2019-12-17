@@ -11,7 +11,7 @@ en:
         other: Colors
       country:
         one: Country
-        oter: Countries
+        other: Countries
       dish:
         zero: No dish
         one: Dish
@@ -196,6 +196,11 @@ en:
       integer: integer
 
   view:
+    homepage: Homepage
+    menu: Menu
+    search: Search
+    search_results: 'Search results'
+    no_result: 'No information found.'
     reset_filters: 'Reset filters'
     alt_organic_wine: '(organic wine)'
     effervescent: '(effervescent)'
@@ -214,6 +219,8 @@ en:
       select_regions_and_color: 'Select regions and colors'
     errors:
       none_selected: 'none selected'
+    flash:
+      error: 'Error: %{msg}'
     notice:
       saved: '%{model} was successfully saved.'
     rack:
@@ -234,13 +241,22 @@ en:
       country_title: 'Regions statistics in %{country}'
       region_title: '%{region} Statistics'
       color_title: 'Color statistics'
+      zone_title: 'Zone Statistics'
       nb_bottles: 'Bottle count'
       percentage: Percentage
       sum: Sum
+      yearly_spendings: 'Yearly spendings'
+      evolution: Evolution
+      out_mvt: 'Out movements'
+      total_spendings: 'Total spendings'
+      lt5: 'Less than 5 years'
+      bt5and10: 'Between 5 and 10 years'
+      gt10: 'More than 10 years'
 
   form:
     cannot_save: "%{count} errors prohibited this %{model} from being saved:"
     save: 'Save change'
+    search: 'Search'
 
   will_paginate:
     previous_label: "&#8592; Previous"

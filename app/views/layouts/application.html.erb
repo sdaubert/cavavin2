@@ -17,28 +17,28 @@
     <div id="content">
       <div id="sidebar">
         <div class="menu">
-          <h4>Menu</h4>
+          <h4><%= t('view.menu') %></h4>
           <ul>
-            <li><%= link_to 'Homepage', admin_main_path %></li>
-            <li><%= link_to 'Cellar book', admin_book_path %></li>
+            <li><%= link_to t('view.homepage'), admin_main_path %></li>
+            <li><%= link_to t('view.cellar_book'), admin_book_path %></li>
             <li class="separator"></li>
-            <li><%= link_to 'Wines', wines_path %></li>
-            <li><%= link_to 'Producers', producers_path %></li>
-            <li><%= link_to 'Providers', providers_path %></li>
-            <li><%= link_to 'Dishes', dishes_path %></li>
-            <li><%= link_to 'Countries', countries_path %></li>
-            <li><%= link_to 'Colors', colors_path %></li>
-            <li><%= link_to 'Bottle Racks', bottle_racks_path %></li>
+            <li><%= link_to t('activerecord.models.wine', count: 2), wines_path %></li>
+            <li><%= link_to t('activerecord.models.producer', count: 2), producers_path %></li>
+            <li><%= link_to t('activerecord.models.provider', count: 2), providers_path %></li>
+            <li><%= link_to t('activerecord.models.dish', count: 2), dishes_path %></li>
+            <li><%= link_to t('activerecord.models.country', count: 2), countries_path %></li>
+            <li><%= link_to t('activerecord.models.color', count: 2), colors_path %></li>
+            <li><%= link_to t('activerecord.models.bottle_rack', count: 2), bottle_racks_path %></li>
             <li class="separator"></li>
-            <li><%= link_to 'Statistics', admin_stats_path %></li>
-            <li><%= link_to 'Preferences', admin_preferences_path %></li>
+            <li><%= link_to t('view.statistics'), admin_stats_path %></li>
+            <li><%= link_to t('activerecord.models.preference', count: 2), admin_preferences_path %></li>
           </ul>
         </div>
         <div class="menu search">
-          <h4>Search</h4>
-          <%= form_tag('/admin/search', method: 'get') do %>
+          <h4><%= t('view.search') %></h4>
+          <%= form_tag(admin_search_path, method: 'get') do %>
             <%= text_field_tag 'search', params[:search] %>
-            <%= submit_tag 'Search' %>
+            <%= submit_tag t('form.search') %>
           <% end %>
         </div>
       </div>
@@ -47,7 +47,7 @@
         <% if flash[:notice] %>
           <p id="notice"><%= notice %></p>
         <% elsif flash[:alert] %>
-          <p id="alert">Error: <%= flash[:alert] %></p>
+          <p id="alert"><%= t('view.flash.error', msg: flash[:alert]) %></p>
         <% end %>
 
         <%= yield %>
