@@ -5,8 +5,6 @@ class AdminController < ApplicationController
   EVOLUTION_YEAR_COUNT = 3
   DRINKING_YEAR_COUNT = 5
 
-  SELECT_QUANTITY_PER_MONTH = 'strftime("%Y-%m", date) as ym, sum(quantity)'.freeze
-
   FakeSpending = Struct.new(:year, :total)
 
   def main
@@ -133,8 +131,7 @@ class AdminController < ApplicationController
   end
 
   def compute_evolution_values(req, type:)
-    values = req.where(mvt_type: type)
-                .pluck(Arel.sql(SELECT_QUANTITY_PER_MONTH))
+    values = req.where(mvt_type: type).sum(:quantity)
     values = Hash[values]
     values.default = 0
 
@@ -143,7 +140,7 @@ class AdminController < ApplicationController
 
   def evolution_values(first_date, last_date)
     data = []
-    request = Wlog.group_by_month_of_year(:date, range: first_date..last_date)
+    request = Wlog.group_by_month(:date, range: first_date..last_date, format: "%Y-%m")
 
     inval = compute_evolution_values(request, type: 'in')
     outval = compute_evolution_values(request, type: 'out')
