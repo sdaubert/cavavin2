@@ -1,12 +1,12 @@
 <div class="group">
-    <h2>Select regions and colors</h2>
+    <h2><%= t('view.dish.select_regions_and_color') %></h2>
 
     <%= form_tag({action: :save_regions, id: @dish}) do %>
     <table class="select">
         <thead>
             <tr>
-                <th>Regions</th>
-                <th colspan="<%= @colors_count %>">Colors</th>
+                <th><%= t('activerecord.models.region', count: 2) %></th>
+                <th colspan="<%= @colors_count %>"><%= t('activerecord.models.color', count: 2) %></th>
             </tr>
             <tr>
                 <th></th>
@@ -21,7 +21,7 @@
     </table>
 
     <div class="actions">
-      <%= submit_tag 'Save' %>
+      <%= submit_tag t('form.save') %>
     </div>
 
     <% end %>

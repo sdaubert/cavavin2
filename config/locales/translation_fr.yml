@@ -1,0 +1,260 @@
+fr:
+  activerecord:
+    models:
+      bottle: Bouteille  #g
+      bottle_rack:
+        zero: Aucun casier
+        one: Casier à bouteilles
+        other: Casiers à bouteilles
+      color:
+        one: Couleur
+        other: Couleurs
+      country: Pays  #g
+      dish:
+        zero: Aucun plat
+        one: Plat
+        other: Plats
+      dra: Dra  #g
+      habtm_colors: Couleurs Habtm  #g
+      habtm_regions: Régions Habtm  #g
+      millesime:
+        zero: Aucun Millésime
+        one: Millésime
+        other: Millésimes
+      preference:
+        zero: Aucune préférence
+        one: Préférence
+        other: Préférences
+      producer:
+        zero: Aucun producteur
+        one: Producteur
+        other: Producteurs
+      provider:
+        zero: Aucun fournisseurs
+        one: Fournisseur
+        other: Fournisseurs
+      region:
+        zero: Aucune région
+        one: Région
+        other: Régions
+      wine:
+        zero: Aucun vin
+        one: Vin
+        other: Vins
+      wlog:
+        zero: Aucune entrée
+        one: Entrée du livre de cave
+        other: Entrée du livre de cave
+
+    attributes:
+      bottle:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        millesime: :activerecord.models.millesime  #g
+        pos: Pos  #g
+
+      bottle_rack:
+        bottles: Bouteilles  #g
+        columns: Colonnes  #g
+        lines: Lignes  #g
+        name: Nom
+        wlogs: :activerecord.models.wlog
+
+      color:
+        color: Couleur  #g
+        dras: Dras  #g
+        name: Nom
+        regions: Les régions  #g
+        wines: Vins  #g
+
+      country:
+        name: Nom
+        producer: Producteur  #g
+        provider: Fournisseur  #g
+        regions: Les régions  #g
+
+      dish:
+        dish_type: Type de plat  #g
+        dras: Dras  #g
+        name: Nom
+        regions: Les régions  #g
+
+      dra:
+        color: :activerecord.models.color  #g
+        dish: :activerecord.models.dish  #g
+        region: :activerecord.models.region  #g
+
+      habtm_colors:
+        color: :activerecord.models.color  #g
+        left_side: :activerecord.models.left_side  #g
+
+      habtm_regions:
+        left_side: :activerecord.models.left_side  #g
+        region: :activerecord.models.region  #g
+
+      millesime:
+        bottles: Bouteilles  #g
+        garde: Garde  #g
+        notes: Remarques  #g
+        wine: :activerecord.models.wine  #g
+        wlogs: :activerecord.models.wlog
+        year: Année
+
+      preference:
+        setting: Réglage  #g
+        stype: Type
+        value: Valeur  #g
+
+      producer:
+        address: Adresse  #g
+        city: Ville  #g
+        country: :activerecord.models.country  #g
+        email: Courriel  #g
+        name: Nom
+        notes: Remarques  #g
+        phone: Téléphone  #g
+        web: Site web  #g
+        wines: Vins  #g
+        zip: 'Code postal'
+
+      provider:
+        address: :activerecord.attributes.producer.address
+        city: :activerecord.attributes.producer.city
+        country: :activerecord.models.country  #g
+        email: :activerecord.attributes.producer.email
+        name: :activerecord.attributes.producer.name
+        notes: :activerecord.attributes.producer.notes
+        phone: :activerecord.attributes.producer.phone
+        web: :activerecord.attributes.producer.web
+        wines: :activerecord.attributes.producer.wines
+        zip: :activerecord.attributes.producer.zip
+
+      region:
+        children: Enfants
+        colors: Couleurs  #g
+        country: :activerecord.models.country  #g
+        depth: Profondeur  #g
+        dishes: Plats
+        dras: Dras  #g
+        lft: Lft  #g
+        name: Nom
+        parent: Parent
+        rgt: Rgt  #g
+        wines: Vins  #g
+
+      wine:
+        color: Couleur
+        domain: Domaine  #g
+        effervescent: Effervescent  #g
+        millesimes: Millésimes  #g
+        notes: Remarques  #g
+        organic: Biologique  #g
+        producer: :activerecord.models.producer  #g
+        provider: :activerecord.models.provider  #g
+        region: :activerecord.models.region  #g
+
+      wlog:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        date: Date
+        millesime: :activerecord.models.millesime  #g
+        move_to_pos: Déplacer vers pos  #g
+        mvt_type: Mouvement  #g
+        notes: Remarques  #g
+        pos: Pos  #g
+        price: Prix  #g
+        quantity: Quantité  #g
+
+  helpers:
+    label:
+      region:
+        color: Couleurs
+
+  region:
+    zone: Zone
+
+  wlog:
+    mvt:
+      in: Entrée
+      out: Sortie
+      move: Déplacement
+
+  dish:
+    type:
+      starter: 'Entrée'
+      meat: 'Viande'
+      fish: 'Poisson/Fruits de mer'
+      speciality: 'Spécialité'
+      cheese: 'Fromage'
+      dessert: 'Dessert'
+
+  preference:
+    type:
+      boolean: booléen
+      integer: entier
+
+  view:
+    homepage: Accueil
+    menu: Menu
+    search: Recherche
+    search_results: 'Résultats de la recherche'
+    no_result: 'Aucun résultat.'
+    reset_filters: 'Effacer les filtres'
+    alt_organic_wine: '(vin bio)'
+    effervescent: '(effervescent)'
+    notes_about_wine: 'Remarques sur le vin :'
+    notes_about_millesime: 'Remarques sur le millésime :'
+    cellar_book: 'Livre de cave'
+    known_wines: 'Vins connus'
+    wines_to_drink: 'Vins à boire'
+    drunk_wines: 'Vins bus'
+    no_known_wine: 'Aucun vin connu de ce %{model}.'
+    no_drunk_wine: 'Aucun vin bu de ce %{model}.'
+    statistics: 'Statistiques'
+    dish:
+      associated_regions: 'Régions associées'
+      associated_regions_intro: 'Ce plat peut être bu avec des vins provenant des régions suivantes :'
+      select_regions_and_color: 'Sélection des régions et couleurs de vins'
+    errors:
+      none_selected: 'aucun sélectionné'
+    flash:
+      error: 'Erreur : %{msg}'
+    notice:
+      saved: '%{model} enregistré.'
+    rack:
+      select_in:  "Sélection du casier pour l'ajout de bouteilles"
+      select_out: 'Sélection du casier pour la sortie de bouteilles'
+      select_move1: 'Sélection du casier pour un mouvement (retrait)'
+      select_move2: 'Sélection du casier pour un mouvement (ajout)'
+      empty: vide
+      size: 'Taille: %{lines}x%{columns} (%{size} emplacements)'
+      free_locations: 'Emplacements vides : '
+      bottles_to_place: 'Bouteilles à placer : '
+    region:
+      subregions: Sous-régions
+      associated_dishes: Plats associés
+      region_stats: 'Statistiques de la région'
+      no_stats: 'Pas de sous-région ou pas de vin : aucune statistique disponible.'
+    statistic:
+      country_title: 'Statistiques des régions en %{country}'
+      region_title: '%{region} : Statistiques'
+      color_title: 'Statistiques par couleur'
+      zone_title: 'Statistiques de zone'
+      nb_bottles: 'Nombre de bouteilles'
+      percentage: Pourcentage
+      sum: Total
+      yearly_spendings: 'Dépenses annuelles'
+      evolution: Évolution
+      out_mvt: 'Sorties'
+      total_spendings: 'Dépenses totales'
+      lt5: 'Moins de 5 ans'
+      bt5and10: 'Entre 5 et 10 ans'
+      gt10: 'Plus de 10 ans'
+
+  form:
+    cannot_save: "%{count} erreur(s) empêche ce(tte) %{model} d'être enregisté:"
+    save: 'Sauvegarder'
+    search: 'Chercher'
+
+  will_paginate:
+    previous_label: "&#8592; Précédent"
+    next_label: "Suivant &#8594;"
+    page_gap: "&hellip;"

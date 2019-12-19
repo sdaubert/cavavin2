@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2>Bottle rack #<%= @bottle_rack.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @bottle_rack.id %></h2>
   <ul>
-    <li>Name: <%=  @bottle_rack.name %></li>
-    <li>Size: <%= "#{@bottle_rack.lines}x#{@bottle_rack.columns}"%> (<%= @bottle_rack.size %> locations)</li>
-    <li>Free locations: <%= @bottle_rack.free_location_count %></li>
+    <li><%= t('activerecord.attributes.bottle_rack.name') %>: <%=  @bottle_rack.name %></li>
+    <li><%= t('view.rack.size', lines: @bottle_rack.lines, columns: @bottle_rack.columns, size: @bottle_rack.size) %></li>
+    <li><%= t('view.rack.free_locations') %><%= @bottle_rack.free_location_count %></li>
   </ul>
 
   <%= render partial: 'rack', locals: { bottle_rack: @bottle_rack, show: true } %>
 </div>
 
-<%= link_to 'Edit', edit_bottle_rack_path(@bottle_rack) %> |
-<%= link_to 'Back', bottle_racks_path %>
+<%= link_to t_action(:edit), edit_bottle_rack_path(@bottle_rack) %> |
+<%= link_to t_action(:index), bottle_racks_path %>

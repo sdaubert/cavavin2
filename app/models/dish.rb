@@ -1,6 +1,5 @@
 class Dish < ApplicationRecord
-  TYPES = ['Starter', 'Meal', 'Fish/Seafood', 'Speciality', 'Cheese',
-           'Dessert'].sort.freeze
+  TYPES = %w[starter meat fish speciality cheese dessert].freeze
 
   validates :name,  presence: true, uniqueness: true
   validates :dish_type, presence: true, inclusion: { in: TYPES }

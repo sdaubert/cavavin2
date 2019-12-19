@@ -1,9 +1,9 @@
-<h2>Search results</h2>
+<h2><%= t('view.search_results') %></h2>
 
 <div class="group">
-    <h3>Wines</h3>
+    <h3><%= t('activerecord.models.wine', count: 2) %></h3>
     <% if @millesimes.empty? %>
-        <p>No information found.</p>
+        <p><%= t('view.no_result') %></p>
     <% else %>
         <ul>
             <% @millesimes.each do |millesime| %>
@@ -17,9 +17,9 @@
         </ul>
     <% end %>
 
-    <h3>Producers</h3>
+    <h3><%= t('activerecord.models.producer', count: 2) %></h3>
     <% if @producers.empty? %>
-        <p>No information found.</p>
+        <p><%= t('view.no_result') %></p>
     <% else %>
         <ul>
             <% @producers.each do |producer| %>
@@ -30,9 +30,9 @@
         </ul>
     <% end %>
 
-    <h3>Providers</h3>
+    <h3><%= t('activerecord.models.provider', count: 2) %></h3>
     <% if @providers.empty? %>
-        <p>No information found.</p>
+        <p><%= t('view.no_result') %></p>
     <% else %>
         <ul>
             <% @providers.each do |provider| %>

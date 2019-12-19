@@ -1,5 +1,6 @@
 class BottleRack < ApplicationRecord
-  NO_POS = [].freeze
+  # Do not freeze as #shift may be called on it...
+  NO_POS = []
 
   has_many :wlogs
   has_many :bottles, foreign_key: 'br_id'

@@ -14,3 +14,11 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections(:fr) do |inflect|
+  inflect.plural /^(\w+)ail$/i, '\1aux'
+  inflect.plural /^(\w+)al$/i, '\1aux'
+  inflect.singular /^(\w+)^aux/i, '\1al'
+  inflect.irregular 'œil', 'yeux'
+  inflect.uncountable %w[pays]
+end

@@ -1,0 +1,264 @@
+en:
+  activerecord:
+    models:
+      bottle: Bottle  #g
+      bottle_rack:
+        zero: No bottle rack
+        one: Bottle rack
+        other: Bottle racks
+      color:
+        one: Color
+        other: Colors
+      country:
+        one: Country
+        other: Countries
+      dish:
+        zero: No dish
+        one: Dish
+        other: Dishes
+      dra: Dra  #g
+      habtm_colors: Habtm colors  #g
+      habtm_regions: Habtm regions  #g
+      millesime:
+        zero: No millesime
+        one: Millesime
+        other: Millesimes
+      preference: Preference  #g
+      producer:
+        zero: No producer
+        one: Producer
+        other: Producers
+      provider:
+        zero: No providers
+        one: Provider
+        other: Providers
+      region:
+        zero: No region
+        one: Region
+        other: Regions
+      wine:
+        zero: No wine
+        one: Wine
+        other: Wines
+      wlog:
+        zero: No log
+        one: Wine log
+        other: Wine logs
+
+    attributes:
+      bottle:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        millesime: :activerecord.models.millesime  #g
+        pos: Pos  #g
+
+      bottle_rack:
+        bottles: Bottles  #g
+        columns: Columns  #g
+        lines: Lines  #g
+        name: Name  #g
+        wlogs: Wlogs  #g
+
+      color:
+        color: Color  #g
+        dras: Dras  #g
+        name: Name  #g
+        regions: Regions  #g
+        wines: Wines  #g
+
+      country:
+        name: Name  #g
+        producer: Producer  #g
+        provider: Provider  #g
+        regions: Regions  #g
+
+      dish:
+        dish_type: Dish type  #g
+        dras: Dras  #g
+        name: Name  #g
+        regions: Regions  #g
+
+      dra:
+        color: :activerecord.models.color  #g
+        dish: :activerecord.models.dish  #g
+        region: :activerecord.models.region  #g
+
+      habtm_colors:
+        color: :activerecord.models.color  #g
+        left_side: :activerecord.models.left_side  #g
+
+      habtm_regions:
+        left_side: :activerecord.models.left_side  #g
+        region: :activerecord.models.region  #g
+
+      millesime:
+        bottles: Bottles  #g
+        garde: Garde  #g
+        notes: Notes  #g
+        wine: :activerecord.models.wine  #g
+        wlogs: Wlogs  #g
+        year: Year  #g
+
+      preference:
+        setting: Setting  #g
+        stype: Type
+        value: Value  #g
+
+      producer:
+        address: Address  #g
+        city: City  #g
+        country: :activerecord.models.country  #g
+        email: Email  #g
+        name: Name  #g
+        notes: Notes  #g
+        phone: Phone  #g
+        web: Web  #g
+        wines: Wines  #g
+        zip: Zip  #g
+
+      provider:
+        address: Address  #g
+        city: City  #g
+        country: :activerecord.models.country  #g
+        email: Email  #g
+        name: Name  #g
+        notes: Notes  #g
+        phone: Phone  #g
+        web: Web  #g
+        wines: Wines  #g
+        zip: Zip  #g
+
+      region:
+        children: Children  #g
+        colors: Colors  #g
+        country: :activerecord.models.country  #g
+        depth: Depth  #g
+        dishes: Dishes  #g
+        dras: Dras  #g
+        lft: Lft  #g
+        name: Name  #g
+        parent: Parent
+        rgt: Rgt  #g
+        wines: Wines  #g
+
+      wine:
+        color: Color
+        domain: Domain  #g
+        effervescent: Effervescent  #g
+        millesimes: Millesimes  #g
+        notes: Notes  #g
+        organic: Organic  #g
+        producer: :activerecord.models.producer  #g
+        provider: :activerecord.models.provider  #g
+        region: :activerecord.models.region  #g
+
+      wlog:
+        bottle_rack: :activerecord.models.bottle_rack  #g
+        date: Date  #g
+        millesime: :activerecord.models.millesime  #g
+        move_to_pos: Move to pos  #g
+        mvt_type: Movement type  #g
+        notes: Notes  #g
+        pos: Pos  #g
+        price: Price  #g
+        quantity: Quantity  #g
+
+  helpers:
+    label:
+      region:
+        color: Colors
+
+  helpers:
+    label:
+      region:
+        color: Colors
+
+  region:
+    zone: Zone
+
+  wlog:
+    mvt:
+      in: In
+      out: Out
+      move: Move
+
+  dish:
+    type:
+      starter: 'Starter'
+      meat: 'Meat'
+      fish: 'Fish/Seafood'
+      speciality: 'Speciality'
+      cheese: 'Cheese'
+      dessert: 'Dessert'
+
+  preference:
+    type:
+      boolean: boolean
+      integer: integer
+
+  view:
+    homepage: Homepage
+    menu: Menu
+    search: Search
+    search_results: 'Search results'
+    no_result: 'No information found.'
+    reset_filters: 'Reset filters'
+    alt_organic_wine: '(organic wine)'
+    effervescent: '(effervescent)'
+    notes_about_wine: 'Notes about wine:'
+    notes_about_millesime: 'Notes about millesime:'
+    cellar_book: 'Cellar book'
+    known_wines: 'Known wines'
+    wines_to_drink: 'Wines to drink'
+    drunk_wines: 'Drunk wines'
+    no_known_wine: 'No known wines from this %{model}.'
+    no_drunk_wine: 'No known drunk wines from this %{model}.'
+    statistics: 'Statistics'
+    dish:
+      associated_regions: 'Associated regions'
+      associated_regions_intro: 'This kind of dish may be drunk with wines from:'
+      select_regions_and_color: 'Select regions and colors'
+    errors:
+      none_selected: 'none selected'
+    flash:
+      error: 'Error: %{msg}'
+    notice:
+      saved: '%{model} was successfully saved.'
+    rack:
+      select_in: 'Select racks to store bottles'
+      select_out: 'Select racks to remove bottles'
+      select_move1: 'Select racks to move bottles out'
+      select_move2: 'Select racks to move bottles in'
+      empty: empty
+      size: 'Size: %{lines}x%{columns} (%{size} locations)'
+      free_locations: 'Free locations: '
+      bottles_to_place: 'Bottles to place: '
+    region:
+      subregions: Subregions
+      associated_dishes: 'Associated dishes'
+      region_stats: 'Region statistics'
+      no_stats: 'No subregion or no wine, so no statistics.'
+    statistic:
+      country_title: 'Regions statistics in %{country}'
+      region_title: '%{region} Statistics'
+      color_title: 'Color statistics'
+      zone_title: 'Zone Statistics'
+      nb_bottles: 'Bottle count'
+      percentage: Percentage
+      sum: Sum
+      yearly_spendings: 'Yearly spendings'
+      evolution: Evolution
+      out_mvt: 'Out movements'
+      total_spendings: 'Total spendings'
+      lt5: 'Less than 5 years'
+      bt5and10: 'Between 5 and 10 years'
+      gt10: 'More than 10 years'
+
+  form:
+    cannot_save: "%{count} errors prohibited this %{model} from being saved:"
+    save: 'Save change'
+    search: 'Search'
+
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"

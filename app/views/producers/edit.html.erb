@@ -1,6 +1,6 @@
-<h2>Editing Producer</h2>
+<h2><%= t_title(:edit) %></h2>
 
 <%= render 'form', producer: @producer %>
 
-<%= link_to 'Show', @producer %> |
-<%= link_to 'Back', producers_path %>
+<%= link_to t_action(:show), @producer %> |
+<%= link_to t_action(:index), producers_path %>

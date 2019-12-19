@@ -1,10 +1,11 @@
 <%= form_with(model: wine, local: true) do |form| %>
   <% if wine.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(wine.errors.count, "error") %> prohibited this wine from being saved:</h2>
-
+      <% count = wine.errors.count %>
+      <h2><%= t('form.cannot_save', model: t('activerecord.models.wine', count: count), count: count) %></h2>
+      <%= wine.errors.inspect %>
       <ul>
-      <% wine.errors.full_messages.each do |message| %>
+      <% wine.errors.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -40,7 +41,7 @@
   </div>
 
   <% if @wine.new_record? %>
-    <h2>Millesime</h2>
+    <h2><%= t('activerecord.models.millesime', count: 1) %></h2>
     <%= form.fields_for(:millesimes) do |fm| %>
       <%= render partial: 'millesimes/form', locals: { subform: true, form: fm } %>
     <% end %>

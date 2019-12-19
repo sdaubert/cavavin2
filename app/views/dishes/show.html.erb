@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2> Dish #<%= @dish.id %></h2>
+  <h2><%= t_title(:show) %> #<%= @dish.id %></h2>
 
   <ul>
-    <li>Name: <%= @dish.name %></li>
-    <li>Type: <%= @dish.dish_type %></li>
+    <li><%= t('activerecord.attributes.dish.name') %>: <%= @dish.name %></li>
+    <li><%= t('activerecord.attributes.dish.dish_type') %>: <%= localized_dish_type(@dish.dish_type) %></li>
   </ul>
 </div>
 
 <div class="group">
-  <h2>Associated regions</h2>
+  <h2><%= t('view.dish.associated_regions') %></h2>
   <% if @dras.empty? %>
-  <p>No known associated region</p>
+  <p><%= t('activerecord.models.region', count: 0) %></p>
   <% else %>
-  <p>This kind of dish may be drunk with wines from:</p>
+  <p><%= t('view.dish.associated_regions_intro') %></p>
   <dl class="association">
     <% @dras.each do |colorname, dras| %>
       <% unless dras.empty? %>
@@ -32,5 +32,5 @@
   <% end %>
 </div>
 
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to t_action(:edit), edit_dish_path(@dish) %> |
+<%= link_to t_action(:index), dishes_path %>

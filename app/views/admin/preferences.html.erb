@@ -1,9 +1,9 @@
-<h2>Preferences</h2>
+<h2><%= t('activerecord.models.preference', count: 2) %></h2>
 
 <%= form_tag('set_preferences', method: :post) %>
 <% if @preferences.any? { |pref| pref.errors.any? } %>
   <div id="error_explanation">
-    <h4>Errors detected in preferences:</h4>
+    <h4><%= t('form.cannot_save', model: t('activerecord.models.wine', count: count), count: count) %></h4>
     <ul>
       <% @preferences.each do |pref| %>
         <% pref.errors.full_messages.each do |msg| %>
@@ -16,21 +16,21 @@
 <table>
     <thead>
         <tr>
-            <td>Setting</td>
-            <td>Type</td>
-            <td>Value</td>
+            <td><%= t('activerecord.attributes.preference.setting') %></td>
+            <td><%= t('activerecord.attributes.preference.stype') %></td>
+            <td><%= t('activerecord.attributes.preference.value') %></td>
         </tr>
     </thead>
     <tbody>
     <% @preferences.each do |pref| %>
         <tr>
             <td><%= pref.setting %></td>
-            <td><%= pref.stype %></td>
+            <td><%= t("preference.type.#{pref.stype}") %></td>
             <td><%= preference_field(pref) %></td>
         </tr>
     <% end %>
     </tbody>
 </table>
 
-<%= submit_tag 'Save' %>
+<%= submit_tag t('form.save') %>
 </form>

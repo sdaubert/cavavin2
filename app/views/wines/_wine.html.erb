@@ -1,24 +1,24 @@
 <ul>
-  <li>Domain: <%= wine.domain %></li>
+  <li><%= t('activerecord.attributes.wine.domain') %>: <%= wine.domain %></li>
   <li>
-    Region:
+    <%= t('activerecord.attributes.wine.region', count: 1) %>:
     <%= link_to wine.region.name, country_region_path(wine.region.country, wine.region) %>
   </li>
   <li>
-    Zone:
+    <%= t('region.zone') %>:
     <%= link_to wine.region.root.name, country_region_path(wine.region.country, wine.region.root) %>
     (<%= link_to wine.region.country.name, country_path(wine.region.country) %>)
   </li>
   <li>
-    Color: <%= wine.color.name %>
+    <%= t('activerecord.attributes.wine.color') %>: <%= wine.color.name %>
     <% if wine.effervescent %>
-      (effervescent)
+      <%= t('view.effervescent') %>
     <% end %>
   </li>
   <% unless min %>
-  <li>Quantity: <%= wine.quantity %></li>
+  <li><%= t('activerecord.attributes.wlog.quantity') %>: <%= wine.quantity %></li>
   <% end %>
   <% if wine.organic? %>
-  <li><%= image_tag('organic.png', alt: 'Organic wine', size: '64x42') %></li>
+  <li><%= image_tag('organic.png', alt: t('view.alt_organic_wine'), size: '64x42') %></li>
   <% end %>
 </ul>

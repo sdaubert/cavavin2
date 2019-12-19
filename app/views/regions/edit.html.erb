@@ -1,6 +1,6 @@
-<h2>Editing region</h2>
+<h2><%= @country.name %> &gt; <%= t_title(:edit) %></h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', [@region.country, @region] %> |
-<%= link_to 'Back', country_regions_path(@region.country) %>
+<%= link_to t_action(:show), [@region.country, @region] %> |
+<%= link_to t_action(:index), country_regions_path(@region.country) %>

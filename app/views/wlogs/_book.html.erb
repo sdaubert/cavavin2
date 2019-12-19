@@ -1,15 +1,15 @@
 <table>
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>Wine</th>
-            <th>Millesime</th>
-            <th>Region</th>
-            <th>Rack</th>
+            <th><%= t('activerecord.attributes.wlog.date') %></th>
+            <th><%= t('activerecord.attributes.wlog.mvt_type') %></th>
+            <th><%= t('activerecord.attributes.wlog.quantity') %></th>
+            <th><%= t('activerecord.models.wine', count: 1) %></th>
+            <th><%= t('activerecord.models.millesime', count: 1) %></th>
+            <th><%= t('activerecord.models.region', count: 1) %></th>
+            <th><%= t('activerecord.models.bottle_rack', count: 1) %></th>
             <% if show_comments %>
-            <th>Comments</th>
+            <th><%= t('activerecord.attributes.wlog.notes') %></th>
             <% end %>
         </tr>
     </thead>
@@ -17,7 +17,7 @@
         <% @book.each do |wlog| %>
         <tr>
             <td><%= wlog.date %></td>
-            <td><%= wlog.mvt_type.upcase %></td>
+            <td><%= t("wlog.mvt.#{wlog.mvt_type}") %></td>
             <td class='right'><%= '-' if wlog.mvt_type == 'out' %><%= wlog.quantity %></td>
             <td><%= link_to wlog.millesime.wine.domain, wine_millesime_path(wlog.millesime.wine, wlog.millesime) %></td>
             <td class='right'><%= wlog.millesime.year %></td>

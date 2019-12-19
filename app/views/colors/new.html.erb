@@ -1,5 +1,5 @@
-<h2>New color</h2>
+<h2><%= t_title(:new) %></h2>
 
 <%= render 'form', color: @color %>
 
-<%= link_to 'Back', colors_path %>
+<%= link_to t_action(:index), colors_path %>

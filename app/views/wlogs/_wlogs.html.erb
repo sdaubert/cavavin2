@@ -1,18 +1,18 @@
 <table>
     <thead>
-        <th>Date</th>
-        <th>Type</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Rack</th>
-        <th>Notes</th>
+        <th><%= t('activerecord.attributes.wlog.date') %></th>
+        <th><%= t('activerecord.attributes.wlog.mvt_type') %></th>
+        <th><%= t('activerecord.attributes.wlog.quantity') %></th>
+        <th><%= t('activerecord.attributes.wlog.price') %></th>
+        <th><%= t('activerecord.attributes.wlog.bottle_rack', count: 1) %></th>
+        <th><%= t('activerecord.attributes.wlog.notes') %></th>
         <th></th>
     </thead>
     <tbody>
     <% @millesime.wlogs.order(id: :desc).each do |wlog| %>
         <tr>
             <td><%= link_to wlog.date, edit_wine_millesime_wlog_path(@wine, @millesime, wlog) %></td>
-            <td><%= wlog.mvt_type %></td>
+            <td><%= t("wlog.mvt.#{wlog.mvt_type}") %></td>
             <td class="right"><%= '-' if wlog.mvt_type == 'out' %><%= wlog.quantity %></td>
             <td class="right"><%= wlog.price %></td>
             <% if wlog.bottle_rack.nil? %>

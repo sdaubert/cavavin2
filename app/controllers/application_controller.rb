@@ -1,6 +1,8 @@
 require 'select_type'
 
 class ApplicationController < ActionController::Base
+  around_action :switch_locale
+
   private
 
   def at_producers
@@ -52,5 +54,16 @@ class ApplicationController < ActionController::Base
 
   def at_millesime
     @millesime = @wine.millesimes.find(params[:millesime_id])
+  end
+
+  # Set locale from locale parameter
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
+
+  # Generate routes for set locale
+  def default_url_options
+    { locale: I18n.locale }
   end
 end

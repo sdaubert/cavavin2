@@ -1,5 +1,5 @@
-<h2>New Producer</h2>
+<h2><%= t_title(:new) %></h2>
 
 <%= render 'form', producer: @producer %>
 
-<%= link_to 'Back', producers_path %>
+<%= link_to t_action(:index), producers_path %>

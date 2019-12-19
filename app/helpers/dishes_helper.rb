@@ -27,6 +27,10 @@ module DishesHelper
     content << generate_children_region(region, dish, level + 1)
   end
 
+  def localized_dish_type(dtype)
+    t("dish.type.#{dtype}")
+  end
+
   private
 
   def tr_opts(region)

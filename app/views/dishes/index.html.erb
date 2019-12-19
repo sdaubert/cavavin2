@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Dishes</h1>
+<h1><%= t_title(:index) %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Dish type</th>
+      <th><%= t('activerecord.attributes.dish.name') %></th>
+      <th><%= t('activerecord.attributes.dish.dish_type') %></th>
       <th></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% @dishes.each do |dish| %>
       <tr>
         <td><%= link_to dish.name, dish %></td>
-        <td><%= dish.dish_type %></td>
+        <td><%= localized_dish_type(dish.dish_type) %></td>
         <td><%= link_to_destroy dish %></td>
       </tr>
     <% end %>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Dish', new_dish_path %>
+<%= link_to t_action(:new), new_dish_path %>

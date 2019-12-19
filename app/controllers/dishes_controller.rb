@@ -29,8 +29,7 @@ class DishesController < ApplicationController
     @dish = Dish.new(dish_params)
 
     if @dish.save
-      redirect_to select_regions_dish_path(@dish),
-                  notice: 'Dish was successfully created.'
+      redirect_to select_regions_dish_path(@dish), redirect_notice
     else
       render :new
     end
@@ -39,8 +38,7 @@ class DishesController < ApplicationController
   # PATCH/PUT /dishes/1
   def update
     if @dish.update(dish_params)
-      redirect_to select_regions_dish_path(@dish),
-                  notice: 'Dish was successfully updated.'
+      redirect_to select_regions_dish_path(@dish), redirect_notice
     else
       render :edit
     end
@@ -49,7 +47,7 @@ class DishesController < ApplicationController
   # DELETE /dishes/1
   def destroy
     @dish.destroy
-    redirect_to dishes_url, notice: 'Dish was successfully destroyed.'
+    redirect_to dishes_url, redirect_notice
   end
 
   def select_regions; end
