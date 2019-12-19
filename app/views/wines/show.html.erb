@@ -43,29 +43,8 @@
   <%= link_to t_action(:new, Millesime), new_wine_millesime_path(@wine) %>
 </div>
 
-<div class="group">
-  <h2><%= t('activerecord.models.producer', count: 2) %></h2>
-  <% if @wine.producer %>
-  <ul>
-    <li><%= link_to @wine.producer.name, @wine.producer %></li>
-    <li><%= @wine.producer.city %>, <%= @wine.producer.zip %></li>
-  </ul>
-  <% else %>
-  <p><%= t('activerecord.models.producer', count: 0) %>.</p>
-  <% end %>
-</div>
-
-<div class="group">
-  <h2><%= t('activerecord.models.provider', count: 2) %></h2>
-  <% if @wine.provider %>
-  <ul>
-    <li><%= link_to @wine.provider.name, @wine.provider %></li>
-    <li><%= @wine.provider.city %>, <%= @wine.provider.zip %></li>
-  </ul>
-  <% else %>
-  <p><%= t('activerecord.models.provider', count: 0) %>.</p>
-  <% end %>
-</div>
+<%= render partial: 'producers/show', locals: { wine: @wine } %>
+<%= render partial: 'providers/show', locals: { wine: @wine } %>
 
 <%= link_to t_action(:edit), edit_wine_path(@wine) %> |
 <%= link_to t_action(:index), wines_path %>

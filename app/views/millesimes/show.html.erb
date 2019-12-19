@@ -39,6 +39,9 @@
   <% end %>
 </div>
 
+<%= render partial: 'producers/show', locals: { wine: @wine } %>
+<%= render partial: 'providers/show', locals: { wine: @wine } %>
+
 <div class="group">
     <h2><%= t('activerecord.models.wlog', count: 2) %></h2>
     <%= render 'wlogs/wlogs' %>

@@ -1,0 +1,11 @@
+<div class="group">
+  <h2><%= t('activerecord.models.producer', count: 2) %></h2>
+  <% if wine.producer %>
+  <ul>
+    <li><%= link_to wine.producer.name, wine.producer %></li>
+    <li><%= wine.producer.city %>, <%= wine.producer.zip %></li>
+  </ul>
+  <% else %>
+  <p><%= t('activerecord.models.producer', count: 0) %>.</p>
+  <% end %>
+</div>
