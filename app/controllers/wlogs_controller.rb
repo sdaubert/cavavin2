@@ -5,7 +5,7 @@ class WlogsController < ApplicationController
   before_action :at_wine
   before_action :at_millesime
   before_action :at_wlog, except: %i[new create]
-  before_action :at_racks, only: %i[select_rack select_rack2 save_rack]
+  before_action :at_racks, only: %i[select_rack save_rack]
 
   def new
     @wlog = @millesime.wlogs.build
@@ -52,12 +52,14 @@ class WlogsController < ApplicationController
   def select_rack2
     @title = t('view.rack.select_move2')
     @move_in_phase = true
+    at_racks(force_all: true)
     render 'select_rack'
   end
 
   def save_rack
     @bottle_rack = BottleRack.find_by(id: params[:bottle_rack][:id])
-    @move_in_phase = (params['move_in_phase'] == true)
+    @move_in_phase = (params['move_in_phase'] == 'true')
+    logger.info("save_rack: move_in_phase: #{@move_in_phase} (#{params['move_in_phase'].inspect})")
 
     if @bottle_rack.nil?
       if need_bottle_rack?
@@ -87,8 +89,8 @@ class WlogsController < ApplicationController
     @wlog = @millesime.wlogs.find(params[:id])
   end
 
-  def at_racks
-    if @wlog.mvt_type == 'in'
+  def at_racks(force_all: false)
+    if force_all || (@wlog.mvt_type == 'in')
       @racks = BottleRack.by_name.all.map { |r| [r.name, r.id] }
     else
       @racks = BottleRack.millesime(@millesime).all.map { |r| [r.name, r.id] }
@@ -151,12 +153,27 @@ class WlogsController < ApplicationController
   def move_bottles!(wlog, rollback: false)
     return if wlog.move_to_br_id.nil?
 
+    br_id = wlog.br_id
+    new_br_id = wlog.move_to_br_id
     all_pos, all_new_pos = generate_pos(wlog)
-    all_pos, all_new_pos = all_new_pos, all_pos if rollback
 
-    @millesime.bottles.where(pos: all_pos).each do |bottle|
-      idx = all_pos.index(bottle.pos)
-      unless idx.nil?
+    if rollback
+      all_pos, all_new_pos = all_new_pos, all_pos
+      br_id, new_br_id = new_br_id, br_id
+    end
+
+    if br_id.nil?
+      @millesime.bottles.where(pos: nil).limit(all_new_pos.size).each do |bottle|
+        bottle.br_id = new_br_id
+        bottle.pos = all_new_pos.shift
+        bottle.save!
+      end
+    else
+      @millesime.bottles.where(br_id: br_id, pos: all_pos).each do |bottle|
+        idx = all_pos.index(bottle.pos)
+        next if idx.nil?
+
+        bottle.br_id = new_br_id
         bottle.pos = all_new_pos[idx]
         bottle.save!
       end
@@ -165,16 +182,18 @@ class WlogsController < ApplicationController
 
   def record_bottle_rack_info(params)
     phase_type = @wlog.mvt_type
-    phase_type = params['move_in_phase'] ? 'in' : 'out' if phase_type == 'move'
+    phase_type = (@move_in_phase ? 'in' : 'out') if phase_type == 'move'
 
     value_to_select = (phase_type == 'out' ? '0' : '1')
     pos = BottleRack.ary_to_pos(params[:bottle_rack][:location]
                     .select { |_k, v| v == value_to_select }
                     .keys)
+    logger.info("record_bottle_rack_info: pos to update: #{pos.inspect}")
 
-    if params['move_in_phase'] == 'true'
+    if @move_in_phase
       @wlog.move_to_br_id = @bottle_rack.id
       @wlog.move_to_pos = pos
+      logger.info("wlog: #{@wlog.inspect}")
     else
       @wlog.br_id = @bottle_rack.id
       @wlog.pos = pos
@@ -183,8 +202,7 @@ class WlogsController < ApplicationController
 
   def need_bottle_rack?
     bottles = @wlog.millesime.bottles
-    (bottles.count.positive? && bottles.where(br_id: nil).empty?) ||
-      @wlog.mvt_type_is_move?
+    (bottles.count.positive? && bottles.where(br_id: nil).empty?)
   end
 
   def redirect_after_save_rack
