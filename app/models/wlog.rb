@@ -25,6 +25,14 @@ class Wlog < ApplicationRecord
     !br_id.nil?
   end
 
+  def move_to_bottle_rack?
+    !move_to_br_id.nil?
+  end
+
+  def has_bottle_rack?
+    bottle_rack? || move_to_bottle_rack?
+  end
+
   private
 
   def move_to_bottle_rack?
