@@ -4,7 +4,7 @@
     <ul class="ungroup">
       <% wines.each do |millesime| %>
       <li>
-        <%= link_to "#{millesime.wine.domain} #{millesime.year}", wine_millesime_path(millesime.wine, millesime) %>,
+        <%= link_to "#{millesime.wine.domain} #{human_millesime(millesime)}", wine_millesime_path(millesime.wine, millesime) %>,
         <%= millesime.wine.color.name %>
       </li>
       <% end %>

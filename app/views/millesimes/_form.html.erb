@@ -11,6 +11,11 @@
 <% end %>
 
 <div class="field">
+  <%= form.label :void_millesime, t('view.millesime.void') %>
+  <%= form.check_box :void_millesime %>
+</div>
+
+<div class="field">
   <%= form.label :year %>
   <%= form.number_field :year %>
 </div>

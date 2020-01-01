@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= @millesime.wine.domain %> <%= @millesime.year %></h2>
+  <h2><%= @millesime.wine.domain %> <%= human_millesime(@millesime) %></h2>
 
   <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
 
   <ul>
-    <li><%= t('activerecord.attributes.millesime.garde') %>: <%= @millesime.garde %></li>
+    <% if @millesime.garde %>
+      <li><%= t('activerecord.attributes.millesime.garde') %>: <%= @millesime.garde %></li>
+    <% end %>
     <li><%= t('activerecord.attributes.wlog.quantity') %>: <%= @millesime.quantity %></li>
     <li>
       <%= t('activerecord.models.bottle_rack', count: 2) %>:

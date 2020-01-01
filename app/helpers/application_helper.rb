@@ -19,6 +19,10 @@ module ApplicationHelper
     link_to content, object, method: :delete, data: { confirm: I18n.t('messages.confirm_delete', model: t_model(object), record: name) }
   end
 
+  def human_millesime(millesime)
+    millesime.year.nil? ? t('view.millesime.void') : millesime.year.to_s
+  end
+
   # Redefinition of t_model from i18n_rails_helper
   # Add pluralize argument
   def t_model(model = nil, pluralize: false)
@@ -49,4 +53,9 @@ module ApplicationHelper
            default: [:"crud.title.#{action || action_name}"], model: t_model(model, pluralize: pluralize))
   end
 
+  # Redefinition of redirect_notice from rails_helper
+  def redirect_notice(record = nil)
+    { notice: I18n.t("crud.notices.#{action_name}", model: t_model,
+      record: record.present? ? "#{record} " : '') }
+  end
 end

@@ -27,8 +27,10 @@
     <tbody>
       <% @wine.millesimes.each do |millesime| %>
         <tr>
-          <td><%= link_to millesime.year, [@wine, millesime] %></td>
-          <td class="right"><%= millesime.garde %></td>
+          <td><%= link_to human_millesime(millesime), [@wine, millesime] %></td>
+          <% if millesime.garde %>
+            <td class="right"><%= millesime.garde %></td>
+          <% end %>
           <td class="right"><%= millesime.quantity %></td>
           <td><%= link_to 'Edit', edit_wine_millesime_path(@wine, millesime) %></td>
           <td><%= link_to_destroy [@wine, millesime] %></td>

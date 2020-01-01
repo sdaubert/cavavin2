@@ -218,6 +218,8 @@ fr:
       none_selected: 'aucun sélectionné'
     flash:
       error: 'Erreur : %{msg}'
+    millesime:
+      void: 'Non millésimé'
     notice:
       saved: '%{model} enregistré.'
     rack:

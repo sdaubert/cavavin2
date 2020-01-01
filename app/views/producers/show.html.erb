@@ -40,7 +40,7 @@
       <% @millesimes_to_drink.each do |mil| %>
         <li>
           <% wine = mil.wine %>
-          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
           <%= wine.region.name %> <%= wine.color.name %>
         </li>
       <% end %>
@@ -55,7 +55,7 @@
       <% @drunk_millesimes.each do |mil| %>
         <li>
           <% wine = mil.wine %>
-          <%= link_to "#{wine.domain} #{mil.year}", wine_millesime_path(wine, mil) %>,
+          <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
           <%= wine.region.name %> <%= wine.color.name %>
         </li>
       <% end %>

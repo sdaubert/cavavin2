@@ -27,7 +27,7 @@
         <tr class="<%= m.years_to_drink_wine < 1 ? 'urgent-to-drink' : nil %>">
             <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
             <td><%= wine.color.name %></td>
-            <td><%= m.year %></td>
+            <td><%= human_millesime(m) %></td>
             <td><%= m.quantity %></td>
             <td><%= wine.region.name %></td>
             <td><%= wine.region.root.name %></td>

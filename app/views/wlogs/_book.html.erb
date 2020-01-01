@@ -20,7 +20,7 @@
             <td><%= t("wlog.mvt.#{wlog.mvt_type}") %></td>
             <td class='right'><%= '-' if wlog.mvt_type == 'out' %><%= wlog.quantity %></td>
             <td><%= link_to wlog.millesime.wine.domain, wine_millesime_path(wlog.millesime.wine, wlog.millesime) %></td>
-            <td class='right'><%= wlog.millesime.year %></td>
+            <td class='right'><%= human_millesime(wlog.millesime) %></td>
             <td><%= wlog.millesime.wine.region.name %></td>
             <td>
                 <% if wlog.bottle_rack? %>

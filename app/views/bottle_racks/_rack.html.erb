@@ -20,11 +20,11 @@
               <% end %>
           <% else %>
               <% if show or @wlog.mvt_type == 'in' or (@wlog.mvt_type == 'move' and move_in_phase) or @wlog.millesime != bottle.millesime %>
-                <%= link_to "#{bottle.millesime.wine.domain} #{bottle.millesime.year}", wine_millesime_path(bottle.millesime.wine, bottle.millesime) %>
+                <%= link_to "#{bottle.millesime.wine.domain} #{human_millesime(bottle.millesime)}", wine_millesime_path(bottle.millesime.wine, bottle.millesime) %>
               <% else %>
                 <%= hidden_field_tag "bottle_rack[location][#{pos}]", 1 %>
                 <%= check_box_tag "bottle_rack[location][#{pos}]", "0" %>
-                <%= "#{bottle.millesime.wine.domain} #{bottle.millesime.year}" %>
+                <%= "#{bottle.millesime.wine.domain} #{human_millesime(bottle.millesime)}" %>
               <% end %>
           <% end %>
         </td>

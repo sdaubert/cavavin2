@@ -45,6 +45,12 @@ class MillesimesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list
   # through.
   def millesime_params
-    params.require(:millesime).permit(:year, :garde, :wine_id, :notes)
+    p = params.require(:millesime).permit(:year, :garde, :wine_id, :notes)
+    if params[:millesime][:void_millesime] == 1
+      p[:millesime][:year] = nil
+      p[:millesime][:garde] = nil
+    end
+
+    p
   end
 end

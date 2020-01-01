@@ -222,6 +222,8 @@ en:
       none_selected: 'none selected'
     flash:
       error: 'Error: %{msg}'
+    millesime:
+      void: 'Void millesime'
     notice:
       saved: '%{model} was successfully saved.'
     rack:

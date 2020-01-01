@@ -9,8 +9,10 @@ class Millesime < ApplicationRecord
 
   validates :year, presence: true,
                    numericality: { only_integer: true },
-                   uniqueness: { scope: :wine_id }
-  validates :garde, presence: true, numericality: { only_integer: true }
+                   uniqueness: { scope: :wine_id },
+                   allow_nil: true
+  validates :garde, presence: { if: :garde_required? },
+                    numericality: { only_integer: true, if: :garde_required? }
 
   # Cannot define it with scope!
   def self.from_region(region)
@@ -29,8 +31,8 @@ class Millesime < ApplicationRecord
                               .having('COUNT(bottles.id) == 0')
   end
 
-  scope :drink_before, ->(years) { where("#{DRINK_DIFF} < ?", years) }
-  scope :drink_after, ->(years) { where("#{DRINK_DIFF} >= ?", years) }
+  scope :drink_before, ->(years) { where.not(year: nil).where("#{DRINK_DIFF} < ?", years) }
+  scope :drink_after, ->(years) { where.not(year: nil).where("#{DRINK_DIFF} >= ?", years) }
 
   scope :of_color, ->(color) { joins(wine: [:color]).where(wines: { color: color.id }) }
   scope :by_year, -> { order(:year) }
@@ -44,9 +46,9 @@ class Millesime < ApplicationRecord
     year + garde - Time.now.year
   end
 
-  # Return millesime'd wine
-  def millesime_wine
-    mil = year.zero? ? '' : " #{year}"
-    "#{wine.domain}#{mil}"
+  private
+
+  def garde_required?
+    !year.nil?
   end
 end

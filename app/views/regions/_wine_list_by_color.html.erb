@@ -1,6 +1,6 @@
 <% wines.each do |mil| %>
   <li>
-    <%= link_to "#{mil.wine.domain} #{mil.year}", wine_millesime_path(mil.wine, mil) %>
+    <%= link_to "#{mil.wine.domain} #{human_millesime(mil)}", wine_millesime_path(mil.wine, mil) %>
     (<%= pluralize(mil.quantity, 'bottle') %>)
   </li>
 <% end %>

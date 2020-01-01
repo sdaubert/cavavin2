@@ -26,7 +26,7 @@
             <% end %>
           </td>
           <td><%= link_to wine.color.name, wines_path(build_params(filter: 'color', filter_id: wine.color)) %></td>
-          <td class="right"><%= millesime.year %></td>
+          <td class="right"><%= human_millesime(millesime) %></td>
           <td class="right"><%= millesime.quantity %>
           <td><%= link_to wine.region.name, wines_path(build_params({ filter: 'region', filter_id: wine.region })) %></td>
           <td><%= link_to wine.region.root.name, wines_path(build_params({ filter: 'zone', filter_id: wine.region.root })) %></td>
