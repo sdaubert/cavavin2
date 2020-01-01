@@ -213,6 +213,7 @@ en:
     no_known_wine: 'No known wines from this %{model}.'
     no_drunk_wine: 'No known drunk wines from this %{model}.'
     statistics: 'Statistics'
+    zip_and_city: '%{city}, %{zip}'
     dish:
       associated_regions: 'Associated regions'
       associated_regions_intro: 'This kind of dish may be drunk with wines from:'

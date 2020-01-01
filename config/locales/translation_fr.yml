@@ -209,6 +209,7 @@ fr:
     no_known_wine: 'Aucun vin connu de ce %{model}.'
     no_drunk_wine: 'Aucun vin bu de ce %{model}.'
     statistics: 'Statistiques'
+    zip_and_city: '%{zip} %{city}'
     dish:
       associated_regions: 'Régions associées'
       associated_regions_intro: 'Ce plat peut être bu avec des vins provenant des régions suivantes :'

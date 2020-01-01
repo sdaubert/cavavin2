@@ -3,7 +3,8 @@
   <% if wine.producer %>
   <ul>
     <li><%= link_to wine.producer.name, wine.producer %></li>
-    <li><%= wine.producer.city %>, <%= wine.producer.zip %></li>
+    <li><%= t('view.zip_and_city', city: wine.producer.city, zip: wine.producer.zip) %></li>
+    <li><%= wine.producer.country.name %></li>
   </ul>
   <% else %>
   <p><%= t('activerecord.models.producer', count: 0) %>.</p>
