@@ -285,12 +285,18 @@ Bourgogne:
         Chablis:
           colors:
             - blanc
+        Chablis Premier Cru:
+          colors:
+            - blanc
         Chablis Grand Cru:
           colors:
             - blanc
         Irancy:
           colors:
             - rouge
+        Petit Chablis:
+          colors:
+            - blanc
         Saint-Bris:
           colors:
             - blanc
