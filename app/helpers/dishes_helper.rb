@@ -7,7 +7,7 @@ module DishesHelper
           content_tag(:td, '', colspan: @colors_count)
       end
       out << "\n"
-      country.regions.roots.map do |root|
+      country.regions.roots.by_name.map do |root|
         out << generate_line(dish, root)
       end
     end
@@ -71,6 +71,6 @@ module DishesHelper
   def generate_children_region(region, dish, level)
     return raw('') if region.leaf?
 
-    raw region.children.map { |subr| generate_line(dish, subr, level) }.join
+    raw region.direct_descendants.by_name.map { |subr| generate_line(dish, subr, level) }.join
   end
 end
