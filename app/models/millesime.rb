@@ -46,6 +46,10 @@ class Millesime < ApplicationRecord
     year + garde - Time.now.year
   end
 
+  def void_millesime
+    year.nil?
+  end
+
   private
 
   def garde_required?
