@@ -7,6 +7,24 @@ class AdminController < ApplicationController
 
   FakeSpending = Struct.new(:year, :total)
 
+  MILLESIME_SEARCH_FIELDS = {
+    wine: %i[domain notes],
+    millesime: %i[notes],
+    region: %i[name],
+    country: %i[name],
+    color: %i[name]
+  }.freeze
+
+  PRODUCER_SEARCH_FIELDS = {
+    producer: %i[name address zip city phone web email notes],
+    country: %i[name]
+  }.freeze
+
+  PROVIDER_SEARCH_FIELDS = {
+    provider: %i[name address zip city phone web email notes],
+    country: %i[name]
+  }.freeze
+
   def main
     @bottle_count = Bottle.count
     @wine_count = Wine.with_bottles.count
@@ -33,29 +51,14 @@ class AdminController < ApplicationController
     keywords = params[:search].to_s.split
     return if keywords.length.zero?
 
-    mil_fields = {
-      wine: %i[domain notes],
-      millesime: %i[notes],
-      region: %i[name],
-      country: %i[name],
-      color: %i[name]
-    }
     @millesimes = Millesime.joins(wine: [:color, { region: :country }])
-                           .concat_fields_like(mil_fields, keywords)
+                           .concat_fields_like(MILLESIME_SEARCH_FIELDS, keywords)
 
-    prod_fields = {
-      producer: %i[name address zip city phone web email notes],
-      country: %i[name]
-    }
     @producers = Producer.joins(:country)
-                         .concat_fields_like(prod_fields, keywords)
+                         .concat_fields_like(PRODUCER_SEARCH_FIELDS, keywords)
 
-    prov_fields = {
-      provider: %i[name address zip city phone web email notes],
-      country: %i[name]
-    }
     @providers = Provider.joins(:country)
-                         .concat_fields_like(prov_fields, keywords)
+                         .concat_fields_like(PROVIDER_SEARCH_FIELDS, keywords)
   end
 
   def preferences
