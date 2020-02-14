@@ -141,16 +141,22 @@ class AdminController < ApplicationController
     values
   end
 
+  def quantity_before(date)
+    hsh = Wlog.group(:mvt_type).where('date < ?', date).sum(:quantity)
+    hsh.default = 0
+    hsh['in'] - hsh['out']
+  end
+
   def evolution_values(first_date, last_date)
     data = []
-    request = Wlog.group_by_month(:date, range: first_date..last_date, format: "%Y-%m")
+    request = Wlog.group_by_month(:date, range: first_date..last_date, format: '%Y-%m')
 
     inval = compute_evolution_values(request, type: 'in')
     outval = compute_evolution_values(request, type: 'out')
 
     (first_date..last_date).select { |d| d.day == 1 }.each do |month|
       ym = month.strftime('%Y-%m')
-      previous_value = data.empty? ? 0 : data.last[1]
+      previous_value = data.empty? ? quantity_before(first_date) : data.last[1]
       data << [ym, previous_value + inval[ym] - outval[ym]]
     end
 
