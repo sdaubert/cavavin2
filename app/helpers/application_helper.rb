@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def build_params(hsh = {})
+    @url_params.merge(hsh)
+  end
+
   def link_to_destroy(object, options={})
     content = if options[:no_img]
                 t_action(:destroy)

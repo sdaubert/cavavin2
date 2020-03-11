@@ -5,7 +5,9 @@ class DishesController < ApplicationController
 
   # GET /dishes
   def index
-    @dishes = Dish.by_name.all
+    handles_filter params
+    @dishes = @dishes.by_name.page(params[:page])
+    @url_params = params.permit(:type)
   end
 
   # GET /dishes/1
@@ -106,5 +108,10 @@ class DishesController < ApplicationController
   # through.
   def dish_params
     params.require(:dish).permit(:name, :dish_type)
+  end
+
+  def handles_filter(params)
+    @dishes = Dish
+    @dishes = @dishes.where(dish_type: params[:type]) if Dish::TYPES.include?(params[:type])
   end
 end

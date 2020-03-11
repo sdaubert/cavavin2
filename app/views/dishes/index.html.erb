@@ -15,13 +15,16 @@
     <% @dishes.each do |dish| %>
       <tr>
         <td><%= link_to dish.name, dish %></td>
-        <td><%= localized_dish_type(dish.dish_type) %></td>
+        <td><%= link_to localized_dish_type(dish.dish_type), dishes_path(build_params(type: dish.dish_type)) %></td>
         <td><%= link_to_destroy dish %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<% if !@url_params.empty? %>
+<%= link_to t('view.reset_filters'), dishes_path %><br>
+<% end %>
 
-<br>
+<%= will_paginate @dishes %>
 
 <%= link_to t_action(:new), new_dish_path %>
