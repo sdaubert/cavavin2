@@ -30,13 +30,13 @@
   <% if @wine.attribute_present? :notes %>
   <dl>
     <dt><%= t('view.notes_about_wine') %></dt>
-    <dd><%= @wine.notes %></dd>
+    <dd><%= simple_format @wine.notes %></dd>
   </dl>
   <% end %>
   <% if @millesime.attribute_present? :notes %>
   <dl>
     <dt><%= t('view.notes_about_millesime') %></dt>
-    <dd><%= @millesime.notes %></dd>
+    <dd><%= simple_format @millesime.notes %></dd>
   </dl>
   <% end %>
 </div>

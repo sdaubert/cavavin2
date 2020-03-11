@@ -8,7 +8,7 @@
   <% if @wine.attribute_present? :notes %>
   <dl>
     <dt><%= t('activerecord.attributes.wine.notes') %>:</dt>
-    <dd><%= @wine.notes %></dd>
+    <dd><%= simple_format @wine.notes %></dd>
   </dl>
   <% end %>
 
