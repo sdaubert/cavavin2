@@ -91,8 +91,9 @@ class AdminController < ApplicationController
 
   private
 
-  def fix_holes_in_years(ary_of_ary)
+  def fix_holes_in_years(ary_of_ary, use_float: false)
     new_ary_of_ary = []
+    null = use_float ? 0.0 : 0
 
     ary_of_ary.each_with_index do |ary, idx|
       if idx.zero?
@@ -103,7 +104,7 @@ class AdminController < ApplicationController
       current_year = ary.first.to_i
       last_known_year = new_ary_of_ary.last.first.to_i
       while current_year != last_known_year + 1
-        new_ary_of_ary << [(last_known_year + 1).to_s, 0.0]
+        new_ary_of_ary << [(last_known_year + 1).to_s, null]
         last_known_year = new_ary_of_ary.last.first.to_i
       end
       new_ary_of_ary << ary
@@ -119,7 +120,7 @@ class AdminController < ApplicationController
                                    range: date_range)
                     .pluck(Arel.sql('strftime("%Y", date), sum(quantity*price) as total'))
 
-    @spendings = fix_holes_in_years(spendings)
+    @spendings = fix_holes_in_years(spendings, use_float: true)
   end
 
   def compute_first_date
@@ -188,12 +189,17 @@ class AdminController < ApplicationController
   end
 
   def compute_drinking
-    first_year = DRINKING_YEAR_COUNT.years.ago.year
+    first_year = DRINKING_YEAR_COUNT.years.ago.year.to_s
     colors = Color.with_bottles
 
     @colors = colors.map(&:color)
-    @colors = nil if @colors.compact.empty?
+    if @colors.compact.empty?
+      @colors = nil
+    else
+      @colors.unshift('#3366CC')
+    end
 
+    total_data = nil
     @drinking = colors.map do |color|
       year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
       data = color.wines
@@ -202,9 +208,20 @@ class AdminController < ApplicationController
                   .order('year')
                   .pluck(Arel.sql('strftime("%Y", wlogs.date) as year, sum(wlogs.quantity)'))
 
-      data.unshift [first_year, 0] if !data.empty? && (data.last.first.to_i != first_year)
+      data.unshift [first_year, 0] if !data.empty? && (data.last.first != first_year)
+      data = fix_holes_in_years(data)
 
-      { name: color.name, data: fix_holes_in_years(data) }
+      if total_data.nil?
+        total_data = data.map(&:dup)
+      else
+        (0...data.size).each do |idx|
+          total_data[idx][1] += data[idx][1]
+        end
+      end
+
+      { name: color.name, data: data }
     end
+
+    @drinking.unshift(name: 'Total', data: total_data)
   end
 end
