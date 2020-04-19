@@ -19,6 +19,10 @@ class Millesime < ApplicationRecord
     joins(wine: :region).where(wines: { region: region.id })
   end
 
+  def self.from_regions(regions)
+    joins(wine: :region).where(wines: { region: regions })
+  end
+
   scope :from_producer, ->(prod) { joins(:wine).where(wines: { producer: prod.id }) }
   scope :from_provider, ->(prov) { joins(:wine).where(wines: { provider: prov.id }) }
   scope :with_bottles, -> { joins(:bottles).distinct }

@@ -9,12 +9,20 @@ class RegionsController < ApplicationController
   def index; end
 
   def show
+    wine_order = 'wines.domain, millesimes.year'
+    region_order = 'regions.name, ' + wine_order
     @millesimes = Millesime.from_region(@region)
                            .with_bottles
-                           .order('wines.domain, millesimes.year')
+                           .order(wine_order)
+    @others_millesimes = Millesime.from_regions(@region.all_descendants)
+                                  .with_bottles
+                                  .order(region_order)
     @drunk_millesimes = Millesime.from_region(@region)
                                  .without_bottles
-                                 .order('wines.domain, millesimes.year')
+                                 .order(wine_order)
+    @others_drunk_millesimes = Millesime.from_regions(@region.all_descendants)
+                                        .without_bottles
+                                        .order(region_order)
   end
 
   def new

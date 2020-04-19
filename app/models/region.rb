@@ -16,6 +16,10 @@ class Region < ApplicationRecord
     Region.children_of(self.id)
   end
 
+  def all_descendants
+    Region.left_of(self.rgt).right_of(self.lft)
+  end
+
   def color?(color)
     colors.where(id: color.id).count.positive?
   end

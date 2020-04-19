@@ -27,11 +27,11 @@
   <h2><%= t('view.known_wines') %></h2>
 
   <%= t('view.wines_to_drink') %>:
-  <%= render partial: 'wine_list', locals: { wines: @millesimes } %>
+  <%= render partial: 'wine_list', locals: { wines: @millesimes, others_wines: @others_millesimes } %>
 
   <br/>
   <%= t('view.drunk_wines') %>:
-  <%= render partial: 'wine_list', locals: { wines: @drunk_millesimes } %>
+  <%= render partial: 'wine_list', locals: { wines: @drunk_millesimes, others_wines: @others_drunk_millesimes } %>
 </div>
 
 <div class="group">
