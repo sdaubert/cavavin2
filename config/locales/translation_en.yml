@@ -224,6 +224,8 @@ en:
       error: 'Error: %{msg}'
     millesime:
       void: 'Void millesime'
+      associated_dishes: 'Associated dishes'
+      associated_dishes_intro: 'This wine may be drunk with:'
     notice:
       saved: '%{model} was successfully saved.'
     rack:

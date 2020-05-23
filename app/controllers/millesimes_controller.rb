@@ -4,6 +4,7 @@ class MillesimesController < ApplicationController
 
   def show
     @racks = BottleRack.millesime(@millesime).all
+    @dras = @millesime.wine.region.dras.of_color(@millesime.wine.color).by_dishes
   end
 
   def new

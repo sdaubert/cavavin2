@@ -6,4 +6,5 @@ class Dra < ApplicationRecord
 
   scope :of_color, ->(color) { where(color: color.id) }
   scope :by_regions, -> { joins(:region).order('regions.name') }
+  scope :by_dishes, -> { joins(:dish).order('dishes.name') }
 end

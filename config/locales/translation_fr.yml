@@ -220,6 +220,8 @@ fr:
       error: 'Erreur : %{msg}'
     millesime:
       void: 'Non millésimé'
+      associated_dishes: 'Plats associés'
+      associated_dishes_intro: 'Ce vin peut être vu avec :'
     notice:
       saved: '%{model} enregistré.'
     rack:

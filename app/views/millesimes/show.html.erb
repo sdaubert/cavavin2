@@ -1,48 +1,64 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= @millesime.wine.domain %> <%= human_millesime(@millesime) %></h2>
+    <h2><%= @millesime.wine.domain %> <%= human_millesime(@millesime) %></h2>
 
-  <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
+    <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
 
-  <ul>
-    <% if @millesime.garde %>
-      <li><%= t('activerecord.attributes.millesime.garde') %>: <%= @millesime.garde %></li>
+    <ul>
+        <% if @millesime.garde %>
+        <li><%= t('activerecord.attributes.millesime.garde') %>: <%= @millesime.garde %></li>
+        <% end %>
+        <li><%= t('activerecord.attributes.wlog.quantity') %>: <%= @millesime.quantity %></li>
+        <li>
+            <%= t('activerecord.models.bottle_rack', count: 2) %>:
+            <% if @racks.empty? %>
+            <%= t('activerecord.models.bottle_rack', count: 0) %>
+            <% else %>
+            <ul>
+                <% @racks.each do |rack| %>
+                <li>
+                    <%= link_to rack.name, bottle_rack_path(rack)%>:
+                    <%= BottleRack.ary_to_pos(rack.bottles.map(&:pos).sort) %>
+                </li>
+                <% end %>
+            </ul>
+            <% end %>
+        </li>
+    </ul>
+
+    <% if @wine.attribute_present? :notes %>
+    <dl>
+        <dt><%= t('view.notes_about_wine') %></dt>
+        <dd><%= simple_format @wine.notes %></dd>
+    </dl>
     <% end %>
-    <li><%= t('activerecord.attributes.wlog.quantity') %>: <%= @millesime.quantity %></li>
-    <li>
-      <%= t('activerecord.models.bottle_rack', count: 2) %>:
-      <% if @racks.empty? %>
-        <%= t('activerecord.models.bottle_rack', count: 0) %>
-      <% else %>
-        <ul>
-          <% @racks.each do |rack| %>
-          <li>
-            <%= link_to rack.name, bottle_rack_path(rack)%>:
-            <%= BottleRack.ary_to_pos(rack.bottles.map(&:pos).sort) %>
-          </li>
-          <% end %>
-        </ul>
-      <% end %>
-    </li>
-  </ul>
-
-  <% if @wine.attribute_present? :notes %>
-  <dl>
-    <dt><%= t('view.notes_about_wine') %></dt>
-    <dd><%= simple_format @wine.notes %></dd>
-  </dl>
-  <% end %>
-  <% if @millesime.attribute_present? :notes %>
-  <dl>
-    <dt><%= t('view.notes_about_millesime') %></dt>
-    <dd><%= simple_format @millesime.notes %></dd>
-  </dl>
-  <% end %>
+    <% if @millesime.attribute_present? :notes %>
+    <dl>
+        <dt><%= t('view.notes_about_millesime') %></dt>
+        <dd><%= simple_format @millesime.notes %></dd>
+    </dl>
+    <% end %>
 </div>
 
 <%= render partial: 'producers/show', locals: { wine: @wine } %>
 <%= render partial: 'providers/show', locals: { wine: @wine } %>
+
+<div class="group">
+    <h2><%= t('view.millesime.associated_dishes') %></h2>
+    <% if @dras.empty? %>
+    <p><%= t('activerecord.models.dish', count: 0) %></p>
+    <% else %>
+    <p><%= t('view.millesime.associated_dishes_intro') %></p>
+    <ul class="dishes">
+        <% @dras.each do |dra| %>
+          <li>
+              <%= link_to dra.dish.name, dish_path(dra.dish) %>
+          </li>
+        <% end %>
+    </ul>
+    <% end %>
+</div>
 
 <div class="group">
     <h2><%= t('activerecord.models.wlog', count: 2) %></h2>
