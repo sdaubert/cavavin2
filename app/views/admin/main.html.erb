@@ -21,10 +21,11 @@
             <th>Region</th>
             <th>Zone</th>
             <th>Country</th>
+            <th>Nb Years</th>
         </tr>
     </thead>
     <tbody>
-    <% @millesimes.each do |m| %>
+        <% @millesimes.each do |m| %>
         <% wine = m.wine %>
         <tr class="<%= m.years_to_drink_wine < 1 ? 'urgent-to-drink' : nil %>">
             <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
@@ -34,8 +35,9 @@
             <td><%= wine.region.name %></td>
             <td><%= wine.region.root.name %></td>
             <td><%= wine.region.country.name %></td>
+            <td><%= m.diff %></td>
         </tr>
-    <% end %>
+        <% end %>
     </tbody>
 </table>
 <% else %>

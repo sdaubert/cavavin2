@@ -1,6 +1,7 @@
 class Millesime < ApplicationRecord
-  DRINK_DIFF = '(millesimes.garde + millesimes.year - ' \
-               "cast(strftime('%Y', date('now')) AS integer))".freeze
+  DRINK_DIFF = "(millesimes.garde + millesimes.year - cast(strftime('%Y', date('now')) AS integer))".freeze
+  DRINK_DIFF_SELECT = (new.attributes.keys.map { |attr| "millesimes.#{attr}" }.join(', ') +
+                       ", #{DRINK_DIFF} AS diff").freeze
 
   belongs_to :wine, required: false
   has_many :wlogs
@@ -35,8 +36,9 @@ class Millesime < ApplicationRecord
                               .having('COUNT(bottles.id) == 0')
   end
 
-  scope :drink_before, ->(years) { where.not(year: nil).where("#{DRINK_DIFF} < ?", years) }
-  scope :drink_after, ->(years) { where.not(year: nil).where("#{DRINK_DIFF} >= ?", years) }
+  # Need to use DRINK_DIFF, and not diff here, as select may be overwritten (this is the case when count on a column)
+  scope :drink_before, ->(years) { select(DRINK_DIFF_SELECT).where.not(year: nil).where("#{DRINK_DIFF} < ?", years) }
+  scope :drink_after, ->(years) { select(DRINK_DIFF_SELECT).where.not(year: nil).where("#{DRINK_DIFF} >= ?", years) }
 
   scope :of_color, ->(color) { joins(wine: [:color]).where(wines: { color: color.id }) }
   scope :by_year, -> { order(:year) }

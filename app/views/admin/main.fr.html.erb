@@ -1,5 +1,5 @@
 <p>
-    Sont référencées dans la cave <%= @bottle_count%> bouteilles de  <%= @wine_count %> vins differents.
+    Sont référencées dans la cave <%= @bottle_count%> bouteilles de <%= @wine_count %> vins differents.
 </p>
 
 <h2 id='todrink'>Vins à boire dans les <%= @years_to_drink_wines %> ans</h2>
@@ -19,10 +19,11 @@
             <th>Région</th>
             <th>Zone</th>
             <th>Pays</th>
+            <th>Nombre d'année</th>
         </tr>
     </thead>
     <tbody>
-    <% @millesimes.each do |m| %>
+        <% @millesimes.each do |m| %>
         <% wine = m.wine %>
         <tr class="<%= m.years_to_drink_wine < 1 ? 'urgent-to-drink' : nil %>">
             <td><%= link_to wine.domain, wine_millesime_path(wine, m) %></td>
@@ -32,8 +33,9 @@
             <td><%= wine.region.name %></td>
             <td><%= wine.region.root.name %></td>
             <td><%= wine.region.country.name %></td>
+            <td><%= m.diff %></td>
         </tr>
-    <% end %>
+        <% end %>
     </tbody>
 </table>
 <% else %>
