@@ -190,7 +190,7 @@ class AdminController < ApplicationController
 
   def compute_drinking
     first_year = DRINKING_YEAR_COUNT.years.ago.year.to_s
-    colors = Color.with_bottles
+    colors = Color.with_wines
 
     @colors = colors.map(&:color)
     if @colors.compact.empty?
