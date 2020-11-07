@@ -1,68 +1,67 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= t_title(:show) %> #<%= @producer.id %></h2>
+    <h2><%= @producer.name %> (<%= t_title(:show) %>)</h2>
 
-  <ul>
-    <li><%= t('activerecord.attributes.producer.name') %>: <%= @producer.name %></li>
-    <% unless @producer.address.empty? && @producer.zip.empty? && @producer.city.empty? %>
-    <li>
-      <%= t('activerecord.attributes.producer.address') %>: <%= @producer.address %>
-      <%= @producer.zip %> <%= @producer.city %>
-    </li>
-    <%end%>
-    <% if @producer.country %>
-    <li><%= t('activerecord.attributes.producer.country') %>: <%= @producer.country.name %></li>
-    <%end%>
-    <% unless @producer.phone.empty? %>
-    <li><%= t('activerecord.attributes.producer.phone') %>: <%= @producer.phone %></li>
-    <%end%>
-    <% unless @producer.web.empty? %>
-    <li><%= t('activerecord.attributes.producer.web') %>: <%= link_to h(@producer.web), @producer.web %></li>
-    <%end%>
-    <% unless @producer.email.empty? %>
-    <li><%= t('activerecord.attributes.producer.email') %>: <%= mail_to @producer.email %></li>
-    <%end%>
-    <% unless @producer.notes.empty? %>
-    <li class="notes"><%= t('activerecord.attributes.producer.notes') %>:
-      <p><%= simple_format @producer.notes %></p>
-    </li>
-    <%end%>
-  </ul>
+    <ul>
+        <% unless @producer.address.empty? && @producer.zip.empty? && @producer.city.empty? %>
+        <li>
+            <%= t('activerecord.attributes.producer.address') %>: <%= @producer.address %>
+            <%= @producer.zip %> <%= @producer.city %>
+        </li>
+        <%end%>
+        <% if @producer.country %>
+        <li><%= t('activerecord.attributes.producer.country') %>: <%= @producer.country.name %></li>
+        <%end%>
+        <% unless @producer.phone.empty? %>
+        <li><%= t('activerecord.attributes.producer.phone') %>: <%= @producer.phone %></li>
+        <%end%>
+        <% unless @producer.web.empty? %>
+        <li><%= t('activerecord.attributes.producer.web') %>: <%= link_to h(@producer.web), @producer.web %></li>
+        <%end%>
+        <% unless @producer.email.empty? %>
+        <li><%= t('activerecord.attributes.producer.email') %>: <%= mail_to @producer.email %></li>
+        <%end%>
+        <% unless @producer.notes.empty? %>
+        <li class="notes"><%= t('activerecord.attributes.producer.notes') %>:
+            <p><%= simple_format @producer.notes %></p>
+        </li>
+        <%end%>
+    </ul>
 </div>
 
 <div class="group">
-  <h2><%= t('view.known_wines') %></h2>
+    <h2><%= t('view.known_wines') %></h2>
 
-  <h3><%= t('view.wines_to_drink') %></h3>
-  <% if @millesimes_to_drink.count.positive? %>
+    <h3><%= t('view.wines_to_drink') %></h3>
+    <% if @millesimes_to_drink.count.positive? %>
     <ul>
-      <% @millesimes_to_drink.each do |mil| %>
+        <% @millesimes_to_drink.each do |mil| %>
         <li>
-          <% wine = mil.wine %>
-          <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
-          <%= wine.region.name %> <%= wine.color.name %>
+            <% wine = mil.wine %>
+            <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
+            <%= wine.region.name %> <%= wine.color.name %>
         </li>
-      <% end %>
+        <% end %>
     </ul>
-  <% else %>
+    <% else %>
     <p><%= t('view.no_known_wine', model: t('activerecord.models.producer', count: 1)) %></p>
-  <% end %>
+    <% end %>
 
-  <h3><%= t('view.drunk_wines') %></h3>
-  <% if @drunk_millesimes.count.positive? %>
+    <h3><%= t('view.drunk_wines') %></h3>
+    <% if @drunk_millesimes.count.positive? %>
     <ul>
-      <% @drunk_millesimes.each do |mil| %>
+        <% @drunk_millesimes.each do |mil| %>
         <li>
-          <% wine = mil.wine %>
-          <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
-          <%= wine.region.name %> <%= wine.color.name %>
+            <% wine = mil.wine %>
+            <%= link_to "#{wine.domain} #{human_millesime(mil)}", wine_millesime_path(wine, mil) %>,
+            <%= wine.region.name %> <%= wine.color.name %>
         </li>
-      <% end %>
+        <% end %>
     </ul>
-  <% else %>
+    <% else %>
     <p><%= t('view.no_drunk_wine', model: t('activerecord.models.producer', count: 1)) %></p>
-  <% end %>
+    <% end %>
 </div>
 
 <%= link_to t_action(:edit), edit_producer_path(@producer) %> |

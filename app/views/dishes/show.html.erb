@@ -1,35 +1,38 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= t_title(:show) %> #<%= @dish.id %></h2>
+    <h2><%= @dish.name %> (<%= t_title(:show) %>)</h2>
 
-  <ul>
-    <li><%= t('activerecord.attributes.dish.name') %>: <%= @dish.name %></li>
-    <li><%= t('activerecord.attributes.dish.dish_type') %>: <%= localized_dish_type(@dish.dish_type) %></li>
-  </ul>
+    <ul>
+        <li>
+            <!--<li><%= t('activerecord.attributes.dish.name') %>: <%= @dish.name %></li>-->
+        <li><%= t('activerecord.attributes.dish.dish_type') %>: <%= localized_dish_type(@dish.dish_type) %></li>
+    </ul>
 </div>
 
 <div class="group">
-  <h2><%= t('view.dish.associated_regions') %></h2>
-  <% if @dras.empty? %>
-  <p><%= t('activerecord.models.region', count: 0) %></p>
-  <% else %>
-  <p><%= t('view.dish.associated_regions_intro') %></p>
-  <dl class="association">
-    <% @dras.each do |colorname, dras| %>
-      <% unless dras.empty? %>
+    <h2><%= t('view.dish.associated_regions') %></h2>
+    <% if @dras.empty? %>
+    <p><%= t('activerecord.models.region', count: 0) %></p>
+    <% else %>
+    <p><%= t('view.dish.associated_regions_intro') %></p>
+    <dl class="association">
+        <% @dras.each do |colorname, dras| %>
+        <% unless dras.empty? %>
         <dt><%= colorname %></dt>
-        <dd><ul id="color-<%= dras.first.color.id %>">
-          <% dras.each do |dra| %>
-            <li>
-              <%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
-            </li>
-          <% end %>
-        </ul></dd>
-      <% end %>
+        <dd>
+            <ul id="color-<%= dras.first.color.id %>">
+                <% dras.each do |dra| %>
+                <li>
+                    <%= link_to dra.region.name, country_region_path(dra.region.country, dra.region) %>
+                </li>
+                <% end %>
+            </ul>
+        </dd>
+        <% end %>
+        <% end %>
+    </dl>
     <% end %>
-  </dl>
-  <% end %>
 </div>
 
 <%= link_to t_action(:edit), edit_dish_path(@dish) %> |

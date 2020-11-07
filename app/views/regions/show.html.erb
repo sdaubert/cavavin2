@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= @country.name %> &gt; <%= t_title(:show) %> #<%= @region.id %></h2>
+  <h2><%= @country.name %> &gt; <%= @region.name %></h2>
 
   <ul>
-    <li><%= t('activerecord.attributes.region.name') %>: <%= @region.name %></li>
     <% unless @region.root? %>
     <li><%= t('region.zone') %>: <%= link_to @region.root.name, country_region_path(@country, @region.root) %></li>
     <li><%= t('activerecord.attributes.region.parent') %>: <%= link_to @region.parent.name, country_region_path(@country, @region.parent) %></li>

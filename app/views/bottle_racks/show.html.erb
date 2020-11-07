@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= t_title(:show) %> #<%= @bottle_rack.id %></h2>
+  <h2><%= t_title(:show) %> <%= @bottle_rack.name %></h2>
   <ul>
-    <li><%= t('activerecord.attributes.bottle_rack.name') %>: <%=  @bottle_rack.name %></li>
     <li><%= t('view.rack.size', lines: @bottle_rack.lines, columns: @bottle_rack.columns, size: @bottle_rack.size) %></li>
     <li><%= t('view.rack.free_locations') %><%= @bottle_rack.free_location_count %></li>
   </ul>

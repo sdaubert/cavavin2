@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-    <h2><%= @millesime.wine.domain %> <%= human_millesime(@millesime) %></h2>
+    <h2><%= @millesime.wine.domain %> <%= human_millesime(@millesime) %> (<%= t_title(:show) %>)</h2>
 
     <%= render partial: 'wines/wine', locals: { wine: @wine, min: true } %>
 
@@ -52,9 +52,9 @@
     <p><%= t('view.millesime.associated_dishes_intro') %></p>
     <ul class="dishes">
         <% @dras.each do |dra| %>
-          <li>
-              <%= link_to dra.dish.name, dish_path(dra.dish) %>
-          </li>
+        <li>
+            <%= link_to dra.dish.name, dish_path(dra.dish) %>
+        </li>
         <% end %>
     </ul>
     <% end %>

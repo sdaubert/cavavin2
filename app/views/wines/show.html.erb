@@ -1,48 +1,48 @@
 <p id="notice"><%= notice %></p>
 
 <div class="group">
-  <h2><%= t_title(:show) %> #<%= @wine.id %></h2>
+    <h2><%= @wine.domain %> (<%= t_title(:show) %>)</h2>
 
-  <%= render partial: 'wines/wine', locals: { wine: @wine, min: false } %>
+    <%= render partial: 'wines/wine', locals: { wine: @wine, min: false } %>
 
-  <% if @wine.attribute_present? :notes %>
-  <dl>
-    <dt><%= t('activerecord.attributes.wine.notes') %>:</dt>
-    <dd><%= simple_format @wine.notes %></dd>
-  </dl>
-  <% end %>
+    <% if @wine.attribute_present? :notes %>
+    <dl>
+        <dt><%= t('activerecord.attributes.wine.notes') %>:</dt>
+        <dd><%= simple_format @wine.notes %></dd>
+    </dl>
+    <% end %>
 
-  <h3><%= t('activerecord.models.millesime', count: 2) %></h3>
-  <% unless @wine.millesimes.empty? %>
-  <table>
-    <thead>
-      <tr>
-        <th><%= t('activerecord.attributes.millesime.year') %></th>
-        <th><%= t('activerecord.attributes.millesime.garde') %></th>
-        <th><%= t('activerecord.attributes.wlog.quantity') %></th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
+    <h3><%= t('activerecord.models.millesime', count: 2) %></h3>
+    <% unless @wine.millesimes.empty? %>
+    <table>
+        <thead>
+            <tr>
+                <th><%= t('activerecord.attributes.millesime.year') %></th>
+                <th><%= t('activerecord.attributes.millesime.garde') %></th>
+                <th><%= t('activerecord.attributes.wlog.quantity') %></th>
+                <th colspan="2"></th>
+            </tr>
+        </thead>
 
-    <tbody>
-      <% @wine.millesimes.each do |millesime| %>
-        <tr>
-          <td><%= link_to human_millesime(millesime), [@wine, millesime] %></td>
-          <% if millesime.garde %>
-            <td class="right"><%= millesime.garde %></td>
-          <% end %>
-          <td class="right"><%= millesime.quantity %></td>
-          <td><%= link_to 'Edit', edit_wine_millesime_path(@wine, millesime) %></td>
-          <td><%= link_to_destroy [@wine, millesime] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <% else %>
-  <p><%= t('activerecord.models.millesime', count: 0) %>.</p>
-  <% end %>
+        <tbody>
+            <% @wine.millesimes.each do |millesime| %>
+            <tr>
+                <td><%= link_to human_millesime(millesime), [@wine, millesime] %></td>
+                <% if millesime.garde %>
+                <td class="right"><%= millesime.garde %></td>
+                <% end %>
+                <td class="right"><%= millesime.quantity %></td>
+                <td><%= link_to 'Edit', edit_wine_millesime_path(@wine, millesime) %></td>
+                <td><%= link_to_destroy [@wine, millesime] %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% else %>
+    <p><%= t('activerecord.models.millesime', count: 0) %>.</p>
+    <% end %>
 
-  <%= link_to t_action(:new, Millesime), new_wine_millesime_path(@wine) %>
+    <%= link_to t_action(:new, Millesime), new_wine_millesime_path(@wine) %>
 </div>
 
 <%= render partial: 'producers/show', locals: { wine: @wine } %>
