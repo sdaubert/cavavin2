@@ -39,7 +39,7 @@ class ColorsController < ApplicationController
   end
 
   def stats
-    @colors = Hash[Color.all.map { |c| [c, 0] }]
+    @colors = Hash[Color.order(:name).all.map { |c| [c, 0] }]
     Wine.find_each do |wine|
       @colors[wine.color] += wine.quantity
     end
