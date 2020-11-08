@@ -10,7 +10,7 @@ class RegionsController < ApplicationController
 
   def show
     wine_order = 'wines.domain, millesimes.year'
-    region_order = 'regions.name, ' + wine_order
+    region_order = "regions.name, #{wine_order}"
     @millesimes = Millesime.from_region(@region)
                            .with_bottles
                            .order(wine_order)
@@ -61,6 +61,8 @@ class RegionsController < ApplicationController
 
   def country_stats
     compute_statistics_on_wines(Wine.from_country(@country), &:root)
+    # Sort @regions hash alphabetically by keys
+    @regions = @regions.sort_by { |key| key }.to_h
   end
 
   def stats
@@ -108,7 +110,7 @@ class RegionsController < ApplicationController
       if @regions[k][:nb].zero?
         @regions.delete(k)
       else
-        @regions[k][:p] = @regions[k][:nb].to_f / @sum_regions.to_f * 100
+        @regions[k][:p] = @regions[k][:nb].to_f / @sum_regions * 100
       end
     end
   end
