@@ -47,7 +47,7 @@
         <% if flash[:notice] %>
           <p id="notice"><%= notice %></p>
         <% elsif flash[:alert] %>
-          <p id="alert"><%= t('view.flash.error', msg: flash[:alert]) %></p>
+          <p id="alert"><%= t('view.flash.error', msg: alert) %></p>
         <% end %>
 
         <%= yield %>
