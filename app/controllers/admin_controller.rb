@@ -214,6 +214,13 @@ class AdminController < ApplicationController
       if total_data.nil?
         total_data = data.map(&:dup)
       else
+        if data.size > total_data.size
+          diff = data.size - total_data.size
+          diff.downto(1).each do |idx|
+            real_idx = data.size - idx
+            total_data[real_idx] = [data[real_idx][0], 0]
+          end
+        end
         (0...data.size).each do |idx|
           total_data[idx][1] += data[idx][1]
         end
