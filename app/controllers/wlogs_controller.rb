@@ -130,7 +130,7 @@ class WlogsController < ApplicationController
 
   def generate_bottles!(wlog)
     positions = BottleRack.pos_to_ary(wlog.pos)
-    already_existing_bottles = wlog.bottles.count
+    already_existing_bottles = wlog.millesime.bottles.count
     if already_existing_bottles.zero?
       wlog.quantity.times do
         @millesime.bottles.create!(br_id: wlog.br_id,
