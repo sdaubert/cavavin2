@@ -41,6 +41,7 @@ class AdminController < ApplicationController
   end
 
   def stats
+    logger.info { 'in stats' }
     compute_spendings
     compute_evolution
     compute_garde
@@ -49,7 +50,7 @@ class AdminController < ApplicationController
 
   def search
     keywords = params[:search].to_s.split
-    return if keywords.length.zero?
+    return if keywords.empty?
 
     @millesimes = Millesime.joins(wine: [:color, { region: :country }])
                            .concat_fields_like(MILLESIME_SEARCH_FIELDS, keywords)
@@ -95,6 +96,7 @@ class AdminController < ApplicationController
     new_ary_of_ary = []
     null = use_float ? 0.0 : 0
 
+    logger.debug { "fix_holes_in_years: ary_of_ary: #{ary_of_ary.inspect}" }
     ary_of_ary.each_with_index do |ary, idx|
       if idx.zero?
         new_ary_of_ary << ary
@@ -102,10 +104,13 @@ class AdminController < ApplicationController
       end
 
       current_year = ary.first.to_i
+      logger.debug { "fix_holes_in_yeras: current_year: #{current_year}"}
       last_known_year = new_ary_of_ary.last.first.to_i
+      logger.debug { "fix_holes_in_yeras: last_known_year: #{last_known_year}"}
       while current_year != last_known_year + 1
         new_ary_of_ary << [(last_known_year + 1).to_s, null]
         last_known_year = new_ary_of_ary.last.first.to_i
+        logger.debug { "fix_holes_in_yeras: last_known_year: #{last_known_year}"}
       end
       new_ary_of_ary << ary
     end
@@ -114,16 +119,20 @@ class AdminController < ApplicationController
   end
 
   def compute_spendings
+    logger.info { 'stats/compute_spendings'}
     date_range = SPENDINGS_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
+    logger.info { 'stats/compute_spendings: db request'}
     spendings = Wlog.where(mvt_type: 'in')
                     .group_by_year(:date,
                                    range: date_range)
                     .pluck(Arel.sql('strftime("%Y", date), sum(quantity*price) as total'))
 
+    logger.info { 'stats/compute_spendings: fix holes'}
     @spendings = fix_holes_in_years(spendings, use_float: true)
   end
 
   def compute_first_date
+    logger.info { 'stats/compute_first_date'}
     first_wlog = Wlog.order(:date).first
     return Time.now.to_date if first_wlog.nil?
 
@@ -135,6 +144,7 @@ class AdminController < ApplicationController
   end
 
   def compute_evolution_values(req, type:)
+    logger.info { 'stats/compute_evolution_values'}
     values = req.where(mvt_type: type).sum(:quantity)
     values = Hash[values]
     values.default = 0
@@ -165,6 +175,7 @@ class AdminController < ApplicationController
   end
 
   def compute_evolution
+    logger.info { 'stats/compute_evolution'}
     first_date = compute_first_date
     last_date = Time.now.to_date.end_of_month
 
@@ -172,6 +183,7 @@ class AdminController < ApplicationController
   end
 
   def compute_garde
+    logger.info { 'stats/compute_garde'}
     before5 = Millesime.drink_before(5)
                        .joins(:bottles)
                        .count('bottles.id')
@@ -189,9 +201,11 @@ class AdminController < ApplicationController
   end
 
   def compute_drinking
+    logger.info { 'stats/compute_drinking' }
     first_year = DRINKING_YEAR_COUNT.years.ago.year.to_s
     colors = Color.with_wines
 
+    logger.info { 'stats/compute_drinking: get colors' }
     @colors = colors.map(&:color)
     if @colors.compact.empty?
       @colors = nil
@@ -199,18 +213,24 @@ class AdminController < ApplicationController
       @colors.unshift('#3366CC')
     end
 
+    logger.info { 'stats/compute_drinking: start compute drinking' }
     total_data = nil
     @drinking = colors.map do |color|
+      logger.info { "  color: #{color.name}"}
+      logger.info { '  get year range' }
       year_range = DRINKING_YEAR_COUNT.years.ago.at_beginning_of_year..Time.now
+      logger.info { '  db request' }
       data = color.wines
                   .drunk
                   .group_by_year('wlogs.date', range: year_range)
                   .order('year')
                   .pluck(Arel.sql('strftime("%Y", wlogs.date) as year, sum(wlogs.quantity)'))
 
-      data.unshift [first_year, 0] if !data.empty? && (data.last.first != first_year)
+      logger.info { '  fix holes' }
+      data.unshift([first_year, 0]) if !data.empty? && (data.first.first != first_year)
       data = fix_holes_in_years(data)
 
+      logger.info { '  compute total' }
       if total_data.nil?
         total_data = data.map(&:dup)
       else
@@ -229,6 +249,7 @@ class AdminController < ApplicationController
       { name: color.name, data: data }
     end
 
+    logger.info { 'stats/compute_drinking: add total' }
     @drinking.unshift(name: 'Total', data: total_data)
   end
 end
